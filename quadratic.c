@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <math.h>
+#include <cassert>
 
 
 
-const int INVALID_COEFFITIENTS_FOR_QUADRATIC = -1;
+const int INVALID_COEFFICIENTS_FOR_QUADRATIC = -1;
 const int INFINITLY_MANY_ROOTS = -2;
 const int UNEXPECTED_ERROR_WHILE_SOLVING_QUADRATIC = -3;
 
@@ -17,7 +18,7 @@ void print_quadratic_roots(int number, double x1, double x2);
 int main(void){
     //Asking user to enter values
     double a = 0, b = 0, c = 0;
-    printf("Enter coeffitients of equation in form \"a b c\" (for ax^2 + bx + c == 0): ");
+    printf("Enter coefficients of equation in form \"a b c\" (for ax^2 + bx + c == 0): ");
     if(scanf("%lf %lf %lf", &a, &b, &c) != 3){
         printf("Error in values\n");
         exit(-1);
@@ -40,20 +41,33 @@ int main(void){
 //writes roots in x1 and x2
 //returns number of roots
 int solve_quadratic(double a, double b, double c, double *x1, double *x2){
+    //checkig for invalid inputs
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
+    assert(x1 != NULL);
+    assert(x2 != NULL);
+
+    //comparing coefficients with 0.0
     int compare_with_zero_a = compare_doubles(a, 0.0);
     int compare_with_zero_b = compare_doubles(b, 0.0);
     int compare_with_zero_c = compare_doubles(c, 0.0);
+
     //in case a == 0, b == 0 and c == 0 equation has infinitely many roots
     if(compare_with_zero_a == 0 && compare_with_zero_b == 0 && compare_with_zero_c == 0) return INFINITLY_MANY_ROOTS;
+
     //if a == 0 at least one of b and c is nonzero, it is not quadratic equation
-    if(compare_with_zero_a == 0) return INVALID_COEFFITIENTS_FOR_QUADRATIC;
+    if(compare_with_zero_a == 0) return INVALID_COEFFICIENTS_FOR_QUADRATIC;
+
 
     //discriminant of quadratic equation
     double discriminant = b * b - 4.0 * a * c;
 
+
     //comparison of discriminant and 0.0
     //1 -> discriminant > 0, -1 -> discriminant < 0, 0 -> discriminant == 0
     int compare_state = compare_doubles(discriminant, 0.0);
+
 
     switch(compare_state){
         case 0: {
@@ -112,7 +126,7 @@ void print_quadratic_roots(int number, double x1, double x2){
             break;
         }
         //invalid coeffitients(a == 0)
-        case INVALID_COEFFITIENTS_FOR_QUADRATIC: {
+        case INVALID_COEFFICIENTS_FOR_QUADRATIC: {
             printf("Invalid coeffitients\n");
             break;
         }
