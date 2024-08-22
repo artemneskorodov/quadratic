@@ -1,21 +1,28 @@
 /**
-
+===============================================================================================================================
+    @file    quadratic.cpp
+    @brief   Quadratic equations library, allows to input coefficients, solve equation and print out roots
+    @author  Artem Neskorodov
+    @date    22.08.2024
+===============================================================================================================================
 */
 
 
 
-#include "../include/quadratic.h"
+#include <quadratic.h>
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <string.h>
-#include "../include/compare_doubles.h"
+#include <utils.h>
 
 
-//!----------------------------------------------------------------------------------------------------
-//! Maximum length that user can input as one word, while typing in coefficients
-//!----------------------------------------------------------------------------------------------------
+/**
+===============================================================================================================================
+Maximum length of user input
+===============================================================================================================================
+*/
 const int MAX_INPUT_LENGTH = 32;
 
 
@@ -279,6 +286,7 @@ void go_to_end_console(void) {
 */
 bool try_get_double(double *out) {
     if(scanf("%lg", out) != 1) return false;
+    go_to_end_console();
     return true;
 }
 

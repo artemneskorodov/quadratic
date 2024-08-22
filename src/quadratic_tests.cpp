@@ -1,10 +1,10 @@
-#include "../include/quadratic_tests.h"
-#include "../include/quadratic.h"
+#include <quadratic_tests.h>
+#include <quadratic.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <math.h>
-#include "../include/compare_doubles.h"
+#include <utils.h>
 
 
 #define MAX_ROOTS_NUMBER_LENGTH 32
