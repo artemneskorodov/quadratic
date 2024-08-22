@@ -1,3 +1,9 @@
+/**
+
+*/
+
+
+
 #include "../include/quadratic.h"
 #include <stdio.h>
 #include <math.h>
@@ -7,7 +13,10 @@
 #include "../include/compare_doubles.h"
 
 
-#define MAX_INPUT_LENGTH 32
+//!----------------------------------------------------------------------------------------------------
+//! Maximum length that user can input as one word, while typing in coefficients
+//!----------------------------------------------------------------------------------------------------
+const int MAX_INPUT_LENGTH = 32;
 
 
 //---------------------------------
@@ -21,6 +30,22 @@ static bool check_if_exit(void);
 
 
 
+/**
+===============================================================================================================================
+    @brief   - Writes coefficients, that user typed, in in equation struct
+
+    @details - Function asks user to type in coefficients of quadratic equation.\n
+             - It will ask user until he/she type in valid double number or word "exit".\n
+             - Function returns:\n
+                + GETTING_SUCCESS (in case of successful writing users inputs to equation fields).\n
+                + GETTING_EXIT (in case of typed in word "exit" by user).\n
+                + There are no other return values.\n
+
+    @param   [out] equation pointer to quadratic equation struct
+
+    @return  Enum, represanting the bihavior of function run
+===============================================================================================================================
+*/
 getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
     assert(equation != NULL);
 
@@ -45,6 +70,30 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
 
 
 
+/**
+===============================================================================================================================
+    @brief   - Solves quadratic equation in form ax^2 + bx + c == 0
+
+    @details - Function gets coefficients from fields a, b and c of equation struct.\n
+             - It solves linear equation if a == 0.\n
+             - Function returns:\n
+                + SOLVING_SUCCESS (if solved equation successfully)\n
+                + SOLVING_ERROR (in case of unexpected error)\n
+                + INVALID_COEFFICIENTS (if one of coefficients is not finite number)\n
+                + There are no other return values\n
+             - Function writes roots in fields 'x1' and 'x2' of equation structure.\n
+             - Number of roots is written in field 'number':\n
+                + NOT_SOLVED can occure there only before structure was sent to solve_quadratic() or in case of error\n
+                + NO_ROOTS if equation has no real roots\n
+                + ONE_ROOT if equation has one real root\n
+                + TWO_ROOTS if equation has two real roots\n
+                + INF_ROOTS if equation has infinitely many roots
+
+    @param   [out] equation Point to equation structure, containing coefficients of quadratic equation
+
+    @return  Enum, representing the behavior of function run
+===============================================================================================================================
+*/
 solving_state_t solve_quadratic(quadratic_equation_t *equation) {
     assert(equation != NULL);
 
@@ -85,6 +134,13 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 
 
 
+/**
+===============================================================================================================================
+    @brief   - Prints roots of quadratic equation in console
+
+    @param   [in]  equation Pointer to equation struct, that is already solved
+===============================================================================================================================
+*/
 void print_quadratic_result(const quadratic_equation_t *equation) {
     assert(equation != NULL);
     printf("Equation %lgx^2 + %lgx + %lg:\n",
@@ -119,7 +175,25 @@ void print_quadratic_result(const quadratic_equation_t *equation) {
 
 
 
-static getting_coeffs_state_t get_number(char symbol, double *out) {
+/**
+===============================================================================================================================
+    @brief   - Function tryes to get one number from user.
+
+    @details - Tries to get number until one of cases:\n
+                + User types in valid double value that can be understood by scanf.\n
+                + User types in word "exit".\n
+             - Function returns:\n
+                + GETTING_SUCCESS (in case of typing in number)\n
+                + GETTING_EXIT (in case of typing in "exit")\n
+                + There are no other return values\n
+
+    @param   [in]  symbol Letter naming coefficient in quadratic equation('a' for x^2, b for x^1 and c for x^0).
+    @param   [out] out Pointer to double, which will contain user coefficient.
+
+    @return  Enum represanting meaning of user input
+===============================================================================================================================
+*/
+getting_coeffs_state_t get_number(char symbol, double *out) {
     while(true) {
         printf("%c = ", symbol);
 
@@ -135,7 +209,29 @@ static getting_coeffs_state_t get_number(char symbol, double *out) {
 
 
 
-static solving_state_t solve_linear(quadratic_equation_t *equation) {
+/**
+===============================================================================================================================
+    @brief   - Function solves linear equation bx + c == 0, where b and c are fields of equation struct
+
+    @details - Function returns:
+                + SOLVING_SUCCESS (if solved equation successfully)\n
+                + SOLVING_ERROR (in case of unexpected error)\n
+                + INVALID_COEFFICIENTS (if one of coefficients is not finite number)\n
+                + There are no other return values\n
+             - Function write root to fields 'x1' and 'x2' of equation struct.\n
+             - Function writes number of roots in field 'number':\n
+                + NOT_SOLVED can occure there only before structure was sent to solve_quadratic() or in case of error\n
+                + NO_ROOTS if equation has no real roots\n
+                + ONE_ROOT if equation has one real root\n
+                + INF_ROOTS if equation has infinitely many roots\n
+                + TWO_ROOTS can't occure in case of linear equation
+
+    @param   [out] equation Pointer to equation struct, that is already solved
+
+    @return  Enum, representing the behavior of function run
+===============================================================================================================================
+*/
+solving_state_t solve_linear(quadratic_equation_t *equation) {
     if(is_zero(equation->b)){
         if(is_zero(equation->c)){
             equation->number = INF_ROOTS;
@@ -153,21 +249,52 @@ static solving_state_t solve_linear(quadratic_equation_t *equation) {
 
 
 
-static void go_to_end_console(void) {
+/**
+===============================================================================================================================
+    @brief   - Function moves pointer in console to last character
+
+    @details - Moves pointer until meets:\n
+                + New line character\n
+                + End Of File\n
+
+===============================================================================================================================
+*/
+void go_to_end_console(void) {
     int c = getchar();
     while(c != EOF && c != '\n') c = getchar();
 }
 
 
 
-static bool try_get_double(double *out) {
+/**
+===============================================================================================================================
+    @brief   - Tries to scanf number that user types in
+
+    @details - Uses scanf() with '%lg' format
+
+    @param   [out] out Pointer to double, which will contain user coefficient.
+
+    @return  TRUE in case of success and FALSE in other
+===============================================================================================================================
+*/
+bool try_get_double(double *out) {
     if(scanf("%lg", out) != 1) return false;
     return true;
 }
 
 
 
-static bool check_if_exit(void) {
+/**
+===============================================================================================================================
+    @brief   - Checks if user typed in word "exit"
+
+    @details - Scanf's input with '%s' format.\n
+             - After run moves pointer in console to last character
+
+    @return  TRUE if there is word "exit" in console and FALSE if not
+===============================================================================================================================
+*/
+bool check_if_exit(void) {
     char string[MAX_INPUT_LENGTH] = {};
     scanf("%s", string);
     go_to_end_console();
