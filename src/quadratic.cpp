@@ -16,11 +16,12 @@
 #include <stdbool.h>
 #include <string.h>
 #include <utils.h>
+#include <colors.h>
 
 
 /**
 ===============================================================================================================================
-Maximum length of user input
+    @brief   Maximum length of user input
 ===============================================================================================================================
 */
 const int MAX_INPUT_LENGTH = 32;
@@ -46,7 +47,7 @@ static bool check_if_exit(void);
              - Function returns:\n
                 + GETTING_SUCCESS (in case of successful writing users inputs to equation fields).\n
                 + GETTING_EXIT (in case of typed in word "exit" by user).\n
-                + There are no other return values.\n
+                + There are no other return values.
 
     @param   [out] equation pointer to quadratic equation struct
 
@@ -60,8 +61,8 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
 
     equation->x1 = equation->x2 = 0;
 
-    printf("(\"exit\" to leave)\n"
-           "Type in coefficients for equation ax^2 + bx + c == 0:\n");
+    printf(CYAN("(\"exit\" to leave)\n")
+           "Type in coefficients for equation " YELLOW("ax^2 + bx + c == 0:\n"));
 
     if(get_number('a', &equation->a) == GETTING_EXIT)
         return GETTING_EXIT;
@@ -150,31 +151,31 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 */
 void print_quadratic_result(const quadratic_equation_t *equation) {
     assert(equation != NULL);
-    printf("Equation %lgx^2 + %lgx + %lg:\n",
+    printf("Equation " YELLOW("%lgx^2 + %lgx + %lg") ":\n",
            equation->a, equation->b, equation->c);
     switch(equation->number) {
         case NOT_SOLVED: {
-            printf("Not solved yet, try to run solve_equation(...)\n");
+            printf(RED("Not solved yet, try to run solve_equation(...)\n"));
             return ;
         }
         case NO_ROOTS: {
-            printf("Does not have real roots\n");
+            printf(PURPLE("Does not have real roots\n"));
             return ;
         }
         case ONE_ROOT: {
-            printf("Has one root: x = %lg\n", equation->x1);
+            printf("Has one root: " PURPLE("x = %lg\n"), equation->x1);
             return ;
         }
         case TWO_ROOTS: {
-            printf("Has two roots: x1 = %lg, x2 = %lg\n", equation->x1, equation->x2);
+            printf("Has two roots: " PURPLE("x1 = %lg, x2 = %lg\n"), equation->x1, equation->x2);
             return ;
         }
         case INF_ROOTS: {
-            printf("Has infinitely many roots\n");
+            printf(PURPLE("Has infinitely many roots\n"));
             return ;
         }
         default: {
-            printf("Something went wrong while trying to print out result\n");
+            printf(RED("Something went wrong while trying to print out result\n"));
             return ;
         }
     }

@@ -4,6 +4,7 @@
 #include <quadratic_tests.h>
 #include <stdio.h>
 #include <string.h>
+#include <colors.h>
 
 
 
@@ -58,26 +59,26 @@ int handle_user(int argc, char *argv[]){
 
 
 int handle_amount_flag(void){
-    printf("Unexpected amount of flags, you can use only 0 or 1\n"
-           "Use flag '--help'\n");
+    printf(RED("Unexpected amount of flags, you can use only 0 or 1\n")
+           "Use flag " PURPLE("'--help'\n"));
     return 0;
 }
 
 
 
 int handle_unknown_flag(char *arg){
-    printf("Unknown flag '%s'\n"
-           "Use flag '--help'\n", arg);
+    printf(RED("Unknown flag '%s'\n")
+           "Use flag " PURPLE("'--help'\n"), arg);
     return 0;
 }
 
 
 
 int handle_help_flag(void){
-    printf("\t'--help' for help\n"
-           "\t'--solve' to type in and solve equation\n"
-           "\t'--test' to run tests\n"
-           "\t'' is considered as '--solve'\n");
+    printf(PURPLE("\t'--help'") " for help\n"
+           PURPLE("\t'--solve'") " to type in and solve equation\n"
+           PURPLE("\t'--test'") " to run tests\n"
+           PURPLE("\t''") " is considered as " PURPLE("'--solve'\n"));
     return 0;
 }
 
@@ -88,18 +89,18 @@ int handle_solve_flag(void){
 
     //Getting coefficients from user
     if(get_coefficients(&equation) == GETTING_EXIT){
-        printf("Stop using Vietta\n");
+        printf(CYAN("Stop using Vietta\n"));
         return 0;
     }
 
     //Solving quadratic
     switch(solve_quadratic(&equation)) {
         case INVALID_COEFFICIENTS: {
-            printf("Your input was invalid, unable to solve equation :(\n");
+            printf(RED("Your input was invalid, unable to solve equation :(\n"));
             return -1;
         }
         case SOLVING_ERROR: {
-            printf("Caught unexpected error while solving\n");
+            printf(RED("Caught unexpected error while solving\n"));
             return -2;
         }
         case SOLVING_SUCCESS: {
@@ -107,7 +108,7 @@ int handle_solve_flag(void){
             return 0;
         }
         default: {
-            printf("solve_quadratic() returned unexpected result\n");
+            printf(RED("solve_quadratic() returned unexpected result\n"));
             return -3;
         }
     }
@@ -116,13 +117,13 @@ int handle_solve_flag(void){
 
 
 int handle_test_flag(void) {
-    printf("Total errors: %d", test_solving_quadratic());
+    printf(YELLOW("Total errors: %d"), test_solving_quadratic());
     return 0;
 }
 
 
 
 int handle_error(void) {
-    printf("Something went wrong\n");
+    printf(RED("Something went wrong\n"));
     return -1;
 }

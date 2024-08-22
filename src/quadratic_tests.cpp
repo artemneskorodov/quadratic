@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <utils.h>
+#include <colors.h>
 
 
 #define MAX_ROOTS_NUMBER_LENGTH 32
@@ -85,16 +86,16 @@ static void print_test_result(test_result_t test_result,
                               const quadratic_equation_t *expected,
                               const quadratic_equation_t *actual) {
 
-    printf("For equation %lgx^2 + %lgx + %lg:\n",
+    printf("For equation " YELLOW("%lgx^2 + %lgx + %lg") ":\n",
            expected->a, expected->b, expected->c);
 
     switch(test_result) {
         case OK: {
-            printf("Test went successfully\n");
+            printf(GREEN("Test went successfully\n"));
             break;
         }
         case UNEXPECTED_SOLVING_ERROR: {
-            printf("Caught unexpected solving error");
+            printf(RED("Caught unexpected solving error"));
             break;
         }
         case DIFFERENT_AMOUNT_OF_ROOTS: {
@@ -106,7 +107,7 @@ static void print_test_result(test_result_t test_result,
             break;
         }
         default: {
-            printf("Test function returned unexpected exit status\n");
+            printf(RED("Test function returned unexpected exit status\n"));
         }
     }
     printf("------------------------\n");
@@ -142,8 +143,8 @@ static void print_different_amount(const quadratic_equation_t *expected, const q
 
     roots_number_to_string(string_number_expected, expected->number);
     roots_number_to_string(string_number_actual, actual->number);
-    printf("Got different amount of roots\n"
-           "Expected: %s, actual: %s\n",
+    printf(RED("Got different amount of roots\n")
+           YELLOW("Expected: %s, actual: %s\n"),
            string_number_expected, string_number_actual);
 }
 
@@ -152,33 +153,33 @@ static void print_different_amount(const quadratic_equation_t *expected, const q
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
     switch(expected->number){
         case NOT_SOLVED: {
-            printf("expected is not solved\n");
+            printf(RED("expected is not solved\n"));
             return ;
         }
         case NO_ROOTS: {
-            printf("expected has no roots\n");
+            printf(RED("expected has no roots\n"));
             return ;
         }
         case ONE_ROOT: {
-            printf("Got different roots\n"
-                   "Expected: x = %lg, actual: x = %lg\n",
+            printf(RED("Got different roots\n")
+                   YELLOW("Expected: x = ") PURPLE("%lg") YELLOW(", actual: x = ") PURPLE("%lg\n"),
                    expected->x1, actual->x1);
             return ;
         }
         case TWO_ROOTS: {
-            printf("Got diggerent roots\n"
-                   "Expected: x1 = %lg, x2 = %lg,\n"
-                   "Actual: x1 = %lg, x2 = %lg\n",
+            printf(RED("Got diggerent roots\n")
+                   YELLOW("Expected: x1 = ") PURPLE("%lg") YELLOW(", x2 = ") PURPLE("%lg,\n")
+                   YELLOW("Actual: x1 = ") PURPLE("%lg") YELLOW(", x2 = ") PURPLE("%lg\n"),
                    expected->x1, expected->x2,
                    actual->x1, actual->x2);
             return ;
         }
         case INF_ROOTS: {
-            printf("expected has inf roots\n");
+            printf(RED("expected has inf roots\n"));
             return ;
         }
         default: {
-            printf("Unexpected roots number\n");
+            printf(RED("Unexpected roots number\n"));
         }
     }
 }
