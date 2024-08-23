@@ -7,25 +7,21 @@
 ===============================================================================================================================
 */
 
-
-
-#include <quadratic.h>
+#include "quadratic.h"
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <string.h>
-#include <utils.h>
-#include <colors.h>
-
+#include "utils.h"
+#include "colors.h"
 
 /**
 ===============================================================================================================================
     @brief   Maximum length of user input
 ===============================================================================================================================
 */
-const int MAX_INPUT_LENGTH = 32;
-
+static const int MAX_INPUT_LENGTH = 32;
 
 //---------------------------------
 //      FUNCTIONS PROTOTYPES
@@ -35,8 +31,6 @@ static solving_state_t solve_linear(quadratic_equation_t *equation);
 static void go_to_end_console(void);
 static bool try_get_double(double *out);
 static bool check_if_exit(void);
-
-
 
 /**
 ===============================================================================================================================
@@ -61,8 +55,9 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
 
     equation->x1 = equation->x2 = 0;
 
-    printf(CYAN("(\"exit\" to leave)\n")
-           "Type in coefficients for equation " YELLOW("ax^2 + bx + c == 0:\n"));
+    color_printf(CYAN, "(\"exit\" to leave)\n");
+    color_printf(DEFAULT, "Type in coefficients for equation ");
+    color_printf(YELLOW, "ax^2 + bx + c == 0:\n");
 
     if(get_number('a', &equation->a) == GETTING_EXIT)
         return GETTING_EXIT;
@@ -75,8 +70,6 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
 
     return GETTING_SUCCESS;
 }
-
-
 
 /**
 ===============================================================================================================================
@@ -113,7 +106,6 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
     if(is_zero(equation->a))
         return solve_linear(equation);
 
-
     double discriminant = equation->b * equation->b - 4 * equation->a * equation->c;
 
     switch(compare_with_zero(discriminant)) {
@@ -140,8 +132,6 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
     }
 }
 
-
-
 /**
 ===============================================================================================================================
     @brief   - Prints roots of quadratic equation in console
@@ -151,37 +141,39 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 */
 void print_quadratic_result(const quadratic_equation_t *equation) {
     assert(equation != NULL);
-    printf("Equation " YELLOW("%lgx^2 + %lgx + %lg") ":\n",
-           equation->a, equation->b, equation->c);
+    color_printf(DEFAULT, "Equation ");
+    color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
+        equation->a, equation->b, equation->c);
+    color_printf(DEFAULT, ":\n");
     switch(equation->number) {
         case NOT_SOLVED: {
-            printf(RED("Not solved yet, try to run solve_equation(...)\n"));
+            color_printf(RED, "Not solved yet, try to run solve_equation(...)\n");
             return ;
         }
         case NO_ROOTS: {
-            printf(PURPLE("Does not have real roots\n"));
+            color_printf(PURPLE, "Does not have real roots\n");
             return ;
         }
         case ONE_ROOT: {
-            printf("Has one root: " PURPLE("x = %lg\n"), equation->x1);
+            color_printf(DEFAULT, "Has one root: ");
+            color_printf(PURPLE, "x = %lg\n", equation->x1);
             return ;
         }
         case TWO_ROOTS: {
-            printf("Has two roots: " PURPLE("x1 = %lg, x2 = %lg\n"), equation->x1, equation->x2);
+            color_printf(DEFAULT, "Has two roots: ");
+            color_printf(PURPLE, "x1 = %lg, x2 = %lg\n", equation->x1, equation->x2);
             return ;
         }
         case INF_ROOTS: {
-            printf(PURPLE("Has infinitely many roots\n"));
+            color_printf(PURPLE, "Has infinitely many roots\n");
             return ;
         }
         default: {
-            printf(RED("Something went wrong while trying to print out result\n"));
+            color_printf(RED, "Something went wrong while trying to print out result\n");
             return ;
         }
     }
 }
-
-
 
 /**
 ===============================================================================================================================
@@ -214,8 +206,6 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
         printf("Invalid input\n");
     }
 }
-
-
 
 /**
 ===============================================================================================================================
@@ -255,8 +245,6 @@ solving_state_t solve_linear(quadratic_equation_t *equation) {
     return SOLVING_SUCCESS;
 }
 
-
-
 /**
 ===============================================================================================================================
     @brief   - Function moves pointer in console to last character
@@ -271,8 +259,6 @@ void go_to_end_console(void) {
     int c = getchar();
     while(c != EOF && c != '\n') c = getchar();
 }
-
-
 
 /**
 ===============================================================================================================================
@@ -290,8 +276,6 @@ bool try_get_double(double *out) {
     go_to_end_console();
     return true;
 }
-
-
 
 /**
 ===============================================================================================================================

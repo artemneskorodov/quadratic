@@ -1,14 +1,10 @@
-#include <utils.h>
+#include "utils.h"
 #include <math.h>
-
-
 
 bool is_zero(double num) {
     if(fabs(num) < EPSILON) return true;
     return false;
 }
-
-
 
 compare_state_t compare_with_zero(double a) {
     if(is_zero(a) == true) return EQUALS;

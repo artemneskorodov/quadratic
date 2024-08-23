@@ -12,9 +12,7 @@ enum compare_state_t {
     EQUALS
 };
 
-
 bool is_zero(double num);
 compare_state_t compare_with_zero(double a);
-
 
 #endif

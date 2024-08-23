@@ -1,15 +1,13 @@
-#include <quadratic_tests.h>
-#include <quadratic.h>
+#include "quadratic_tests.h"
+#include "quadratic.h"
 #include <stdio.h>
 #include <assert.h>
 #include <stdbool.h>
 #include <math.h>
-#include <utils.h>
-#include <colors.h>
-
+#include "utils.h"
+#include "colors.h"
 
 #define MAX_ROOTS_NUMBER_LENGTH 32
-
 
 enum test_result_t {
     OK,
@@ -17,8 +15,6 @@ enum test_result_t {
     DIFFERENT_AMOUNT_OF_ROOTS,
     DIFFERENT_ROOTS
 };
-
-
 
 //---------------------------------
 //      FUNCTIONS PROTOTYPES
@@ -30,12 +26,10 @@ static void print_different_amount(const quadratic_equation_t *expected, const q
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
 
-
-
 int test_solving_quadratic(void) {
     int errors_counter = 0;
 
-    const quadratic_equation_t tests[] = {
+    static const quadratic_equation_t tests[] = {
         {.a = 1, .b = 2, .c = 1, .x1 = -1, .x2 = -1, .number = ONE_ROOT},
         {.a = 0.5, .b = 0.5, .c = 0.5, .x1 = 0, .x2 = 0, .number = NO_ROOTS},
         {.a = 3.0, .b = 5.0, .c = 2.0, .x1 = -1, .x2 = -0.66666666667, .number = TWO_ROOTS},
@@ -56,8 +50,6 @@ int test_solving_quadratic(void) {
     }
     return errors_counter;
 }
-
-
 
 static test_result_t test_solving_one(const quadratic_equation_t *expected, quadratic_equation_t *actual) {
     assert(expected != NULL);
@@ -80,22 +72,22 @@ static test_result_t test_solving_one(const quadratic_equation_t *expected, quad
     return OK;
 }
 
-
-
 static void print_test_result(test_result_t test_result,
                               const quadratic_equation_t *expected,
                               const quadratic_equation_t *actual) {
 
-    printf("For equation " YELLOW("%lgx^2 + %lgx + %lg") ":\n",
-           expected->a, expected->b, expected->c);
+    color_printf(DEFAULT, "For equation ");
+    color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
+        expected->a, expected->b, expected->c);
+    color_printf(DEFAULT, ":\n");
 
     switch(test_result) {
         case OK: {
-            printf(GREEN("Test went successfully\n"));
+            color_printf(GREEN, "Test went successfully\n");
             break;
         }
         case UNEXPECTED_SOLVING_ERROR: {
-            printf(RED("Caught unexpected solving error"));
+            color_printf(RED, "Caught unexpected solving error");
             break;
         }
         case DIFFERENT_AMOUNT_OF_ROOTS: {
@@ -107,13 +99,11 @@ static void print_test_result(test_result_t test_result,
             break;
         }
         default: {
-            printf(RED("Test function returned unexpected exit status\n"));
+            color_printf(RED, "Test function returned unexpected exit status\n");
         }
     }
-    printf("------------------------\n");
+    color_printf(DEFAULT, "------------------------\n");
 }
-
-
 
 static bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second) {
     assert(first != NULL);
@@ -135,56 +125,56 @@ static bool are_roots_same(const quadratic_equation_t *first, const quadratic_eq
     return true;
 }
 
-
-
 static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual){
     char string_number_expected[MAX_ROOTS_NUMBER_LENGTH] = {};
     char string_number_actual[MAX_ROOTS_NUMBER_LENGTH] = {};
 
     roots_number_to_string(string_number_expected, expected->number);
     roots_number_to_string(string_number_actual, actual->number);
-    printf(RED("Got different amount of roots\n")
-           YELLOW("Expected: %s, actual: %s\n"),
+    color_printf(RED, "Got different amount of roots\n");
+    color_printf(YELLOW, "Expected: %s, actual: %s\n",
            string_number_expected, string_number_actual);
 }
-
-
 
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
     switch(expected->number){
         case NOT_SOLVED: {
-            printf(RED("expected is not solved\n"));
+            color_printf(RED, "expected is not solved\n");
             return ;
         }
         case NO_ROOTS: {
-            printf(RED("expected has no roots\n"));
+            color_printf(RED, "expected has no roots\n");
             return ;
         }
         case ONE_ROOT: {
-            printf(RED("Got different roots\n")
-                   YELLOW("Expected: x = ") PURPLE("%lg") YELLOW(", actual: x = ") PURPLE("%lg\n"),
-                   expected->x1, actual->x1);
+            color_printf(RED, "Got different roots\n");
+            color_printf(YELLOW, "Expected: x = ");
+            color_printf(PURPLE, "%lg", expected->x1);
+            color_printf(YELLOW, ", actual: x = ");
+            color_printf(PURPLE, "%lg\n", actual->x1);
             return ;
         }
         case TWO_ROOTS: {
-            printf(RED("Got diggerent roots\n")
-                   YELLOW("Expected: x1 = ") PURPLE("%lg") YELLOW(", x2 = ") PURPLE("%lg,\n")
-                   YELLOW("Actual: x1 = ") PURPLE("%lg") YELLOW(", x2 = ") PURPLE("%lg\n"),
-                   expected->x1, expected->x2,
-                   actual->x1, actual->x2);
+            color_printf(RED, "Got diggerent roots\n");
+            color_printf(YELLOW, "Expected: x1 = ");
+            color_printf(PURPLE, "%lg", expected->x1);
+            color_printf(YELLOW, ", x2 = ");
+            color_printf(PURPLE, "%lg,\n", expected->x2);
+            color_printf(YELLOW, "Actual: x1 = ");
+            color_printf(PURPLE, "%lg", actual->x1);
+            color_printf(YELLOW, ", x2 = ");
+            color_printf(PURPLE, "%lg\n", actual->x2);
             return ;
         }
         case INF_ROOTS: {
-            printf(RED("expected has inf roots\n"));
+            color_printf(RED, "expected has inf roots\n");
             return ;
         }
         default: {
-            printf(RED("Unexpected roots number\n"));
+            color_printf(RED, "Unexpected roots number\n");
         }
     }
 }
-
-
 
 static void roots_number_to_string(char *out, roots_number_t number) {
     switch(number){
