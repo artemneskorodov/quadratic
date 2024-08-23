@@ -25,28 +25,43 @@ static bool are_roots_same(const quadratic_equation_t *first, const quadratic_eq
 static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
+static roots_number_t int_to_roots_number(int n);
 
 int test_solving_quadratic(void) {
     int errors_counter = 0;
 
-    static const quadratic_equation_t tests[] = {
-        {.a = 1, .b = 2, .c = 1, .x1 = -1, .x2 = -1, .number = ONE_ROOT},
-        {.a = 0.5, .b = 0.5, .c = 0.5, .x1 = 0, .x2 = 0, .number = NO_ROOTS},
-        {.a = 3.0, .b = 5.0, .c = 2.0, .x1 = -1, .x2 = -0.66666666667, .number = TWO_ROOTS},
-        {.a = 2, .b = -12, .c = 13.5, .x1 = 1.5, .x2 = 4.5, .number = TWO_ROOTS},
-        {.a = 0, .b = 0, .c = 0, .x1 = 0, .x2 = 0, .number = INF_ROOTS},
-        {.a = 1, .b = -19.96, .c = -105.462, .x1 = 24.3, .x2 = -4.34, .number = TWO_ROOTS},
-        {.a = 1, .b = -19.96, .c = -105.462, .x1 = -4.34, .x2 = 24.3, .number = TWO_ROOTS},
-    };
+    FILE *tests = fopen("tests.txt", "r");
 
-    for(size_t i = 0; i < sizeof(tests) / sizeof(quadratic_equation_t); i++){
+    if(tests == NULL){
+        color_printf(RED, "There is no file \"tests.txt\"\n");
+        return -1;
+    }
+
+    int lines_number = 0;
+    if(fscanf(tests, "%d\n", &lines_number) != 1){
+        color_printf(RED, "Caught error while trying to read lines number from file\n");
+        return -1;
+    }
+
+    for(int line = 0; line < lines_number; line++){
+        quadratic_equation_t expected = {};
+
+        int roots_number_numeric = 0;
+
+        if(fscanf(tests, "%lg %lg %lg %lg %lg %d\n",
+        &expected.a, &expected.b, &expected.c,
+        &expected.x1, &expected.x2, &roots_number_numeric) != 6){
+            color_printf(RED, "Caught error, while reading line %d", line);
+        }
+
+        expected.number = int_to_roots_number(roots_number_numeric);
+
         quadratic_equation_t actual = {};
-        test_result_t test_result = test_solving_one(tests + i, &actual);
 
-        if(test_result != OK)
-            errors_counter++;
+        test_result_t result = test_solving_one(&expected, &actual);
 
-        print_test_result(test_result, tests + i, &actual);
+        print_test_result(result, &expected, &actual);
+
     }
     return errors_counter;
 }
@@ -201,5 +216,16 @@ static void roots_number_to_string(char *out, roots_number_t number) {
         default: {
             sprintf(out, "ERROR");
         }
+    }
+}
+
+static roots_number_t int_to_roots_number(int n){
+    switch(n) {
+        case -1: return NOT_SOLVED;
+        case -2: return INF_ROOTS;
+        case 0: return NO_ROOTS;
+        case 1: return ONE_ROOT;
+        case 2: return TWO_ROOTS;
+        default: return NOT_SOLVED;
     }
 }

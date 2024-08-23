@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <math.h>
+#include "quadratic.h"
 
 bool is_zero(double num) {
     if(fabs(num) < EPSILON) return true;
