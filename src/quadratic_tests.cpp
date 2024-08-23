@@ -25,7 +25,6 @@ static bool are_roots_same(const quadratic_equation_t *first, const quadratic_eq
 static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
-static roots_number_t int_to_roots_number(int n);
 
 int test_solving_quadratic(void) {
     int errors_counter = 0;
@@ -38,23 +37,20 @@ int test_solving_quadratic(void) {
     }
 
     int lines_number = 0;
-    if(fscanf(tests, "%d\n", &lines_number) != 1){
-        color_printf(RED, "Caught error while trying to read lines number from file\n");
+    if(read_lines_number(tests, &lines_number) == READING_ERROR) {
+        color_printf(RED, "Caught error while trying to get lines number\n");
+        fclose(tests);
         return -1;
     }
 
     for(int line = 0; line < lines_number; line++){
         quadratic_equation_t expected = {};
 
-        int roots_number_numeric = 0;
-
-        if(fscanf(tests, "%lg %lg %lg %lg %lg %d\n",
-        &expected.a, &expected.b, &expected.c,
-        &expected.x1, &expected.x2, &roots_number_numeric) != 6){
-            color_printf(RED, "Caught error, while reading line %d", line);
+        if(read_line(tests, &expected) == READING_ERROR) {
+            color_printf(RED, "Caught error while reading line %d", line);
+            fclose(tests);
+            return -1;
         }
-
-        expected.number = int_to_roots_number(roots_number_numeric);
 
         quadratic_equation_t actual = {};
 
@@ -216,16 +212,5 @@ static void roots_number_to_string(char *out, roots_number_t number) {
         default: {
             sprintf(out, "ERROR");
         }
-    }
-}
-
-static roots_number_t int_to_roots_number(int n){
-    switch(n) {
-        case -1: return NOT_SOLVED;
-        case -2: return INF_ROOTS;
-        case 0: return NO_ROOTS;
-        case 1: return ONE_ROOT;
-        case 2: return TWO_ROOTS;
-        default: return NOT_SOLVED;
     }
 }
