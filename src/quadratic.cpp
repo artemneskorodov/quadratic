@@ -4,21 +4,23 @@
     @brief   Quadratic equations library, allows to input coefficients, solve equation and print out roots
     @author  Artem Neskorodov
     @date    22.08.2024
+
 ===============================================================================================================================
 */
 
 #include "quadratic.h"
 #include <stdio.h>
 #include <math.h>
-#include <assert.h>
 #include <stdbool.h>
 #include <string.h>
 #include "utils.h"
 #include "colors.h"
+#include "custom_assert.h"
 
 /**
 ===============================================================================================================================
     @brief   Maximum length of user input
+
 ===============================================================================================================================
 */
 static const int MAX_INPUT_LENGTH = 32;
@@ -32,24 +34,8 @@ static void go_to_end_console(void);
 static bool try_get_double(double *out);
 static bool check_if_exit(void);
 
-/**
-===============================================================================================================================
-    @brief   - Writes coefficients, that user typed, in in equation struct
-
-    @details - Function asks user to type in coefficients of quadratic equation.\n
-             - It will ask user until he/she type in valid double number or word "exit".\n
-             - Function returns:\n
-                + GETTING_SUCCESS (in case of successful writing users inputs to equation fields).\n
-                + GETTING_EXIT (in case of typed in word "exit" by user).\n
-                + There are no other return values.
-
-    @param   [out] equation pointer to quadratic equation struct
-
-    @return  Enum, represanting the bihavior of function run
-===============================================================================================================================
-*/
 getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
-    assert(equation != NULL);
+    C_ASSERT(equation != NULL);
 
     equation->number = NOT_SOLVED;
 
@@ -71,32 +57,8 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
     return GETTING_SUCCESS;
 }
 
-/**
-===============================================================================================================================
-    @brief   - Solves quadratic equation in form ax^2 + bx + c == 0
-
-    @details - Function gets coefficients from fields a, b and c of equation struct.\n
-             - It solves linear equation if a == 0.\n
-             - Function returns:\n
-                + SOLVING_SUCCESS (if solved equation successfully)\n
-                + SOLVING_ERROR (in case of unexpected error)\n
-                + INVALID_COEFFICIENTS (if one of coefficients is not finite number)\n
-                + There are no other return values\n
-             - Function writes roots in fields 'x1' and 'x2' of equation structure.\n
-             - Number of roots is written in field 'number':\n
-                + NOT_SOLVED can occure there only before structure was sent to solve_quadratic() or in case of error\n
-                + NO_ROOTS if equation has no real roots\n
-                + ONE_ROOT if equation has one real root\n
-                + TWO_ROOTS if equation has two real roots\n
-                + INF_ROOTS if equation has infinitely many roots
-
-    @param   [out] equation Point to equation structure, containing coefficients of quadratic equation
-
-    @return  Enum, representing the behavior of function run
-===============================================================================================================================
-*/
 solving_state_t solve_quadratic(quadratic_equation_t *equation) {
-    assert(equation != NULL);
+    C_ASSERT(equation != NULL);
 
     if(!isfinite(equation->a)) return INVALID_COEFFICIENTS;
     if(!isfinite(equation->b)) return INVALID_COEFFICIENTS;
@@ -132,15 +94,8 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
     }
 }
 
-/**
-===============================================================================================================================
-    @brief   - Prints roots of quadratic equation in console
-
-    @param   [in]  equation Pointer to equation struct, that is already solved
-===============================================================================================================================
-*/
 void print_quadratic_result(const quadratic_equation_t *equation) {
-    assert(equation != NULL);
+    C_ASSERT(equation != NULL);
     color_printf(DEFAULT, "Equation ");
     color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
         equation->a, equation->b, equation->c);
@@ -194,6 +149,7 @@ void print_quadratic_result(const quadratic_equation_t *equation) {
 ===============================================================================================================================
 */
 getting_coeffs_state_t get_number(char symbol, double *out) {
+    C_ASSERT(out != NULL);
     while(true) {
         printf("%c = ", symbol);
 
@@ -230,6 +186,7 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
 ===============================================================================================================================
 */
 solving_state_t solve_linear(quadratic_equation_t *equation) {
+    C_ASSERT(equation != NULL);
     if(is_zero(equation->b)){
         if(is_zero(equation->c)){
             equation->number = INF_ROOTS;
@@ -272,6 +229,7 @@ void go_to_end_console(void) {
 ===============================================================================================================================
 */
 bool try_get_double(double *out) {
+    C_ASSERT(out != NULL);
     if(scanf("%lg", out) != 1) return false;
     go_to_end_console();
     return true;

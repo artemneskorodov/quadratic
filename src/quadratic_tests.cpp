@@ -1,13 +1,29 @@
+/**
+===============================================================================================================================
+    @file    quadratic_tests.cpp
+    @brief   Testing solve_quadratic(...);
+    @date    23.08.2024
+    @author  Artem Neskorodov
+    @link    https://vk.com/neskorodovartem
+
+===============================================================================================================================
+*/
 #include "quadratic_tests.h"
 #include "quadratic.h"
 #include <stdio.h>
-#include <assert.h>
 #include <stdbool.h>
 #include <math.h>
 #include "utils.h"
 #include "colors.h"
+#include "custom_assert.h"
 
-#define MAX_ROOTS_NUMBER_LENGTH 32
+/**
+===============================================================================================================================
+    @brief   - The maximum length of roots number as string
+
+===============================================================================================================================
+*/
+static const int MAX_ROOTS_NUMBER_LENGTH = 32;
 
 enum test_result_t {
     OK,
@@ -19,52 +35,71 @@ enum test_result_t {
 //---------------------------------
 //      FUNCTIONS PROTOTYPES
 //---------------------------------
-static test_result_t test_solving_one(const quadratic_equation_t *expected, quadratic_equation_t *actual);
+static test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual);
 static void print_test_result(test_result_t test_result, const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second);
 static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
 
-int test_solving_quadratic(void) {
-    int errors_counter = 0;
+test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
+    C_ASSERT(tests_number != NULL);
+    C_ASSERT(errors_number != NULL);
+
+    *errors_number = 0;
+    *tests_number = 0;
 
     FILE *tests = fopen("tests.txt", "r");
 
-    if(tests == NULL){
-        color_printf(RED, "There is no file \"tests.txt\"\n");
-        return -1;
-    }
+    if(tests == NULL)
+        return NO_SUCH_FILE;
 
-    int lines_number = 0;
-    if(read_lines_number(tests, &lines_number) == READING_ERROR) {
-        color_printf(RED, "Caught error while trying to get lines number\n");
-        fclose(tests);
-        return -1;
-    }
-
-    for(int line = 0; line < lines_number; line++){
-        quadratic_equation_t expected = {};
-
-        if(read_line(tests, &expected) == READING_ERROR) {
-            color_printf(RED, "Caught error while reading line %d", line);
-            fclose(tests);
-            return -1;
-        }
-
+    quadratic_equation_t expected = {};
+    reading_state_t reading_state = read_line(tests, &expected);
+    while(reading_state == READING_SUCCESS) {
         quadratic_equation_t actual = {};
-
-        test_result_t result = test_solving_one(&expected, &actual);
-
-        print_test_result(result, &expected, &actual);
-
+        test_result_t test_result = run_test(&expected, &actual);
+        if(test_result != OK)
+            *errors_number += 1;
+        print_test_result(test_result, &expected, &actual);
+        reading_state = read_line(tests, &expected);
+        *tests_number += 1;
     }
-    return errors_counter;
+
+    if(reading_state == READING_ERROR)
+        return INVALID_LINES;
+
+    return SUCCESS_TEST;
 }
 
-static test_result_t test_solving_one(const quadratic_equation_t *expected, quadratic_equation_t *actual) {
-    assert(expected != NULL);
-    assert(actual != NULL);
+/**
+===============================================================================================================================
+    @brief   - Runs one equation from file "tests.txt" and checks answer.
+
+    @details - Pushes fields a, b and c from expected to actual and then runs solve_quadratic(actual)\.n
+             - Compares expected answers and actual answers:\n
+                + Firstly checks the equality of amount of roots.\n
+                + Secondly checks roots depending on amount of them:\n
+                    + Skips comparison if equation has zero or infinitly many roots.\n
+                    + Checks equality of x1 if equation has one root.\n
+                    + Checks equality of x1 and x2 if eqaution has two roots.\n
+             - Function returns:\n
+                + UNEXPECTED_SOLVING_ERROR if solve_quadratic did not return SOLVING_SUCCESS.\n
+                + DIFFETENT_AMOUT_OF_ROOTS if there is different amount of roots.\n
+                + DIFFERENT_ROOTS if roots are different.\n
+                + OK if test is passed.\n
+             - The roots are considired to be equal if iz_zero(x_actual - x_expected) == true.
+
+    @param   [in]  expected           Pointer to expected equation structure
+    @param   [in]  actual             Pointer to quadratic structure where solve_quadratic(...) will work.
+
+    @return  Error(or success) code.
+
+===============================================================================================================================
+*/
+test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual) {
+    C_ASSERT(expected != NULL);
+    C_ASSERT(actual != NULL);
 
     actual->number = NOT_SOLVED;
     actual->a = expected->a;
@@ -83,9 +118,22 @@ static test_result_t test_solving_one(const quadratic_equation_t *expected, quad
     return OK;
 }
 
-static void print_test_result(test_result_t test_result,
+/**
+===============================================================================================================================
+    @brief   - Prints result of test to console.
+
+    @param   [in]  test_result        The test result returned by run_test(...).
+    @param   [in]  expected           Pointer to structure of expected values.
+    @param   [in]  actual             Pointer to structure with actual values.
+
+===============================================================================================================================
+*/
+void print_test_result(test_result_t test_result,
                               const quadratic_equation_t *expected,
                               const quadratic_equation_t *actual) {
+
+    C_ASSERT(expected != NULL);
+    C_ASSERT(actual != NULL);
 
     color_printf(DEFAULT, "For equation ");
     color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
@@ -116,9 +164,25 @@ static void print_test_result(test_result_t test_result,
     color_printf(DEFAULT, "------------------------\n");
 }
 
-static bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second) {
-    assert(first != NULL);
-    assert(second != NULL);
+/**
+===============================================================================================================================
+    @brief   - Compares roots depending on their amount.
+
+    @details - If amounts of roots are different roots are NOT the same.\n
+             - If there is zero or infinitely many roots they are the same.\n
+             - Checks only x1 if there is one root.\n
+             - Checks x1 and x2 if there is two roots.\n
+
+    @param   [in]  first              Pointer to first equation structure to be compared.
+    @param   [in]  second             Pointer to second equation structure to be compared.
+
+    @return  True if roots are the same and false if not.
+
+===============================================================================================================================
+*/
+bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second) {
+    C_ASSERT(first != NULL);
+    C_ASSERT(second != NULL);
 
     if(first->number != second->number)
         return false;
@@ -136,7 +200,18 @@ static bool are_roots_same(const quadratic_equation_t *first, const quadratic_eq
     return true;
 }
 
-static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual){
+/**
+===============================================================================================================================
+    @brief   - Functions to print in console that there is different amount of roots in structures.
+
+    @param   [in]  expected           Pointer to expected quadratic structure
+    @param   [in]  actual             Pointer to actual quadratic structure
+
+===============================================================================================================================
+*/
+void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual){
+    C_ASSERT(expected != NULL);
+    C_ASSERT(actual != NULL);
     char string_number_expected[MAX_ROOTS_NUMBER_LENGTH] = {};
     char string_number_actual[MAX_ROOTS_NUMBER_LENGTH] = {};
 
@@ -147,7 +222,18 @@ static void print_different_amount(const quadratic_equation_t *expected, const q
            string_number_expected, string_number_actual);
 }
 
-static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
+/**
+===============================================================================================================================
+    @brief   - Function to print in console that the roots are different
+
+    @param   [in]  expected           Pointer to expected quadratic structure
+    @param   [in]  actual             Pointer to actual quadratic structure
+
+===============================================================================================================================
+*/
+void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
+    C_ASSERT(expected != NULL);
+    C_ASSERT(actual != NULL);
     switch(expected->number){
         case NOT_SOLVED: {
             color_printf(RED, "expected is not solved\n");
@@ -187,7 +273,23 @@ static void print_different_roots(const quadratic_equation_t *expected, const qu
     }
 }
 
-static void roots_number_to_string(char *out, roots_number_t number) {
+/**
+===============================================================================================================================
+    @brief   - Converts roots number to string.
+
+    @details - If number is 0, 1 or 2, string will be numerical.\n
+             - If number is NOT_SOLVED (error occured) string will be "NOT SOLVED".\n
+             - If number is INF_ROOTS string will be "INF".\n
+             - The minimal length of out is 11, but to avoid errors use constant MAX_ROOTS_NUMBER_LENGTH.
+
+    @param   [out] out                Pointer to string which will contain output.
+    @param   [in]  number             Number of roots.
+
+===============================================================================================================================
+*/
+void roots_number_to_string(char *out, roots_number_t number) {
+    C_ASSERT(number != NOT_SOLVED);
+    C_ASSERT(out != NULL);
     switch(number){
         case NOT_SOLVED: {
             sprintf(out, "NOT SOLVED");
