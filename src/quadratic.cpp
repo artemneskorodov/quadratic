@@ -38,7 +38,7 @@ static getting_coeffs_state_t get_number(char symbol, double *out);
 static solving_state_t solve_linear(quadratic_equation_t *equation);
 static void clear_buffer(void);
 static scanning_result_t try_get_double(double *out);
-static bool check_if_exit(void);
+static bool try_get_exit(void);
 
 getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
     C_ASSERT(equation != NULL);
@@ -82,16 +82,16 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
             equation->number = TWO_ROOTS;
             equation->x1 = (-equation->b - discriminant_root) / (2 * equation->a);
             equation->x2 = (-equation->b + discriminant_root) / (2 * equation->a);
-            if(is_zero(equation->x1))
+            if(is_minus_zero(equation->x1))
                 equation->x1 = 0;
-            if(is_zero(equation->x2))
+            if(is_minus_zero(equation->x2))
                 equation->x2 = 0;
             return SOLVING_SUCCESS;
         }
         case EQUALS: {
             equation->number = ONE_ROOT;
             equation->x1 = equation->x2 = (-equation->b) / (2 * equation->a);
-            if(is_zero(equation->x1))
+            if(is_minus_zero(equation->x1))
                 equation->x1 = equation->x2 = 0;
             return SOLVING_SUCCESS;
         }
@@ -109,9 +109,8 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 void print_quadratic_result(const quadratic_equation_t *equation) {
     C_ASSERT(equation != NULL);
     color_printf(DEFAULT, "Equation ");
-    color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
+    color_printf(YELLOW, "%lgx^2 + %lgx + %lg == 0:\n",
         equation->a, equation->b, equation->c);
-    color_printf(DEFAULT, ":\n");
     switch(equation->number) {
         case NOT_SOLVED: {
             color_printf(RED, "Not solved yet, try to run solve_equation(...)\n");
@@ -165,12 +164,13 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
     while(true) {
         color_printf(CYAN, "%c = ", symbol);
 
+
         switch(try_get_double(out)) {
             case SCANNING_SUCCESS: {
                 return GETTING_SUCCESS;
             }
             case SCANNING_FAILURE: {
-                if(check_if_exit() == true)
+                if(try_get_exit() == true)
                     return GETTING_EXIT;
             }
             case SCANNING_WITH_POSTFIX: {
@@ -221,7 +221,7 @@ solving_state_t solve_linear(quadratic_equation_t *equation) {
     else{
         equation->number = ONE_ROOT;
         equation->x1 = equation->x2 = - equation->c / equation->b;
-        if(is_zero(equation->x1))
+        if(is_minus_zero(equation->x1))
             equation->x1 = equation->x2 = 0;
     }
     return SOLVING_SUCCESS;
@@ -275,7 +275,7 @@ scanning_result_t try_get_double(double *out) {
     @return  TRUE if there is word "exit" in console and FALSE if not
 ===============================================================================================================================
 */
-bool check_if_exit(void) {
+bool try_get_exit(void) {
     char string[MAX_INPUT_LENGTH] = {};
     scanf("%s", string);
     clear_buffer();

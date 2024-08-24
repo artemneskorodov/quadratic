@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdint.h>
 #include "quadratic.h"
 #include "utils.h"
 #include "custom_assert.h"
@@ -27,7 +28,7 @@ compare_state_t compare_with_zero(double a) {
     return LESS;
 }
 
-reading_state_t read_line(FILE *file, quadratic_equation_t *equation) {
+reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation) {
     C_ASSERT(file != NULL);
     C_ASSERT(equation != NULL);
     if(file == NULL)
@@ -45,4 +46,12 @@ reading_state_t read_line(FILE *file, quadratic_equation_t *equation) {
         return READING_ERROR;
 
     return READING_SUCCESS;
+}
+
+bool is_minus_zero(double number) {
+    const uint64_t minus_zero = 0b1000000000000000000000000000000000000000000000000000000000000000;
+    uint64_t bits = *(uint64_t *)&number;
+    if(minus_zero == bits)
+        return true;
+    return false;
 }

@@ -34,12 +34,9 @@ enum test_result_t {
     DIFFERENT_ROOTS
 };
 
-//---------------------------------
-//      FUNCTIONS PROTOTYPES
-//---------------------------------
 static test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual);
 static void print_test_result(test_result_t test_result, const quadratic_equation_t *expected, const quadratic_equation_t *actual);
-static bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second);
+static bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t *second);
 static void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
@@ -57,14 +54,14 @@ test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
         return NO_SUCH_FILE;
 
     quadratic_equation_t expected = {};
-    reading_state_t reading_state = read_line(tests, &expected);
+    reading_state_t reading_state = read_expected_line(tests, &expected);
     while(reading_state == READING_SUCCESS) {
         quadratic_equation_t actual = {};
         test_result_t test_result = run_test(&expected, &actual);
         if(test_result != OK)
             *errors_number += 1;
         print_test_result(test_result, &expected, &actual);
-        reading_state = read_line(tests, &expected);
+        reading_state = read_expected_line(tests, &expected);
         *tests_number += 1;
     }
 
@@ -114,7 +111,7 @@ test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_
     if(expected->number != actual->number)
         return DIFFERENT_AMOUNT_OF_ROOTS;
 
-    if(are_roots_same(expected, actual) != true)
+    if(compare_roots(expected, actual) != true)
         return DIFFERENT_ROOTS;
 
     return OK;
@@ -182,7 +179,7 @@ void print_test_result(test_result_t test_result,
 
 ===============================================================================================================================
 */
-bool are_roots_same(const quadratic_equation_t *first, const quadratic_equation_t *second) {
+bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t *second) {
     C_ASSERT(first != NULL);
     C_ASSERT(second != NULL);
 

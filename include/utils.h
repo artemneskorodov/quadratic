@@ -91,6 +91,20 @@ compare_state_t compare_with_zero(double a);
 
 ================================================================================================================================
 */
-reading_state_t read_line(FILE *file, quadratic_equation_t *equation);
+reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation);
+
+/**
+================================================================================================================================
+    @brief   - Checks if double represantation of zero has sign bit set to 1
+
+    @details - Converts double to integer saving bits and compares it with 0b100000000000000000....
+
+    @param   [in]  number             Number to be checked
+
+    @return  True if number has binary represantation 1000000..... and false in other cases
+
+================================================================================================================================
+*/
+bool is_minus_zero(double number);
 
 #endif

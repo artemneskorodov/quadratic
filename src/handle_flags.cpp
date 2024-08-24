@@ -30,7 +30,7 @@ struct solving_mode_t {
     exit_code_t (*handle_function)(void);
 };
 
-static exit_code_t handle_unexpected_amount_of_flags(void);
+static exit_code_t handle_unsupported_amount_of_flags(void);
 static exit_code_t handle_unknown_flag(const char *flag);
 static exit_code_t handle_help(void);
 static exit_code_t handle_solve(void);
@@ -52,7 +52,7 @@ static const solving_mode_t modes[] = {
 
 exit_code_t handle_user(int argc, const char *argv[]){
     C_ASSERT(argv != NULL);
-    if(argc != 1 && argc != 2) return handle_unexpected_amount_of_flags();
+    if(argc != 1 && argc != 2) return handle_unsupported_amount_of_flags();
     if(argc == 1) return handle_solve();
     for(size_t mode = 0; mode < sizeof(modes) / sizeof(solving_mode_t); mode++)
         if(strcmp(modes[mode].long_name, argv[argc - 1]) == 0 || strcmp(modes[mode].short_name, argv[argc - 1]) == 0)
@@ -66,8 +66,8 @@ exit_code_t handle_user(int argc, const char *argv[]){
 
 ===============================================================================================================================
 */
-exit_code_t handle_unexpected_amount_of_flags(void){
-    color_printf(RED, "Unexpected amount of flags, you can use only 0 or 1\n");
+exit_code_t handle_unsupported_amount_of_flags(void){
+    color_printf(RED, "Unsupported amount of flags, you can use only 0 or 1\n");
     color_printf(DEFAULT, "Use flag ");
     color_printf(PURPLE, "'--help'\n");
     return EXIT_CODE_SUCCESS;
