@@ -18,6 +18,5 @@
 */
 
 int main(int argc, const char *argv[]) {
-    C_ASSERT(argv != NULL);
     return (int)handle_user(argc, argv);
 }
