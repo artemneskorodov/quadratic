@@ -161,7 +161,7 @@ exit_code_t handle_test(void) {
     int total = 0, errors = 0;
     switch(test_solving_quadratic(&total, &errors)) {
         case NO_SUCH_FILE: {
-            color_printf(RED, "There is no file \"tests.txt\"\n");
+            color_printf(RED, "There is no file \"%s\"\n", TESTS_FILE_NAME);
             return EXIT_CODE_FAILURE;
         }
         case INVALID_LINES:{

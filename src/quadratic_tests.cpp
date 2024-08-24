@@ -49,7 +49,7 @@ test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
     *errors_number = 0;
     *tests_number = 0;
 
-    FILE *tests = fopen("tests.txt", "r");
+    FILE *tests = fopen(TESTS_FILE_NAME, "r");
 
     if(tests == NULL)
         return NO_SUCH_FILE;

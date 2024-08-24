@@ -20,6 +20,14 @@ enum test_state_t {
 
 /**
 ===============================================================================================================================
+    @brief Name of file where program will take expected cases to test solve_quadratic(...);
+
+===============================================================================================================================
+*/
+static const char *TESTS_FILE_NAME = "tests.txt";
+
+/**
+===============================================================================================================================
     @brief   - Run tests of solve_quadratic(...)
 
     @details - Expected values are taken from file "tests.txt" in form:\n
