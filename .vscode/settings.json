@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "assert.h": "c",
-        "random": "cpp",
-        "functional": "cpp",
-        "cstdlib": "cpp"
-    }
-}

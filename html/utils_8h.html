@@ -11,12 +11,15 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -49,17 +52,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('utils_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,12 +96,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#enum-members">Enumerations</a> &#124;
@@ -104,14 +113,14 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aaf2bf363c8c28c823c6967ee322c6094" id="r_aaf2bf363c8c28c823c6967ee322c6094"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094">compare_state_t</a> { <a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094aba63a604e56e6c9ea24e738bd422fb2b">BIGGER</a>
-, <a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f">LESS</a>
-, <a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094a949310f9cb536c15919e133f7e7316f3">EQUALS</a>
+<tr class="memitem:aaf2bf363c8c28c823c6967ee322c6094" id="r_aaf2bf363c8c28c823c6967ee322c6094"><td class="memItemLeft" align="right" valign="top"><a id="aaf2bf363c8c28c823c6967ee322c6094" name="aaf2bf363c8c28c823c6967ee322c6094"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>compare_state_t</b> { <b>BIGGER</b>
+, <b>LESS</b>
+, <b>EQUALS</b>
  }</td></tr>
 <tr class="separator:aaf2bf363c8c28c823c6967ee322c6094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07de0d125bfc87aa91042de16abadbf6" id="r_a07de0d125bfc87aa91042de16abadbf6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07de0d125bfc87aa91042de16abadbf6">reading_state_t</a> { <a class="el" href="#a07de0d125bfc87aa91042de16abadbf6a2727282a03a06221752ff8ea7774924b">READING_SUCCESS</a>
-, <a class="el" href="#a07de0d125bfc87aa91042de16abadbf6a17bcf9ac986e66b6a333261c119606ca">READING_ERROR</a>
-, <a class="el" href="#a07de0d125bfc87aa91042de16abadbf6acda17ccb237ba5d840673fb6e1ba41b0">READING_END</a>
+<tr class="memitem:a07de0d125bfc87aa91042de16abadbf6" id="r_a07de0d125bfc87aa91042de16abadbf6"><td class="memItemLeft" align="right" valign="top"><a id="a07de0d125bfc87aa91042de16abadbf6" name="a07de0d125bfc87aa91042de16abadbf6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>reading_state_t</b> { <b>READING_SUCCESS</b>
+, <b>READING_ERROR</b>
+, <b>READING_END</b>
  }</td></tr>
 <tr class="separator:a07de0d125bfc87aa91042de16abadbf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -123,13 +132,13 @@ Functions</h2></td></tr>
 </ul>
  <br /></td></tr>
 <tr class="separator:a818c7ac4f30b3ab52a36a116ed00d0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8452c6d1788ec691ce06e705cde2bd13" id="r_a8452c6d1788ec691ce06e705cde2bd13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094">compare_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8452c6d1788ec691ce06e705cde2bd13">compare_with_zero</a> (double a)</td></tr>
+<tr class="memitem:a8452c6d1788ec691ce06e705cde2bd13" id="r_a8452c6d1788ec691ce06e705cde2bd13"><td class="memItemLeft" align="right" valign="top">compare_state_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8452c6d1788ec691ce06e705cde2bd13">compare_with_zero</a> (double a)</td></tr>
 <tr class="memdesc:a8452c6d1788ec691ce06e705cde2bd13"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Compares double number with zero. </li>
 </ul>
  <br /></td></tr>
 <tr class="separator:a8452c6d1788ec691ce06e705cde2bd13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae181f0ec5732bee14b8fee134ab733c6" id="r_ae181f0ec5732bee14b8fee134ab733c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a07de0d125bfc87aa91042de16abadbf6">reading_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae181f0ec5732bee14b8fee134ab733c6">read_line</a> (FILE *file, <a class="el" href="structquadratic__equation__t.html">quadratic_equation_t</a> *equation)</td></tr>
+<tr class="memitem:ae181f0ec5732bee14b8fee134ab733c6" id="r_ae181f0ec5732bee14b8fee134ab733c6"><td class="memItemLeft" align="right" valign="top">reading_state_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae181f0ec5732bee14b8fee134ab733c6">read_line</a> (FILE *file, <a class="el" href="structquadratic__equation__t.html">quadratic_equation_t</a> *equation)</td></tr>
 <tr class="memdesc:ae181f0ec5732bee14b8fee134ab733c6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Reads line of tests file. </li>
 </ul>
@@ -141,46 +150,7 @@ Functions</h2></td></tr>
 <hr  />
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="aaf2bf363c8c28c823c6967ee322c6094" name="aaf2bf363c8c28c823c6967ee322c6094"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf2bf363c8c28c823c6967ee322c6094">&#9670;&#160;</a></span>compare_state_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094">compare_state_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaf2bf363c8c28c823c6967ee322c6094aba63a604e56e6c9ea24e738bd422fb2b" name="aaf2bf363c8c28c823c6967ee322c6094aba63a604e56e6c9ea24e738bd422fb2b"></a>BIGGER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f" name="aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f"></a>LESS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aaf2bf363c8c28c823c6967ee322c6094a949310f9cb536c15919e133f7e7316f3" name="aaf2bf363c8c28c823c6967ee322c6094a949310f9cb536c15919e133f7e7316f3"></a>EQUALS&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<a id="a07de0d125bfc87aa91042de16abadbf6" name="a07de0d125bfc87aa91042de16abadbf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07de0d125bfc87aa91042de16abadbf6">&#9670;&#160;</a></span>reading_state_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#a07de0d125bfc87aa91042de16abadbf6">reading_state_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07de0d125bfc87aa91042de16abadbf6a2727282a03a06221752ff8ea7774924b" name="a07de0d125bfc87aa91042de16abadbf6a2727282a03a06221752ff8ea7774924b"></a>READING_SUCCESS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07de0d125bfc87aa91042de16abadbf6a17bcf9ac986e66b6a333261c119606ca" name="a07de0d125bfc87aa91042de16abadbf6a17bcf9ac986e66b6a333261c119606ca"></a>READING_ERROR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07de0d125bfc87aa91042de16abadbf6acda17ccb237ba5d840673fb6e1ba41b0" name="a07de0d125bfc87aa91042de16abadbf6acda17ccb237ba5d840673fb6e1ba41b0"></a>READING_END&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a8452c6d1788ec691ce06e705cde2bd13" name="a8452c6d1788ec691ce06e705cde2bd13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8452c6d1788ec691ce06e705cde2bd13">&#9670;&#160;</a></span>compare_with_zero()</h2>
 
@@ -188,7 +158,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#aaf2bf363c8c28c823c6967ee322c6094">compare_state_t</a> compare_with_zero </td>
+          <td class="memname">compare_state_t compare_with_zero </td>
           <td>(</td>
           <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
           <td></td>
@@ -269,7 +239,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a07de0d125bfc87aa91042de16abadbf6">reading_state_t</a> read_line </td>
+          <td class="memname">reading_state_t read_line </td>
           <td>(</td>
           <td class="paramtype">FILE *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
         </tr>
@@ -331,10 +301,13 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="utils_8h.html">utils.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

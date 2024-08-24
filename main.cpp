@@ -17,5 +17,5 @@
 */
 
 int main(int argc, const char *argv[]) {
-    return handle_user(argc, argv);
+    return (int)handle_user(argc, argv);
 }

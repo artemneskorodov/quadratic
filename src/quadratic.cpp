@@ -197,7 +197,12 @@ solving_state_t solve_linear(quadratic_equation_t *equation) {
     }
     else{
         equation->number = ONE_ROOT;
-        equation->x1 = equation->x2 = -equation->c / equation->b;
+        if(is_zero(equation->c)){
+            equation->x1 = equation->x2 = 0;
+        }
+        else{
+            equation->x1 = equation->x2 = - equation->c / equation->a;
+        }
     }
     return SOLVING_SUCCESS;
 }

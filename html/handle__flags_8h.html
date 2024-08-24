@@ -11,12 +11,15 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -49,17 +52,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('handle__flags_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,14 +96,9 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">handle_flags.h File Reference</div></div>
 </div><!--header-->
@@ -99,14 +109,21 @@ $(function(){ initResizable(false); });
 
 <p><a href="handle__flags_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a2d967eed409413b06a8450ff977ab52a" id="r_a2d967eed409413b06a8450ff977ab52a"><td class="memItemLeft" align="right" valign="top"><a id="a2d967eed409413b06a8450ff977ab52a" name="a2d967eed409413b06a8450ff977ab52a"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>exit_code_t</b> { <b>EXIT_CODE_SUCCESS</b> = 0
+, <b>EXIT_CODE_FAILURE</b> = 1
+ }</td></tr>
+<tr class="separator:a2d967eed409413b06a8450ff977ab52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abed3e09854c03317510e396a1b41d110" id="r_abed3e09854c03317510e396a1b41d110"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abed3e09854c03317510e396a1b41d110">handle_user</a> (int argc, const char *argv[])</td></tr>
-<tr class="memdesc:abed3e09854c03317510e396a1b41d110"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="memitem:a2fe13711640153cc3050c7227f2b9a19" id="r_a2fe13711640153cc3050c7227f2b9a19"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fe13711640153cc3050c7227f2b9a19">handle_user</a> (int argc, const char *argv[])</td></tr>
+<tr class="memdesc:a2fe13711640153cc3050c7227f2b9a19"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Defines the mode in which program will run </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:abed3e09854c03317510e396a1b41d110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a2fe13711640153cc3050c7227f2b9a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header of library, allowing to handle flags typed in by user in console. </p>
@@ -114,14 +131,14 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abed3e09854c03317510e396a1b41d110" name="abed3e09854c03317510e396a1b41d110"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abed3e09854c03317510e396a1b41d110">&#9670;&#160;</a></span>handle_user()</h2>
+<a id="a2fe13711640153cc3050c7227f2b9a19" name="a2fe13711640153cc3050c7227f2b9a19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fe13711640153cc3050c7227f2b9a19">&#9670;&#160;</a></span>handle_user()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int handle_user </td>
+          <td class="memname">exit_code_t handle_user </td>
           <td>(</td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
         </tr>
@@ -158,10 +175,13 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="handle__flags_8h.html">handle_flags.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

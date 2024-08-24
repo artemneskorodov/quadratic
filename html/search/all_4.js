@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['equals_0',['EQUALS',['../utils_8h.html#aaf2bf363c8c28c823c6967ee322c6094a949310f9cb536c15919e133f7e7316f3',1,'utils.h']]],
-  ['exe_1',['Quadratic.exe',['../index.html',1,'']]]
+  ['is_5fzero_0',['is_zero',['../utils_8h.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp'],['../utils_8cpp.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp']]]
 ];

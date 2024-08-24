@@ -11,12 +11,15 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -49,17 +52,29 @@ $(function() { codefold.init(0); });
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function() {
-  initMenu('',true,false,'search.php','Search',false);
+  initMenu('',true,false,'search.php','Search',true);
   $(function() { init_search(); });
 });
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('quadratic__tests_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,12 +96,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#enum-members">Enumerations</a> &#124;
@@ -102,15 +111,15 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a771b98f001ed3e41e779472ee7cedc33" id="r_a771b98f001ed3e41e779472ee7cedc33"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a771b98f001ed3e41e779472ee7cedc33">test_state_t</a> { <a class="el" href="#a771b98f001ed3e41e779472ee7cedc33a40adf7082186ec66252002d2d7af3d94">NO_SUCH_FILE</a>
-, <a class="el" href="#a771b98f001ed3e41e779472ee7cedc33aa3a47d42bed97a5be2d43d4a6659fb43">INVALID_LINES</a>
-, <a class="el" href="#a771b98f001ed3e41e779472ee7cedc33adea0ead270dd8c3bab205ef06d6372d3">SUCCESS_TEST</a>
+<tr class="memitem:a771b98f001ed3e41e779472ee7cedc33" id="r_a771b98f001ed3e41e779472ee7cedc33"><td class="memItemLeft" align="right" valign="top"><a id="a771b98f001ed3e41e779472ee7cedc33" name="a771b98f001ed3e41e779472ee7cedc33"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>test_state_t</b> { <b>NO_SUCH_FILE</b>
+, <b>INVALID_LINES</b>
+, <b>SUCCESS_TEST</b>
  }</td></tr>
 <tr class="separator:a771b98f001ed3e41e779472ee7cedc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7d126c81d57fa6d7250151a243923057" id="r_a7d126c81d57fa6d7250151a243923057"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a771b98f001ed3e41e779472ee7cedc33">test_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d126c81d57fa6d7250151a243923057">test_solving_quadratic</a> (int *tests_number, int *errors_number)</td></tr>
+<tr class="memitem:a7d126c81d57fa6d7250151a243923057" id="r_a7d126c81d57fa6d7250151a243923057"><td class="memItemLeft" align="right" valign="top">test_state_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d126c81d57fa6d7250151a243923057">test_solving_quadratic</a> (int *tests_number, int *errors_number)</td></tr>
 <tr class="memdesc:a7d126c81d57fa6d7250151a243923057"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Run tests of solve_quadratic(...) </li>
 </ul>
@@ -122,27 +131,7 @@ Functions</h2></td></tr>
 <hr  />
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a771b98f001ed3e41e779472ee7cedc33" name="a771b98f001ed3e41e779472ee7cedc33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a771b98f001ed3e41e779472ee7cedc33">&#9670;&#160;</a></span>test_state_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#a771b98f001ed3e41e779472ee7cedc33">test_state_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a771b98f001ed3e41e779472ee7cedc33a40adf7082186ec66252002d2d7af3d94" name="a771b98f001ed3e41e779472ee7cedc33a40adf7082186ec66252002d2d7af3d94"></a>NO_SUCH_FILE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a771b98f001ed3e41e779472ee7cedc33aa3a47d42bed97a5be2d43d4a6659fb43" name="a771b98f001ed3e41e779472ee7cedc33aa3a47d42bed97a5be2d43d4a6659fb43"></a>INVALID_LINES&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a771b98f001ed3e41e779472ee7cedc33adea0ead270dd8c3bab205ef06d6372d3" name="a771b98f001ed3e41e779472ee7cedc33adea0ead270dd8c3bab205ef06d6372d3"></a>SUCCESS_TEST&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a7d126c81d57fa6d7250151a243923057" name="a7d126c81d57fa6d7250151a243923057"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d126c81d57fa6d7250151a243923057">&#9670;&#160;</a></span>test_solving_quadratic()</h2>
 
@@ -150,7 +139,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a771b98f001ed3e41e779472ee7cedc33">test_state_t</a> test_solving_quadratic </td>
+          <td class="memname">test_state_t test_solving_quadratic </td>
           <td>(</td>
           <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tests_number</em></span>, </td>
         </tr>
@@ -215,10 +204,13 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="quadratic__tests_8h.html">quadratic_tests.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

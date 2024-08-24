@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['less_0',['LESS',['../utils_8h.html#aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f',1,'utils.h']]]
+  ['solve_5fquadratic_0',['solve_quadratic',['../quadratic_8h.html#a78256d2aca444f759716cbfb4df6e778',1,'solve_quadratic(quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#a78256d2aca444f759716cbfb4df6e778',1,'solve_quadratic(quadratic_equation_t *equation):&#160;quadratic.cpp']]]
 ];
