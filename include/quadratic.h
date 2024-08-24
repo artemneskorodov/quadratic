@@ -36,7 +36,8 @@ enum solving_state_t {
 
 enum getting_coeffs_state_t {
     GETTING_SUCCESS,
-    GETTING_EXIT
+    GETTING_EXIT,
+    GETTING_ERROR
 };
 
 /**

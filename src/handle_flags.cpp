@@ -122,9 +122,20 @@ exit_code_t handle_solve(void){
     quadratic_equation_t equation = {.number = NOT_SOLVED};
 
     //Getting coefficients from user
-    if(get_coefficients(&equation) == GETTING_EXIT){
-        color_printf(CYAN, "Stop using Vietta\n");
-        return EXIT_CODE_SUCCESS;
+    switch(get_coefficients(&equation)){
+        case GETTING_EXIT: {
+            color_printf(CYAN, "Stop using Vietta\n");
+            return EXIT_CODE_SUCCESS;
+        }
+        case GETTING_SUCCESS: {
+            break;
+        }
+        case GETTING_ERROR: {
+            return EXIT_CODE_FAILURE;
+        }
+        default: {
+            return EXIT_CODE_FAILURE;
+        }
     }
 
     //Solving quadratic

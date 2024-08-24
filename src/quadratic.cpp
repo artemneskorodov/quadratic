@@ -17,6 +17,12 @@
 #include "colors.h"
 #include "custom_assert.h"
 
+enum scanning_result_t {
+    SCANNING_WITH_POSTFIX,
+    SCANNING_SUCCESS,
+    SCANNING_FAILURE
+};
+
 /**
 ===============================================================================================================================
     @brief   Maximum length of user input
@@ -30,8 +36,8 @@ static const int MAX_INPUT_LENGTH = 32;
 //---------------------------------
 static getting_coeffs_state_t get_number(char symbol, double *out);
 static solving_state_t solve_linear(quadratic_equation_t *equation);
-static void go_to_end_console(void);
-static bool try_get_double(double *out);
+static void clear_buffer(void);
+static scanning_result_t try_get_double(double *out);
 static bool check_if_exit(void);
 
 getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
@@ -157,15 +163,26 @@ void print_quadratic_result(const quadratic_equation_t *equation) {
 getting_coeffs_state_t get_number(char symbol, double *out) {
     C_ASSERT(out != NULL);
     while(true) {
-        printf("%c = ", symbol);
+        color_printf(CYAN, "%c = ", symbol);
 
-        if(try_get_double(out) == true)
-            return GETTING_SUCCESS;
+        switch(try_get_double(out)) {
+            case SCANNING_SUCCESS: {
+                return GETTING_SUCCESS;
+            }
+            case SCANNING_FAILURE: {
+                if(check_if_exit() == true)
+                    return GETTING_EXIT;
+            }
+            case SCANNING_WITH_POSTFIX: {
+                break ;
+            }
+            default: {
+                color_printf(RED, "Unexpected error\n");
+                return GETTING_ERROR;
+            }
+        }
 
-        if(check_if_exit() == true)
-            return GETTING_EXIT;
-
-        printf("Invalid input\n");
+        color_printf(PURPLE, "Invalid input\n");
     }
 }
 
@@ -220,7 +237,7 @@ solving_state_t solve_linear(quadratic_equation_t *equation) {
 
 ===============================================================================================================================
 */
-void go_to_end_console(void) {
+void clear_buffer(void) {
     int c = getchar();
     while(c != EOF && c != '\n') c = getchar();
 }
@@ -236,11 +253,16 @@ void go_to_end_console(void) {
     @return  TRUE in case of success and FALSE in other
 ===============================================================================================================================
 */
-bool try_get_double(double *out) {
+scanning_result_t try_get_double(double *out) {
     C_ASSERT(out != NULL);
-    if(scanf("%lg", out) != 1) return false;
-    go_to_end_console();
-    return true;
+    if(scanf("%lg", out) != 1) return SCANNING_FAILURE;
+
+    int c = getchar();
+    if(c != '\n' && c != EOF){
+        clear_buffer();
+        return SCANNING_WITH_POSTFIX;
+    }
+    return SCANNING_SUCCESS;
 }
 
 /**
@@ -256,7 +278,7 @@ bool try_get_double(double *out) {
 bool check_if_exit(void) {
     char string[MAX_INPUT_LENGTH] = {};
     scanf("%s", string);
-    go_to_end_console();
+    clear_buffer();
     if(strcmp(string, "exit") == 0)
         return true;
 
