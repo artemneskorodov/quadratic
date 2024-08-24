@@ -76,11 +76,17 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
             equation->number = TWO_ROOTS;
             equation->x1 = (-equation->b - discriminant_root) / (2 * equation->a);
             equation->x2 = (-equation->b + discriminant_root) / (2 * equation->a);
+            if(is_zero(equation->x1))
+                equation->x1 = 0;
+            if(is_zero(equation->x2))
+                equation->x2 = 0;
             return SOLVING_SUCCESS;
         }
         case EQUALS: {
             equation->number = ONE_ROOT;
             equation->x1 = equation->x2 = (-equation->b) / (2 * equation->a);
+            if(is_zero(equation->x1))
+                equation->x1 = equation->x2 = 0;
             return SOLVING_SUCCESS;
         }
         case LESS: {
@@ -197,12 +203,9 @@ solving_state_t solve_linear(quadratic_equation_t *equation) {
     }
     else{
         equation->number = ONE_ROOT;
-        if(is_zero(equation->c)){
+        equation->x1 = equation->x2 = - equation->c / equation->b;
+        if(is_zero(equation->x1))
             equation->x1 = equation->x2 = 0;
-        }
-        else{
-            equation->x1 = equation->x2 = - equation->c / equation->a;
-        }
     }
     return SOLVING_SUCCESS;
 }

@@ -21,7 +21,7 @@
 
 =============!========================!========================================================================================
 */
-static const double EPSILON = 1e-6;
+static const double EPSILON = 1e-9;
 
 enum compare_state_t {
     BIGGER,

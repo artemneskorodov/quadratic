@@ -1,4 +1,5 @@
 #include "handle_flags.h"
+#include "custom_assert.h"
 #include <stdio.h>
 
 /**
@@ -17,5 +18,6 @@
 */
 
 int main(int argc, const char *argv[]) {
+    C_ASSERT(argv != NULL);
     return (int)handle_user(argc, argv);
 }

@@ -24,7 +24,7 @@
 
 ===============================================================================================================================
 */
-struct mode_t {
+struct solving_mode_t {
     const char *long_name;
     const char *short_name;
     exit_code_t (*handle_function)(void);
@@ -44,20 +44,20 @@ static exit_code_t handle_test(void);
 
 ===============================================================================================================================
 */
-static const mode_t modes[] = {
-    {.long_name = "--help",  .short_name = "-h", .handle_function = handle_help },
-    {.long_name = "--solve", .short_name = "-s", .handle_function = handle_solve},
-    {.long_name = "--test",  .short_name = "-t", .handle_function = handle_test }
+static const solving_mode_t modes[] = {
+    {.long_name = "--help",  .short_name = "-h", .handle_function = handle_help  },
+    {.long_name = "--solve", .short_name = "-s", .handle_function = handle_solve },
+    {.long_name = "--test",  .short_name = "-t", .handle_function = handle_test  }
 };
 
 exit_code_t handle_user(int argc, const char *argv[]){
     C_ASSERT(argv != NULL);
     if(argc != 1 && argc != 2) return handle_unexpected_amount_of_flags();
     if(argc == 1) return handle_solve();
-    for(size_t mode = 0; mode < sizeof(modes) / sizeof(mode_t); mode++)
-        if(strcmp(modes[mode].long_name, argv[1]) == 0 || strcmp(modes[mode].short_name, argv[1]) == 0)
+    for(size_t mode = 0; mode < sizeof(modes) / sizeof(solving_mode_t); mode++)
+        if(strcmp(modes[mode].long_name, argv[argc - 1]) == 0 || strcmp(modes[mode].short_name, argv[argc - 1]) == 0)
             return modes[mode].handle_function();
-    return handle_unknown_flag(argv[1]);
+    return handle_unknown_flag(argv[argc - 1]);
 }
 
 /**
@@ -162,11 +162,11 @@ exit_code_t handle_test(void) {
     switch(test_solving_quadratic(&total, &errors)) {
         case NO_SUCH_FILE: {
             color_printf(RED, "There is no file \"tests.txt\"\n");
-            return EXIT_CODE_SUCCESS;
+            return EXIT_CODE_FAILURE;
         }
         case INVALID_LINES:{
             color_printf(RED, "Tests file is invalid\n");
-            return EXIT_CODE_SUCCESS;
+            return EXIT_CODE_FAILURE;
         }
         case SUCCESS_TEST: {
             color_printf(YELLOW, "All test have been carried out\n");
