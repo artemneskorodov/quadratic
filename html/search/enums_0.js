@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['roots_5fnumber_5ft_0',['roots_number_t',['../quadratic_8h.html#aab90a28b547f90a752c3d962a5365f25',1,'quadratic.h']]]
+  ['color_5ft_0',['color_t',['../colors_8h.html#a0a8ef1b5e1941b7257e545cc33405ff1',1,'colors.h']]],
+  ['compare_5fstate_5ft_1',['compare_state_t',['../utils_8h.html#aaf2bf363c8c28c823c6967ee322c6094',1,'utils.h']]]
 ];

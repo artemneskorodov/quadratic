@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    quadratic_tests.cpp
-    @brief   Testing solve_quadratic(...);
+    @brief   Testing solve_quadratic(...).
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -19,7 +19,7 @@
 
 /**
 ===============================================================================================================================
-    @brief   - The maximum length of roots number as string
+    @brief   - The maximum length of roots number as string.
 
 ===============================================================================================================================
 */
@@ -203,8 +203,8 @@ bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t
 ===============================================================================================================================
     @brief   - Functions to print in console that there is different amount of roots in structures.
 
-    @param   [in]  expected           Pointer to expected quadratic structure
-    @param   [in]  actual             Pointer to actual quadratic structure
+    @param   [in]  expected           Pointer to expected quadratic structure.
+    @param   [in]  actual             Pointer to actual quadratic structure.
 
 ===============================================================================================================================
 */
@@ -223,10 +223,10 @@ void print_different_amount(const quadratic_equation_t *expected, const quadrati
 
 /**
 ===============================================================================================================================
-    @brief   - Function to print in console that the roots are different
+    @brief   - Function to print in console that the roots are different.
 
-    @param   [in]  expected           Pointer to expected quadratic structure
-    @param   [in]  actual             Pointer to actual quadratic structure
+    @param   [in]  expected           Pointer to expected quadratic structure.
+    @param   [in]  actual             Pointer to actual quadratic structure.
 
 ===============================================================================================================================
 */

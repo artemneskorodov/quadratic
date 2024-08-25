@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['print_5fassert_5ferror_0',['print_assert_error',['../custom__assert_8h.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp'],['../custom__assert_8cpp.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp']]],
-  ['print_5fquadratic_5fresult_1',['print_quadratic_result',['../quadratic_8h.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp']]]
+  ['handle_5fflags_2ecpp_0',['handle_flags.cpp',['../handle__flags_8cpp.html',1,'']]],
+  ['handle_5fflags_2eh_1',['handle_flags.h',['../handle__flags_8h.html',1,'']]],
+  ['handle_5ffunction_2',['handle_function',['../structsolving__mode__t.html#ac370573188b0a246774b4a31c804f04f',1,'solving_mode_t']]],
+  ['handle_5fuser_3',['handle_user',['../handle__flags_8h.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp']]]
 ];

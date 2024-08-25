@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    custom_assert.cpp
-    @brief   Assert macro
+    @brief   Assert macro.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem

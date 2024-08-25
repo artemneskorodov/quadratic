@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    handle_flags.cpp
-    @brief   Handling flags pushed from console
+    @brief   Handling flags pushed from console.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -20,7 +20,7 @@
 
 /**
 ===============================================================================================================================
-    @brief Structure to store names and handle functions of supported modes
+    @brief Structure to store names and handle functions of supported modes.
 
 ===============================================================================================================================
 */
@@ -38,9 +38,9 @@ static exit_code_t handle_test(void);
 
 /**
 ===============================================================================================================================
-    @brief   - List of modes supported by program
-    @details - Contains short name and long name(for example '-h' and '--help')\n
-             - Contains function to handle user
+    @brief   - List of modes supported by program.
+    @details - Contains short name and long name(for example '-h' and '--help').\n
+             - Contains function to handle user.
 
 ===============================================================================================================================
 */
@@ -161,10 +161,10 @@ exit_code_t handle_solve(void){
 
 /**
 ===============================================================================================================================
-    @brief   - Test mode
+    @brief   - Test mode.
 
     @details - Starts tests.\n
-             - Prints total number of tests from file "tests.txt" and errors
+             - Prints total number of tests from file "tests.txt" and errors.
 
 ===============================================================================================================================
 */

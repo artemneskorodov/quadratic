@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['read_5fline_0',['read_line',['../utils_8h.html#ae181f0ec5732bee14b8fee134ab733c6',1,'read_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp'],['../utils_8cpp.html#ae181f0ec5732bee14b8fee134ab733c6',1,'read_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp']]],
-  ['roots_5fnumber_5ft_1',['roots_number_t',['../quadratic_8h.html#aab90a28b547f90a752c3d962a5365f25',1,'quadratic.h']]]
+  ['less_0',['LESS',['../utils_8h.html#aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f',1,'utils.h']]],
+  ['long_5fname_1',['long_name',['../structsolving__mode__t.html#a4c33c7528c496ba2624340a9f3b561d3',1,'solving_mode_t']]]
 ];

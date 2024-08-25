@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quadratic_5fequation_5ft_0',['quadratic_equation_t',['../structquadratic__equation__t.html',1,'']]]
+  ['solving_5fmode_5ft_0',['solving_mode_t',['../structsolving__mode__t.html',1,'']]]
 ];

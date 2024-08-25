@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    colors.cpp
-    @brief   Library that allowes to print colored text
+    @brief   Library that allowes to print colored text.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -45,7 +45,7 @@ void color_printf(color_t color, const char *string, ...) {
 ===============================================================================================================================
     @brief   - Prints special color code, that starts colored text output in console.
 
-    @param   [in]  color              Enumerator representing color
+    @param   [in]  color              Enumerator representing color.
 
 ===============================================================================================================================
 */
@@ -90,7 +90,7 @@ void start_color(color_t color) {
 
 /**
 ===============================================================================================================================
-    @brief   - Prints special code, that resets the color of text in console to default
+    @brief   - Prints special code, that resets the color of text in console to default.
 
 ===============================================================================================================================
 */

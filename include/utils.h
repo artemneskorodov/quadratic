@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    utils.h
-    @brief   Header of library, allowing to compare doubles with zero and reading test cases for quadratic equation from file
+    @brief   Header of library, allowing to compare doubles with zero and reading test cases for quadratic equation from file.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -16,10 +16,10 @@
 #include "quadratic.h"
 
 /**
-=============!========================!========================================================================================
-    @brief   - Constant that is used to compare doubles
+===============================================================================================================================
+    @brief   - Constant that is used to compare doubles.
 
-=============!========================!========================================================================================
+===============================================================================================================================
 */
 static const double EPSILON = 1e-9;
 
@@ -37,13 +37,13 @@ enum reading_state_t {
 
 /**
 ===============================================================================================================================
-    @brief   - Compares number to zero
+    @brief   - Compares number to zero.
 
-    @details - Number is considered to be zero if |num| < EPSILON
+    @details - Number is considered to be zero if |num| < EPSILON.
 
-    @param   [in] num                 The number to be compared with zero
+    @param   [in] num                 The number to be compared with zero.
 
-    @return  TRUE if |num| < EPSILON and FALSE in other cases
+    @return  TRUE if |num| < EPSILON and FALSE in other cases.
 
 ===============================================================================================================================
 */
@@ -87,7 +87,7 @@ compare_state_t compare_with_zero(double a);
     @param   [in]  file               Pointer to opened file where tests are located.
     @param   [out] equation           Pointer a structure where function puts coefficients, expected roots and roots number.
 
-    @return  Error(or success) code
+    @return  Error (or success) code
 
 ================================================================================================================================
 */
@@ -95,13 +95,13 @@ reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation);
 
 /**
 ================================================================================================================================
-    @brief   - Checks if double represantation of zero has sign bit set to 1
+    @brief   - Checks if double represantation of zero has sign bit set to 1.
 
     @details - Converts double to integer saving bits and compares it with 0b100000000000000000....
 
-    @param   [in]  number             Number to be checked
+    @param   [in]  number             Number to be checked.
 
-    @return  True if number has binary represantation 1000000..... and false in other cases
+    @return  True if number has binary represantation 1000000..... and false in other cases.
 
 ================================================================================================================================
 */

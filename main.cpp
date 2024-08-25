@@ -5,7 +5,7 @@
 /**
 ===============================================================================================================================
     @mainpage Quadratic.exe
-    @brief    Allowes to solve quadratic equations
+    @brief    Allowes to solve quadratic equations.
     @details  Has different modes:\n
                 + Solving (--solve)\n
                 + Testing (--test)\n

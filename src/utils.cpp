@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    utils.cpp
-    @brief   Comparison of doubles with zero and reading test cases from file
+    @brief   Comparison of doubles with zero and reading test cases from file.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem

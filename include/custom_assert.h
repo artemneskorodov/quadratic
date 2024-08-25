@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    custom_assert.h
-    @brief   header of custom assert library
+    @brief   header of custom assert library.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -14,10 +14,10 @@
 
 /**
 ===============================================================================================================================
-    @brief   - If NDEBUG is defined, asserts will be ommited
+    @brief   - If NDEBUG is defined, asserts will be ommited.
 
     @details - C_ASSERT in case of error will print out file name,
-            line number and wrond expression and then termenate program
+            line number and wrond expression and then termenate program.
 
 ===============================================================================================================================
 */
@@ -29,13 +29,13 @@
 
 /**
 ===============================================================================================================================
-    @brief   - Prints line number, file name and expression on which C_ASSERT macro gained error
+    @brief   - Prints line number, file name and expression on which C_ASSERT macro gained error.
 
-    @details - Terminates program after use
+    @details - Terminates program after use.
 
-    @param   [in]  string             Expression that is FALSE
-    @param   [in]  line_number        Number of line in source code on which C_ASSERT gained error
-    @param   [in]  filename           String with name of file in which C_ASSERT gained error
+    @param   [in]  string             Expression that is FALSE.
+    @param   [in]  line_number        Number of line in source code on which C_ASSERT gained error.
+    @param   [in]  filename           String with name of file in which C_ASSERT gained error.
 
 ===============================================================================================================================
 */

@@ -1,7 +1,7 @@
 /**
 ===============================================================================================================================
     @file    handle_flags.h
-    @brief   Header of library, allowing to handle flags typed in by user in console
+    @brief   Header of library, allowing to handle flags typed in by user in console.
     @date    23.08.2024
     @author  Artem Neskorodov
     @link    https://vk.com/neskorodovartem
@@ -19,15 +19,15 @@ enum exit_code_t {
 
 /**
 ================================================================================================================================
-    @brief   - Defines the mode in which program will run
+    @brief   - Defines the mode in which program will run.
 
-    @details - Allows to use --help, --solve and --test flags\n
-             - Starting program without a flag is considered as solving mode
+    @details - Allows to use --help, --solve and --test flags.\n
+             - Starting program without a flag is considered as solving mode.
 
-    @param   [in]  argc               Number of strings in argv
-    @param   [in]  argv               Array of strings with flags
+    @param   [in]  argc               Number of strings in argv.
+    @param   [in]  argv               Array of strings with flags.
 
-    @return  0 in case of success
+    @return  Exit code
 
 ===============================================================================================================================
 */
