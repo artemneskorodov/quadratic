@@ -275,9 +275,9 @@ scanning_result_t try_get_double(double *out) {
     @brief   - Checks if user typed in word "exit"
 
     @details - Scanf's input with '%s' format.\n
-             - After run moves pointer in console to last character
+             - After run moves pointer in console to last character.
 
-    @return  TRUE if there is word "exit" in console and FALSE if not
+    @return  TRUE if there is word "exit" in console and FALSE if not.
 
 ===============================================================================================================================
 */
