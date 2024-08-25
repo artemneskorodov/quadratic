@@ -6,11 +6,11 @@ EXENAME:=quadratic.exe
 
 all: ${EXENAME}
 
-${EXENAME}:	${OBJECTS}
+${EXENAME}:	$(addprefix ${BINDIR},${OBJECTS})
 	g++ main.cpp $(addprefix ${BINDIR},${OBJECTS}) ${FLAGS} -o ${EXENAME}
-${OBJECTS}:
-	g++ -c $(addprefix ${SRCDIR},$(patsubst %.o,%.cpp,$@)) ${FLAGS} -o $(addprefix ${BINDIR},$@)
+$(addprefix ${BINDIR},${OBJECTS}):
+	g++ -c $(patsubst %.o,%.cpp,$(addprefix ${SRCDIR},$(notdir $@))) ${FLAGS} -o $@
 clean:
-	del quadratic.exe
+	del ${EXENAME}
 	$(foreach OBJ,${OBJECTS},$(shell del $(addprefix ${BINDIR},${OBJ})))
 
