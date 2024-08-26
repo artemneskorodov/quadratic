@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['print_5fassert_5ferror_0',['print_assert_error',['../custom__assert_8h.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp'],['../custom__assert_8cpp.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp']]],
-  ['print_5fquadratic_5fresult_1',['print_quadratic_result',['../quadratic_8h.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp']]]
+  ['is_5fequal_0',['is_equal',['../utils_8h.html#a8fd312984962992d16840d50fd38304d',1,'is_equal(double a, double b):&#160;utils.cpp'],['../utils_8cpp.html#a8fd312984962992d16840d50fd38304d',1,'is_equal(double a, double b):&#160;utils.cpp']]],
+  ['is_5fminus_5fzero_1',['is_minus_zero',['../utils_8h.html#aec8f375c5e131b2048f5e6b9d91155da',1,'is_minus_zero(double number):&#160;utils.cpp'],['../utils_8cpp.html#aec8f375c5e131b2048f5e6b9d91155da',1,'is_minus_zero(double number):&#160;utils.cpp']]],
+  ['is_5fzero_2',['is_zero',['../utils_8h.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp'],['../utils_8cpp.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp']]]
 ];

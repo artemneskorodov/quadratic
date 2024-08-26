@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_5fcoefficients_0',['get_coefficients',['../quadratic_8h.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp']]]
+  ['free_5fmodes_0',['free_modes',['../handle__flags_8h.html#ab0411e084f5ba88c0f608b1569dba18b',1,'free_modes(void):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#ab0411e084f5ba88c0f608b1569dba18b',1,'free_modes(void):&#160;handle_flags.cpp']]]
 ];

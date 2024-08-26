@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['handle_5fflags_2ecpp_0',['handle_flags.cpp',['../handle__flags_8cpp.html',1,'']]],
-  ['handle_5fflags_2eh_1',['handle_flags.h',['../handle__flags_8h.html',1,'']]],
-  ['handle_5fuser_2',['handle_user',['../handle__flags_8h.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp']]]
+  ['get_5fcoefficients_0',['get_coefficients',['../quadratic_8h.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp']]]
 ];

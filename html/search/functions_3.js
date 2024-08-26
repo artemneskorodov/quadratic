@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['is_5fminus_5fzero_0',['is_minus_zero',['../utils_8h.html#aec8f375c5e131b2048f5e6b9d91155da',1,'is_minus_zero(double number):&#160;utils.cpp'],['../utils_8cpp.html#aec8f375c5e131b2048f5e6b9d91155da',1,'is_minus_zero(double number):&#160;utils.cpp']]],
-  ['is_5fzero_1',['is_zero',['../utils_8h.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp'],['../utils_8cpp.html#a818c7ac4f30b3ab52a36a116ed00d0ef',1,'is_zero(double num):&#160;utils.cpp']]]
+  ['handle_5fhelp_0',['handle_help',['../handlers_8h.html#a274fb9174e3a0104f2c54f2ad45c6321',1,'handlers.cpp']]],
+  ['handle_5fsolve_1',['handle_solve',['../handlers_8h.html#ac2ec93133fe5fc66b37ac896a049b945',1,'handlers.cpp']]],
+  ['handle_5ftest_2',['handle_test',['../handlers_8h.html#a700704bbf3e66de70b3d441b2c84ffe5',1,'handlers.cpp']]]
 ];

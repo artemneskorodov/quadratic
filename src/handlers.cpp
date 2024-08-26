@@ -1,3 +1,14 @@
+/**
+===============================================================================================================================
+    @file    handlers.h
+    @brief   Function to handle users.
+    @date    23.08.2024
+    @author  Artem Neskorodov
+    @link    https://vk.com/neskorodovartem
+
+===============================================================================================================================
+*/
+
 #include "colors.h"
 #include "handle_flags.h"
 #include "handlers.h"

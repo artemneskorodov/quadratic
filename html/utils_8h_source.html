@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: include/utils.h Source File</title>
+<title>My Project: quadratic/include/utils.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -129,19 +129,21 @@ $(function(){initNavTree('utils_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keywordtype">bool</span> <a class="code hl_function" href="utils_8h.html#aec8f375c5e131b2048f5e6b9d91155da">is_minus_zero</a>(<span class="keywordtype">double</span> number);</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordtype">bool</span> <a class="code hl_function" href="utils_8h.html#a8fd312984962992d16840d50fd38304d">is_equal</a>(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aquadratic_8h_html"><div class="ttname"><a href="quadratic_8h.html">quadratic.h</a></div><div class="ttdoc">Header of library to enter, solve and print quadratic equations.</div></div>
 <div class="ttc" id="astructquadratic__equation__t_html"><div class="ttname"><a href="structquadratic__equation__t.html">quadratic_equation_t</a></div><div class="ttdoc">Structure of quadratic equation.</div><div class="ttdef"><b>Definition</b> quadratic.h:33</div></div>
-<div class="ttc" id="autils_8h_html_a0bee40d3992bb16a435f9243374c62db"><div class="ttname"><a href="utils_8h.html#a0bee40d3992bb16a435f9243374c62db">read_expected_line</a></div><div class="ttdeci">reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation)</div><div class="ttdoc">Reads line of tests file.</div><div class="ttdef"><b>Definition</b> utils.cpp:31</div></div>
-<div class="ttc" id="autils_8h_html_a818c7ac4f30b3ab52a36a116ed00d0ef"><div class="ttname"><a href="utils_8h.html#a818c7ac4f30b3ab52a36a116ed00d0ef">is_zero</a></div><div class="ttdeci">bool is_zero(double num)</div><div class="ttdoc">Compares number to zero.</div><div class="ttdef"><b>Definition</b> utils.cpp:20</div></div>
-<div class="ttc" id="autils_8h_html_a8452c6d1788ec691ce06e705cde2bd13"><div class="ttname"><a href="utils_8h.html#a8452c6d1788ec691ce06e705cde2bd13">compare_with_zero</a></div><div class="ttdeci">compare_state_t compare_with_zero(double a)</div><div class="ttdoc">Compares double number with zero.</div><div class="ttdef"><b>Definition</b> utils.cpp:25</div></div>
-<div class="ttc" id="autils_8h_html_aec8f375c5e131b2048f5e6b9d91155da"><div class="ttname"><a href="utils_8h.html#aec8f375c5e131b2048f5e6b9d91155da">is_minus_zero</a></div><div class="ttdeci">bool is_minus_zero(double number)</div><div class="ttdoc">Checks if double represantation of zero has sign bit set to 1.</div><div class="ttdef"><b>Definition</b> utils.cpp:51</div></div>
+<div class="ttc" id="autils_8h_html_a0bee40d3992bb16a435f9243374c62db"><div class="ttname"><a href="utils_8h.html#a0bee40d3992bb16a435f9243374c62db">read_expected_line</a></div><div class="ttdeci">reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation)</div><div class="ttdoc">Reads line of tests file.</div><div class="ttdef"><b>Definition</b> utils.cpp:37</div></div>
+<div class="ttc" id="autils_8h_html_a818c7ac4f30b3ab52a36a116ed00d0ef"><div class="ttname"><a href="utils_8h.html#a818c7ac4f30b3ab52a36a116ed00d0ef">is_zero</a></div><div class="ttdeci">bool is_zero(double num)</div><div class="ttdoc">Compares number to zero.</div><div class="ttdef"><b>Definition</b> utils.cpp:22</div></div>
+<div class="ttc" id="autils_8h_html_a8452c6d1788ec691ce06e705cde2bd13"><div class="ttname"><a href="utils_8h.html#a8452c6d1788ec691ce06e705cde2bd13">compare_with_zero</a></div><div class="ttdeci">compare_state_t compare_with_zero(double a)</div><div class="ttdoc">Compares double number with zero.</div><div class="ttdef"><b>Definition</b> utils.cpp:29</div></div>
+<div class="ttc" id="autils_8h_html_a8fd312984962992d16840d50fd38304d"><div class="ttname"><a href="utils_8h.html#a8fd312984962992d16840d50fd38304d">is_equal</a></div><div class="ttdeci">bool is_equal(double a, double b)</div><div class="ttdoc">Checks if numbers can be treated equal</div><div class="ttdef"><b>Definition</b> utils.cpp:65</div></div>
+<div class="ttc" id="autils_8h_html_aec8f375c5e131b2048f5e6b9d91155da"><div class="ttname"><a href="utils_8h.html#aec8f375c5e131b2048f5e6b9d91155da">is_minus_zero</a></div><div class="ttdeci">bool is_minus_zero(double number)</div><div class="ttdoc">Checks if double represantation of zero has sign bit set to 1.</div><div class="ttdef"><b>Definition</b> utils.cpp:57</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="utils_8h.html">utils.h</a></li>
+    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_515fe4dd022c0393d1c7fe31b284a3ba.html">include</a></li><li class="navelem"><a class="el" href="utils_8h.html">utils.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

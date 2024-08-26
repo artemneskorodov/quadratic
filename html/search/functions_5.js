@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['read_5fexpected_5fline_0',['read_expected_line',['../utils_8h.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp'],['../utils_8cpp.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp']]]
+  ['modes_5finit_0',['modes_init',['../handle__flags_8h.html#a1fd23998f92e73915ca6633c48e3b485',1,'modes_init(unsigned int number):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#a1fd23998f92e73915ca6633c48e3b485',1,'modes_init(unsigned int number):&#160;handle_flags.cpp']]]
 ];

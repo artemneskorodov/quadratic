@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/colors.cpp File Reference</title>
+<title>My Project: quadratic/src/colors.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,19 +105,25 @@ $(function(){initNavTree('colors_8cpp.html',''); initResizable(true); });
 
 <p>Library that allowes to print colored text.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="colors_8h_source.html">colors.h</a>&quot;</code><br />
-<code>#include &lt;stdarg.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdarg.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="colors_8h_source.html">colors.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="custom__assert_8h_source.html">custom_assert.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abcdc5933295d951fe63fa5817d4a04a3" id="r_abcdc5933295d951fe63fa5817d4a04a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcdc5933295d951fe63fa5817d4a04a3">color_printf</a> (color_t color, const char *string,...)</td></tr>
-<tr class="memdesc:abcdc5933295d951fe63fa5817d4a04a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="memitem:a9a394c56fc0dbb0084e133edac695ce2" id="r_a9a394c56fc0dbb0084e133edac695ce2"><td class="memItemLeft" align="right" valign="top"><a id="a9a394c56fc0dbb0084e133edac695ce2" name="a9a394c56fc0dbb0084e133edac695ce2"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>background_code</b> (background_t background)</td></tr>
+<tr class="separator:a9a394c56fc0dbb0084e133edac695ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6962c2f95116cb3c312007fa9edcbbc2" id="r_a6962c2f95116cb3c312007fa9edcbbc2"><td class="memItemLeft" align="right" valign="top"><a id="a6962c2f95116cb3c312007fa9edcbbc2" name="a6962c2f95116cb3c312007fa9edcbbc2"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>color_code</b> (color_t color)</td></tr>
+<tr class="separator:a6962c2f95116cb3c312007fa9edcbbc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0b5649aa402c7204f42fe27d1904cc" id="r_a4a0b5649aa402c7204f42fe27d1904cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0b5649aa402c7204f42fe27d1904cc">color_printf</a> (color_t color, bool is_bold, background_t background, const char *string,...)</td></tr>
+<tr class="memdesc:a4a0b5649aa402c7204f42fe27d1904cc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Allows to print colored text. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:abcdc5933295d951fe63fa5817d4a04a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a4a0b5649aa402c7204f42fe27d1904cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Library that allowes to print colored text. </p>
@@ -125,8 +131,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abcdc5933295d951fe63fa5817d4a04a3" name="abcdc5933295d951fe63fa5817d4a04a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcdc5933295d951fe63fa5817d4a04a3">&#9670;&#160;</a></span>color_printf()</h2>
+<a id="a4a0b5649aa402c7204f42fe27d1904cc" name="a4a0b5649aa402c7204f42fe27d1904cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a0b5649aa402c7204f42fe27d1904cc">&#9670;&#160;</a></span>color_printf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -135,6 +141,16 @@ Functions</h2></td></tr>
           <td class="memname">void color_printf </td>
           <td>(</td>
           <td class="paramtype">color_t</td>          <td class="paramname"><span class="paramname"><em>color</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_bold</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">background_t</td>          <td class="paramname"><span class="paramname"><em>background</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -208,7 +224,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="colors_8cpp.html">colors.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_c42dfdf1ff52a61af71330adb3e129e9.html">src</a></li><li class="navelem"><a class="el" href="colors_8cpp.html">colors.cpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

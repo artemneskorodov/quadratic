@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: include/colors.h Source File</title>
+<title>My Project: quadratic/include/colors.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -105,26 +105,38 @@ $(function(){initNavTree('colors_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define COLORS_H</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">enum</span> color_t {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    RED,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    GREEN,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    YELLOW,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    BLUE,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    PURPLE,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    CYAN,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    WHITE,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    DEFAULT</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    RED_TEXT,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    GREEN_TEXT,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    YELLOW_TEXT,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    BLUE_TEXT,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    PURPLE_TEXT,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    CYAN_TEXT,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    WHITE_TEXT,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    DEFAULT_TEXT</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keywordtype">void</span> <a class="code hl_function" href="colors_8h.html#abcdc5933295d951fe63fa5817d4a04a3">color_printf</a>(color_t color, <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">string</span>, ...);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="acolors_8h_html_abcdc5933295d951fe63fa5817d4a04a3"><div class="ttname"><a href="colors_8h.html#abcdc5933295d951fe63fa5817d4a04a3">color_printf</a></div><div class="ttdeci">void color_printf(color_t color, const char *string,...)</div><div class="ttdoc">Allows to print colored text.</div><div class="ttdef"><b>Definition</b> colors.cpp:34</div></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">enum</span> background_t {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    BLACK_BACKGROUND,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    RED_BACKGROUND,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    GREEN_BACKGROUND,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    YELLOW_BACKGROUND,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    BLUE_BACKGROUND,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    PURPLE_BACKGROUND,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    CYAN_BACKGROUND,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    WHITE_BACKGROUND,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    DEFAULT_BACKGROUND</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordtype">void</span> <a class="code hl_function" href="colors_8h.html#a4a0b5649aa402c7204f42fe27d1904cc">color_printf</a>(color_t color, <span class="keywordtype">bool</span> is_bold, background_t background, <span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">string</span>, ...);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acolors_8h_html_a4a0b5649aa402c7204f42fe27d1904cc"><div class="ttname"><a href="colors_8h.html#a4a0b5649aa402c7204f42fe27d1904cc">color_printf</a></div><div class="ttdeci">void color_printf(color_t color, bool is_bold, background_t background, const char *string,...)</div><div class="ttdoc">Allows to print colored text.</div><div class="ttdef"><b>Definition</b> colors.cpp:48</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="colors_8h.html">colors.h</a></li>
+    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_515fe4dd022c0393d1c7fe31b284a3ba.html">include</a></li><li class="navelem"><a class="el" href="colors_8h.html">colors.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

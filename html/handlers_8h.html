@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: quadratic/src/custom_assert.cpp File Reference</title>
+<title>My Project: quadratic/include/handlers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +71,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('custom__assert_8cpp.html',''); initResizable(true); });
+$(function(){initNavTree('handlers_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -99,71 +99,128 @@ $(function(){initNavTree('custom__assert_8cpp.html',''); initResizable(true); })
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">custom_assert.cpp File Reference</div></div>
+  <div class="headertitle"><div class="title">handlers.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Assert macro.  
+<p>Prototypes of function to handle users.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="custom__assert_8h_source.html">custom_assert.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="colors_8h_source.html">colors.h</a>&quot;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-</div><table class="memberdecls">
+
+<p><a href="handlers_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad5b3bf2b0746ceec58e1f20a5057cc83" id="r_ad5b3bf2b0746ceec58e1f20a5057cc83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5b3bf2b0746ceec58e1f20a5057cc83">print_assert_error</a> (const char *string, int line_number, const char *filename)</td></tr>
-<tr class="memdesc:ad5b3bf2b0746ceec58e1f20a5057cc83"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
-<li>Prints line number, file name and expression on which C_ASSERT macro gained error. </li>
+<tr class="memitem:a274fb9174e3a0104f2c54f2ad45c6321" id="r_a274fb9174e3a0104f2c54f2ad45c6321"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a274fb9174e3a0104f2c54f2ad45c6321">handle_help</a> (void)</td></tr>
+<tr class="memdesc:a274fb9174e3a0104f2c54f2ad45c6321"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<li>Handles help request. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:ad5b3bf2b0746ceec58e1f20a5057cc83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a274fb9174e3a0104f2c54f2ad45c6321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ec93133fe5fc66b37ac896a049b945" id="r_ac2ec93133fe5fc66b37ac896a049b945"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2ec93133fe5fc66b37ac896a049b945">handle_solve</a> (void)</td></tr>
+<tr class="memdesc:ac2ec93133fe5fc66b37ac896a049b945"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<li>Solve mode. </li>
+</ul>
+ <br /></td></tr>
+<tr class="separator:ac2ec93133fe5fc66b37ac896a049b945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a700704bbf3e66de70b3d441b2c84ffe5" id="r_a700704bbf3e66de70b3d441b2c84ffe5"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a700704bbf3e66de70b3d441b2c84ffe5">handle_test</a> (void)</td></tr>
+<tr class="memdesc:a700704bbf3e66de70b3d441b2c84ffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<li>Test mode. </li>
+</ul>
+ <br /></td></tr>
+<tr class="separator:a700704bbf3e66de70b3d441b2c84ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Assert macro. </p>
+<div class="textblock"><p>Prototypes of function to handle users. </p>
+<p>Function to handle users.</p>
 <hr  />
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad5b3bf2b0746ceec58e1f20a5057cc83" name="ad5b3bf2b0746ceec58e1f20a5057cc83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5b3bf2b0746ceec58e1f20a5057cc83">&#9670;&#160;</a></span>print_assert_error()</h2>
+<a id="a274fb9174e3a0104f2c54f2ad45c6321" name="a274fb9174e3a0104f2c54f2ad45c6321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274fb9174e3a0104f2c54f2ad45c6321">&#9670;&#160;</a></span>handle_help()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void print_assert_error </td>
+          <td class="memname">exit_code_t handle_help </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>string</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line_number</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p><ul>
-<li>Prints line number, file name and expression on which C_ASSERT macro gained error. </li>
+<li>Handles help request. </li>
+</ul>
+</p>
+<hr  />
+ <hr  />
+ 
+</div>
+</div>
+<a id="ac2ec93133fe5fc66b37ac896a049b945" name="ac2ec93133fe5fc66b37ac896a049b945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ec93133fe5fc66b37ac896a049b945">&#9670;&#160;</a></span>handle_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">exit_code_t handle_solve </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><ul>
+<li>Solve mode. </li>
 </ul>
 </p>
 <hr  />
  <ul>
-<li>Deos not terminate program after use.</li>
+<li>Asks user to type in coefficients for quadratic equation.<br  />
+<ul>
+<li>Solves equation.<br  />
+</li>
+<li>Prints resutlts in console.<br  />
+ <hr  />
+ </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">string</td><td>Expression that is FALSE. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">line_number</td><td>Number of line in source code on which C_ASSERT gained error. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>String with name of file in which C_ASSERT gained error.</td></tr>
-  </table>
-  </dd>
-</dl>
+</li>
+</ul>
+
+</div>
+</div>
+<a id="a700704bbf3e66de70b3d441b2c84ffe5" name="a700704bbf3e66de70b3d441b2c84ffe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a700704bbf3e66de70b3d441b2c84ffe5">&#9670;&#160;</a></span>handle_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">exit_code_t handle_test </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><ul>
+<li>Test mode. </li>
+</ul>
+</p>
+<hr  />
+ <ul>
+<li>Starts tests.<br  />
+<ul>
+<li>Prints total number of tests from file "tests.txt" and errors.</li>
+</ul>
+</li>
+</ul>
 <hr  />
  
 </div>
@@ -173,7 +230,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_c42dfdf1ff52a61af71330adb3e129e9.html">src</a></li><li class="navelem"><a class="el" href="custom__assert_8cpp.html">custom_assert.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_515fe4dd022c0393d1c7fe31b284a3ba.html">include</a></li><li class="navelem"><a class="el" href="handlers_8h.html">handlers.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

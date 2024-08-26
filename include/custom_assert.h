@@ -32,7 +32,7 @@
 ===============================================================================================================================
     @brief   - Prints line number, file name and expression on which C_ASSERT macro gained error.
 
-    @details - Terminates program after use.
+    @details - Deos not terminate program after use.
 
     @param   [in]  string             Expression that is FALSE.
     @param   [in]  line_number        Number of line in source code on which C_ASSERT gained error.

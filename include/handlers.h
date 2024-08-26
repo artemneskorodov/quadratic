@@ -1,3 +1,14 @@
+/**
+===============================================================================================================================
+    @file    handlers.h
+    @brief   Prototypes of function to handle users.
+    @date    23.08.2024
+    @author  Artem Neskorodov
+    @link    https://vk.com/neskorodovartem
+
+===============================================================================================================================
+*/
+
 #ifndef HANDLERS_H
 #define HANDLERS_H
 

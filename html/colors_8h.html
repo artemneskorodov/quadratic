@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: include/colors.h File Reference</title>
+<title>My Project: quadratic/include/colors.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -112,27 +112,42 @@ $(function(){initNavTree('colors_8h.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a0a8ef1b5e1941b7257e545cc33405ff1" id="r_a0a8ef1b5e1941b7257e545cc33405ff1"><td class="memItemLeft" align="right" valign="top"><a id="a0a8ef1b5e1941b7257e545cc33405ff1" name="a0a8ef1b5e1941b7257e545cc33405ff1"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>color_t</b> { <br />
-&#160;&#160;<b>RED</b>
-, <b>GREEN</b>
-, <b>YELLOW</b>
-, <b>BLUE</b>
+&#160;&#160;<b>RED_TEXT</b>
+, <b>GREEN_TEXT</b>
+, <b>YELLOW_TEXT</b>
+, <b>BLUE_TEXT</b>
 , <br />
-&#160;&#160;<b>PURPLE</b>
-, <b>CYAN</b>
-, <b>WHITE</b>
-, <b>DEFAULT</b>
+&#160;&#160;<b>PURPLE_TEXT</b>
+, <b>CYAN_TEXT</b>
+, <b>WHITE_TEXT</b>
+, <b>DEFAULT_TEXT</b>
 <br />
  }</td></tr>
 <tr class="separator:a0a8ef1b5e1941b7257e545cc33405ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6356354e1f872b1d09ec3db8cac65228" id="r_a6356354e1f872b1d09ec3db8cac65228"><td class="memItemLeft" align="right" valign="top"><a id="a6356354e1f872b1d09ec3db8cac65228" name="a6356354e1f872b1d09ec3db8cac65228"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>background_t</b> { <br />
+&#160;&#160;<b>BLACK_BACKGROUND</b>
+, <b>RED_BACKGROUND</b>
+, <b>GREEN_BACKGROUND</b>
+, <b>YELLOW_BACKGROUND</b>
+, <br />
+&#160;&#160;<b>BLUE_BACKGROUND</b>
+, <b>PURPLE_BACKGROUND</b>
+, <b>CYAN_BACKGROUND</b>
+, <b>WHITE_BACKGROUND</b>
+, <br />
+&#160;&#160;<b>DEFAULT_BACKGROUND</b>
+<br />
+ }</td></tr>
+<tr class="separator:a6356354e1f872b1d09ec3db8cac65228"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abcdc5933295d951fe63fa5817d4a04a3" id="r_abcdc5933295d951fe63fa5817d4a04a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcdc5933295d951fe63fa5817d4a04a3">color_printf</a> (color_t color, const char *string,...)</td></tr>
-<tr class="memdesc:abcdc5933295d951fe63fa5817d4a04a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="memitem:a4a0b5649aa402c7204f42fe27d1904cc" id="r_a4a0b5649aa402c7204f42fe27d1904cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0b5649aa402c7204f42fe27d1904cc">color_printf</a> (color_t color, bool is_bold, background_t background, const char *string,...)</td></tr>
+<tr class="memdesc:a4a0b5649aa402c7204f42fe27d1904cc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Allows to print colored text. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:abcdc5933295d951fe63fa5817d4a04a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a4a0b5649aa402c7204f42fe27d1904cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header of library, allowing to print colored text in console. </p>
@@ -140,8 +155,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abcdc5933295d951fe63fa5817d4a04a3" name="abcdc5933295d951fe63fa5817d4a04a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcdc5933295d951fe63fa5817d4a04a3">&#9670;&#160;</a></span>color_printf()</h2>
+<a id="a4a0b5649aa402c7204f42fe27d1904cc" name="a4a0b5649aa402c7204f42fe27d1904cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a0b5649aa402c7204f42fe27d1904cc">&#9670;&#160;</a></span>color_printf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,6 +165,16 @@ Functions</h2></td></tr>
           <td class="memname">void color_printf </td>
           <td>(</td>
           <td class="paramtype">color_t</td>          <td class="paramname"><span class="paramname"><em>color</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>is_bold</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">background_t</td>          <td class="paramname"><span class="paramname"><em>background</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -223,7 +248,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="colors_8h.html">colors.h</a></li>
+    <li class="navelem"><a class="el" href="dir_169e6446e3be1fdd4b0c673e455c3f2d.html">quadratic</a></li><li class="navelem"><a class="el" href="dir_515fe4dd022c0393d1c7fe31b284a3ba.html">include</a></li><li class="navelem"><a class="el" href="colors_8h.html">colors.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
