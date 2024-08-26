@@ -47,7 +47,7 @@ exit_code_t parse_flags(int argc, const char *argv[], program_modes_t *list);
     @return  Error (or success) code.
 ===============================================================================================================================
 */
-exit_code_t register_mode(program_modes_t *list, const char *short_name, const char *long_name, exit_code_t (*handler)(void));
+exit_code_t register_mode(program_modes_t *list, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[]));
 
 /**
 ===============================================================================================================================
@@ -61,7 +61,7 @@ exit_code_t register_mode(program_modes_t *list, const char *short_name, const c
 
 ===============================================================================================================================
 */
-exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(void));
+exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(const int argc, const char *argv[]));
 
 /**
 ===============================================================================================================================
@@ -73,5 +73,10 @@ exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(v
 */
 exit_code_t free_modes(program_modes_t *modes);
 
+/**
+===============================================================================================================================
+
+===============================================================================================================================
+*/
 program_modes_t *modes_list_init(void);
 #endif

@@ -9,18 +9,19 @@
 ===============================================================================================================================
 */
 
+#include <stdio.h>
 #include "colors.h"
 #include "handle_flags.h"
 #include "handlers.h"
 #include "quadratic.h"
 #include "quadratic_tests.h"
 
-exit_code_t handle_help(void) {
+exit_code_t handle_help(const int /*argc*/, const char */*argv*/[]) {
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--help'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " for help\n");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--solve'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " to type in and solve equation\n");
-    color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--test'");
+    color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--test (filename)'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " to run tests\n");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t''");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " is considered as ");
@@ -28,7 +29,7 @@ exit_code_t handle_help(void) {
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t handle_solve(void) {
+exit_code_t handle_solve(const int /*argc*/, const char */*argv*/[]) {
     quadratic_equation_t equation = {.number = NOT_SOLVED};
 
     //Getting coefficients from user
@@ -69,11 +70,15 @@ exit_code_t handle_solve(void) {
     }
 }
 
-exit_code_t handle_test(void) {
+exit_code_t handle_test(const int argc, const char *argv[]) {
     int total = 0, errors = 0;
-    switch(test_solving_quadratic(&total, &errors)) {
+    const char *filename = DEFAULT_TEST_FILE_NAME;
+    if(argc >= 3) {
+        filename = argv[2];
+    }
+    switch(test_solving_quadratic(&total, &errors, filename)) {
         case NO_SUCH_FILE: {
-            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "There is no file \"%s\"\n", TESTS_FILE_NAME);
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "There is no file \"%s\"\n", filename);
             return EXIT_CODE_FAILURE;
         }
         case INVALID_LINES:{

@@ -19,13 +19,7 @@ enum test_state_t {
     TEST_ERROR
 };
 
-/**
-===============================================================================================================================
-    @brief Name of file where program will take expected cases to test solve_quadratic(...).
-
-===============================================================================================================================
-*/
-extern const char *TESTS_FILE_NAME;
+extern const char *DEFAULT_TEST_FILE_NAME;
 
 /**
 ===============================================================================================================================
@@ -53,6 +47,6 @@ extern const char *TESTS_FILE_NAME;
 
 ===============================================================================================================================
 */
-test_state_t test_solving_quadratic(int *tests_number, int *errors_number);
+test_state_t test_solving_quadratic(int *tests_number, int *errors_number, const char *filename);
 
 #endif

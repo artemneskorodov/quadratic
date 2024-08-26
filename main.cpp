@@ -20,7 +20,7 @@
 ===============================================================================================================================
 */
 
-int main(int argc, const char *argv[]) {
+int main(const int argc, const char *argv[]) {
     program_modes_t *modes = modes_list_init();
     if(modes == NULL)
         return EXIT_FAILURE;
