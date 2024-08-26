@@ -17,6 +17,8 @@ enum exit_code_t {
     EXIT_CODE_FAILURE = 1
 };
 
+struct program_modes_t;
+
 /**
 ================================================================================================================================
     @brief   - Defines the mode in which program will run.
@@ -31,35 +33,21 @@ enum exit_code_t {
 
 ===============================================================================================================================
 */
-exit_code_t parse_flags(int argc, const char *argv[]);
-
-/**
-===============================================================================================================================
-    @brief   - Initializes modes list structure.
-
-    @details - This structure is global to handle_flags.cpp file.
-
-    @param   [in]  number             Number of modes which are supported by program.
-
-    @return  Error (or success) code.
-===============================================================================================================================
-*/
-exit_code_t modes_init(unsigned int number);
+exit_code_t parse_flags(int argc, const char *argv[], program_modes_t *list);
 
 /**
 ===============================================================================================================================
     @brief   - Adds mode to modes list.
 
-    @details - Use modes_init(int) before.
-
     @param   [in]  long_name          Long flag for mode.
     @param   [in]  short_name         Short flag for mode.
     @param   [in]  handler            Function, that handles user for particullar mode.
+    @param   [in]  list               Pointer to list with modes
 
     @return  Error (or success) code.
 ===============================================================================================================================
 */
-exit_code_t register_mode(const char *long_name, const char *short_name, exit_code_t (*handler)(void));
+exit_code_t register_mode(program_modes_t *list, const char *short_name, const char *long_name, exit_code_t (*handler)(void));
 
 /**
 ===============================================================================================================================
@@ -73,7 +61,7 @@ exit_code_t register_mode(const char *long_name, const char *short_name, exit_co
 
 ===============================================================================================================================
 */
-exit_code_t choose_default_mode(const char *short_name);
+exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(void));
 
 /**
 ===============================================================================================================================
@@ -83,5 +71,7 @@ exit_code_t choose_default_mode(const char *short_name);
 
 ===============================================================================================================================
 */
-exit_code_t free_modes(void);
+exit_code_t free_modes(program_modes_t *modes);
+
+program_modes_t *modes_list_init(void);
 #endif
