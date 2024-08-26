@@ -8,9 +8,9 @@
 
 ===============================================================================================================================
 */
+#include <stdlib.h>
 #include "custom_assert.h"
 #include "colors.h"
-#include <stdlib.h>
 
 void print_assert_error(const char *string, int line_number, const char *filename) {
     color_printf(RED_TEXT, true, DEFAULT_BACKGROUND,

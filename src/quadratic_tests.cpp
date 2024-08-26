@@ -8,11 +8,11 @@
 
 ===============================================================================================================================
 */
-#include "quadratic_tests.h"
-#include "quadratic.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include "quadratic_tests.h"
+#include "quadratic.h"
 #include "utils.h"
 #include "colors.h"
 #include "custom_assert.h"
