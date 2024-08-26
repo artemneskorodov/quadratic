@@ -15,6 +15,7 @@
 #include "handlers.h"
 #include "quadratic.h"
 #include "quadratic_tests.h"
+#include "custom_assert.h"
 
 exit_code_t handle_help(const int /*argc*/, const char */*argv*/[]) {
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--help'");
@@ -71,6 +72,8 @@ exit_code_t handle_solve(const int /*argc*/, const char */*argv*/[]) {
 }
 
 exit_code_t handle_test(const int argc, const char *argv[]) {
+    C_ASSERT(argv != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(argc >= 0,    EXIT_CODE_FAILURE);
     int total = 0, errors = 0;
     const char *filename = DEFAULT_TEST_FILE_NAME;
     if(argc >= 3) {

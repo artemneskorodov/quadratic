@@ -83,9 +83,10 @@ exit_code_t handle_unknown_flag(const char *flag){
 }
 
 exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[])) {
-    C_ASSERT(short_name != NULL, EXIT_CODE_FAILURE);
-    C_ASSERT(long_name  != NULL, EXIT_CODE_FAILURE);
-    C_ASSERT(handler    != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(short_name  != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(long_name   != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(handler     != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(modes_stack != NULL, EXIT_CODE_FAILURE);
 
     if(*modes_stack == NULL) {
         *modes_stack = (program_modes_t *)calloc(1, sizeof(program_modes_t));
@@ -110,7 +111,8 @@ exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name,
 }
 
 exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*handler)(const int argc, const char *argv[])) {
-    C_ASSERT(handler != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(handler     != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(modes_stack != NULL, EXIT_CODE_FAILURE);
 
     if(*modes_stack == NULL) {
         *modes_stack = (program_modes_t *)calloc(1, sizeof(program_modes_t));

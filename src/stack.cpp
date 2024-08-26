@@ -9,6 +9,7 @@ struct stack_elem_t {
 
 stack_state_t stack_push(stack_elem_t **head, void *data) {
     C_ASSERT(data != NULL, STACK_ERROR);
+    C_ASSERT(head != NULL, STACK_ERROR);
 
     stack_elem_t *new_elem = (stack_elem_t *)calloc(1, sizeof(stack_elem_t));
     if(new_elem == NULL)
@@ -21,6 +22,7 @@ stack_state_t stack_push(stack_elem_t **head, void *data) {
 }
 
 void *stack_pop(stack_elem_t **head) {
+    C_ASSERT(head != NULL, NULL);
     void *data = (*head)->data;
     stack_elem_t *next = (*head)->next;
     free(*head);

@@ -53,6 +53,7 @@ void color_printf(color_t color, bool is_bold, background_t background, const ch
     va_list args;
     va_start(args, string);
     vprintf(string, args);
+
     reset_color();
     va_end(args);
 }

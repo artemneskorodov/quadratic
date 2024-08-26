@@ -110,6 +110,7 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 
 void print_quadratic_result(const quadratic_equation_t *equation) {
     C_ASSERT(equation != NULL, );
+
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Equation ");
     color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "%lgx^2 + %lgx + %lg == 0:\n",
         equation->a, equation->b, equation->c);
@@ -165,6 +166,7 @@ void print_quadratic_result(const quadratic_equation_t *equation) {
 */
 getting_coeffs_state_t get_number(char symbol, double *out) {
     C_ASSERT(out != NULL, GETTING_ERROR);
+
     while(true) {
         color_printf(CYAN_TEXT, false, DEFAULT_BACKGROUND, "%c = ", symbol);
 
@@ -215,6 +217,7 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
 */
 solving_state_t solve_linear(quadratic_equation_t *equation) {
     C_ASSERT(equation != NULL, SOLVING_ERROR);
+
     if(is_zero(equation->b)){
         if(is_zero(equation->c)){
             equation->number = INF_ROOTS;
@@ -265,6 +268,7 @@ void clear_buffer(void) {
 */
 scanning_result_t try_get_double(double *out) {
     C_ASSERT(out != NULL, SCANNING_FAILURE);
+
     if(scanf("%lg", out) != 1)
         return SCANNING_FAILURE;
 

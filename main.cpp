@@ -35,24 +35,23 @@ int main(const int argc, const char *argv[]) {
 
 program_modes_t *register_modes_flags(void) {
     program_modes_t *modes = NULL;
+
     if(register_mode(&modes, "-s", "--solve", handle_solve) != EXIT_CODE_SUCCESS) {
         free_modes(modes);
         return NULL;
     }
-
     if(register_mode(&modes, "-t", "--test", handle_test) != EXIT_CODE_SUCCESS) {
         free_modes(modes);
         return NULL;
     }
-
     if(register_mode(&modes, "-h", "--help", handle_help) != EXIT_CODE_SUCCESS) {
         free_modes(modes);
         return NULL;
     }
-
     if(choose_default_mode(&modes, handle_solve) != EXIT_CODE_SUCCESS) {
         free_modes(modes);
         return NULL;
     }
+
     return modes;
 }

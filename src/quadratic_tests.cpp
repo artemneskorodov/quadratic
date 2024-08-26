@@ -43,12 +43,9 @@ static void print_different_roots(const quadratic_equation_t *expected, const qu
 static void roots_number_to_string(char *out, roots_number_t number);
 
 test_state_t test_solving_quadratic(int *tests_number, int *errors_number, const char *filename) {
-    C_ASSERT(tests_number != NULL, TEST_ERROR);
+    C_ASSERT(tests_number  != NULL, TEST_ERROR);
     C_ASSERT(errors_number != NULL, TEST_ERROR);
-
-    if(filename == NULL) {
-        filename = DEFAULT_TEST_FILE_NAME;
-    }
+    C_ASSERT(filename      != NULL, TEST_ERROR);
 
     *errors_number = 0;
     *tests_number = 0;
@@ -106,12 +103,12 @@ test_state_t test_solving_quadratic(int *tests_number, int *errors_number, const
 */
 test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual) {
     C_ASSERT(expected != NULL, TEST_FAILURE);
-    C_ASSERT(actual != NULL, TEST_FAILURE);
+    C_ASSERT(actual   != NULL, TEST_FAILURE);
 
     actual->number = NOT_SOLVED;
-    actual->a = expected->a;
-    actual->b = expected->b;
-    actual->c = expected->c;
+    actual->a      = expected->a;
+    actual->b      = expected->b;
+    actual->c      = expected->c;
 
     if(solve_quadratic(actual) != SOLVING_SUCCESS)
         return UNEXPECTED_SOLVING_ERROR;
@@ -140,7 +137,7 @@ void print_test_result(test_result_t test_result,
                        const quadratic_equation_t *actual) {
 
     C_ASSERT(expected != NULL, );
-    C_ASSERT(actual != NULL, );
+    C_ASSERT(actual   != NULL, );
 
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "For equation ");
     color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "%lgx^2 + %lgx + %lg",
@@ -192,7 +189,7 @@ void print_test_result(test_result_t test_result,
 ===============================================================================================================================
 */
 bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t *second) {
-    C_ASSERT(first != NULL, false);
+    C_ASSERT(first  != NULL, false);
     C_ASSERT(second != NULL, false);
 
     if(first->number != second->number)
@@ -226,6 +223,7 @@ bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t
 void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual){
     C_ASSERT(expected != NULL, );
     C_ASSERT(actual   != NULL, );
+
     char string_number_expected[MAX_ROOTS_NUMBER_LENGTH] = {};
     char string_number_actual[MAX_ROOTS_NUMBER_LENGTH]   = {};
 
@@ -247,7 +245,7 @@ void print_different_amount(const quadratic_equation_t *expected, const quadrati
 */
 void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
     C_ASSERT(expected != NULL, );
-    C_ASSERT(actual != NULL, );
+    C_ASSERT(actual   != NULL, );
 
     switch(expected->number){
         case NOT_SOLVED: {
@@ -305,7 +303,7 @@ void print_different_roots(const quadratic_equation_t *expected, const quadratic
 */
 void roots_number_to_string(char *out, roots_number_t number) {
     C_ASSERT(number != NOT_SOLVED, );
-    C_ASSERT(out != NULL, );
+    C_ASSERT(out    != NULL,       );
 
     switch(number){
         case NOT_SOLVED: {

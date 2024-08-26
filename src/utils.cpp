@@ -35,7 +35,7 @@ compare_state_t compare_with_zero(double a) {
 }
 
 reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation) {
-    C_ASSERT(file != NULL, READING_ERROR);
+    C_ASSERT(file     != NULL, READING_ERROR);
     C_ASSERT(equation != NULL, READING_ERROR);
     if(file == NULL)
         return READING_ERROR;
