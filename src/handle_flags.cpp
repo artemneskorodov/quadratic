@@ -16,7 +16,6 @@
 #include "custom_assert.h"
 #include "handle_flags.h"
 #include "quadratic.h"
-#include "stack.h"
 #include "quadratic_tests.h"
 
 /**
@@ -30,23 +29,23 @@ struct solving_mode_t {
     const char *long_name;
     const char *short_name;
     exit_code_t (*handle_function)(const int argc, const char *argv[]);
+    solving_mode_t *next;
 };
 
 struct program_modes_t {
-    stack_elem_t *modes_list;
+    solving_mode_t *modes_list;
     exit_code_t (*default_handler)(const int argc, const char *argv[]);
 };
 
+enum push_state_t {
+    PUSHED_SUCCESSFULLY,
+    PUSHING_ERROR
+};
+
 static exit_code_t handle_unknown_flag(const char *flag);
+static solving_mode_t *mode_pop(solving_mode_t **head);
+static push_state_t mode_push(solving_mode_t **head, solving_mode_t *mode);
 
-/**
-===============================================================================================================================
-    @brief   - List of modes supported by program.
-    @details - Contains short name and long name(for example '-h' and '--help').\n
-             - Contains function to handle user.
-
-===============================================================================================================================
-*/
 exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *modes_stack){
     C_ASSERT(modes_stack                  != NULL, EXIT_CODE_FAILURE);
     C_ASSERT(argv                         != NULL, EXIT_CODE_FAILURE);
@@ -54,12 +53,14 @@ exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *mod
     if(argc == 1)
         return modes_stack->default_handler(argc, argv);
 
-    for(solving_mode_t *current = (solving_mode_t *)stack_pop(&(modes_stack->modes_list));
+    for(solving_mode_t *current = mode_pop(&(modes_stack->modes_list));
         current != NULL;
-        free(current),  current = (solving_mode_t *)stack_pop(&(modes_stack->modes_list))) {
+        free(current),  current = mode_pop(&(modes_stack->modes_list))) {
         if(strcmp(current->long_name,  argv[1]) == 0 ||
            strcmp(current->short_name, argv[1]) == 0) {
-            return current->handle_function(argc, argv);
+            exit_code_t (*function)(const int, const char *[]) = current->handle_function;
+            free(current);
+            return function(argc, argv);
         }
     }
 
@@ -102,7 +103,7 @@ exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name,
     mode->long_name       = long_name ;
     mode->short_name      = short_name;
 
-    if(stack_push(&((*modes_stack)->modes_list), (void *)mode) != STACK_SUCCESS) {
+    if(mode_push(&((*modes_stack)->modes_list), mode) != PUSHED_SUCCESSFULLY) {
         free(mode);
         return EXIT_CODE_FAILURE;
     }
@@ -125,8 +126,57 @@ exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*han
 }
 
 void free_modes(program_modes_t *modes_stack) {
-    if(modes_stack == NULL)
-        return ;
+    C_ASSERT(modes_stack != NULL, );
+    solving_mode_t *current = modes_stack->modes_list;
+    while(current != NULL) {
+        solving_mode_t *next = current->next;
+        free(current);
+        current = next;
+    }
+    free(modes_stack);
+}
 
-    free_stack(modes_stack->modes_list);
+/**
+================================================================================================================================
+    @brief   - Gets one element from stack.
+
+    @details - Returns NULL, when there is no other elements in stack.\n
+             - Do not forget to free memory, allocated to mode.
+
+    @param   [in]  head               Pointer to pointer to head in program_modes_structure.
+
+    @return  Pointer to solving mode structure.
+
+===============================================================================================================================
+*/
+solving_mode_t *mode_pop(solving_mode_t **head) {
+    C_ASSERT(head != NULL, NULL);
+
+    if(*head == NULL)
+        return NULL;
+    solving_mode_t *result_mode = *head;
+    *head = (*head)->next;
+    return result_mode;
+}
+
+/**
+================================================================================================================================
+    @brief   - Pushes element in stack.
+
+    @details - Allows to use --help, --solve and --test flags.\n
+             - Starting program without a flag is considered as solving mode.
+
+    @param   [in]  head               Pointer to pointer to head in program_modes_structure.
+    @param   [in]  mode               Pointer to structure, containing solving mode.
+
+    @return  Error (or success) code.
+
+===============================================================================================================================
+*/
+push_state_t mode_push(solving_mode_t **head, solving_mode_t *mode) {
+    C_ASSERT(head != NULL, PUSHING_ERROR);
+
+    mode->next = *head;
+    *head = mode;
+    return PUSHED_SUCCESSFULLY;
 }

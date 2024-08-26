@@ -12,8 +12,6 @@
 #ifndef HANDLE_FLAGS_H
 #define HANDLE_FLAGS_H
 
-#include "stack.h"
-
 enum exit_code_t {
     EXIT_CODE_SUCCESS = 0,
     EXIT_CODE_FAILURE = 1
