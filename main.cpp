@@ -20,32 +20,39 @@
 ===============================================================================================================================
 */
 
+program_modes_t *register_modes_flags(void);
+
 int main(const int argc, const char *argv[]) {
-    program_modes_t *modes = modes_list_init();
+    program_modes_t *modes = register_modes_flags();
+
     if(modes == NULL)
         return EXIT_FAILURE;
-
-    if(register_mode(modes, "-s", "--solve", handle_solve) != EXIT_CODE_SUCCESS) {
-        free_modes(modes);
-        return EXIT_FAILURE;
-    }
-
-    if(register_mode(modes, "-t", "--test", handle_test) != EXIT_CODE_SUCCESS) {
-        free_modes(modes);
-        return EXIT_FAILURE;
-    }
-
-    if(register_mode(modes, "-h", "--help", handle_help) != EXIT_CODE_SUCCESS) {
-        free_modes(modes);
-        return EXIT_FAILURE;
-    }
-
-    if(choose_default_mode(modes, handle_solve) != EXIT_CODE_SUCCESS) {
-        free_modes(modes);
-        return EXIT_FAILURE;
-    }
 
     exit_code_t result = parse_flags(argc, argv, modes);
     free_modes(modes);
     return (int)result;
+}
+
+program_modes_t *register_modes_flags(void) {
+    program_modes_t *modes = NULL;
+    if(register_mode(&modes, "-s", "--solve", handle_solve) != EXIT_CODE_SUCCESS) {
+        free_modes(modes);
+        return NULL;
+    }
+
+    if(register_mode(&modes, "-t", "--test", handle_test) != EXIT_CODE_SUCCESS) {
+        free_modes(modes);
+        return NULL;
+    }
+
+    if(register_mode(&modes, "-h", "--help", handle_help) != EXIT_CODE_SUCCESS) {
+        free_modes(modes);
+        return NULL;
+    }
+
+    if(choose_default_mode(&modes, handle_solve) != EXIT_CODE_SUCCESS) {
+        free_modes(modes);
+        return NULL;
+    }
+    return modes;
 }

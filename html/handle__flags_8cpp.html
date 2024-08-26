@@ -114,6 +114,7 @@ $(function(){initNavTree('handle__flags_8cpp.html',''); initResizable(true); });
 <code>#include &quot;<a class="el" href="custom__assert_8h_source.html">custom_assert.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="handle__flags_8h_source.html">handle_flags.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="quadratic_8h_source.html">quadratic.h</a>&quot;</code><br />
+<code>#include &quot;stack.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="quadratic__tests_8h_source.html">quadratic_tests.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -121,39 +122,35 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsolving__mode__t.html">solving_mode_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure to store names and handle functions of supported modes.  <a href="structsolving__mode__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structprogram__modes__t.html">program_modes_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac119ac26da01ddea4ff6eac4030f070e" id="r_ac119ac26da01ddea4ff6eac4030f070e"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac119ac26da01ddea4ff6eac4030f070e">parse_flags</a> (int argc, const char *argv[])</td></tr>
-<tr class="memdesc:ac119ac26da01ddea4ff6eac4030f070e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="memitem:a0ad35c702e4d2df63ecfffa6e5f92a78" id="r_a0ad35c702e4d2df63ecfffa6e5f92a78"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ad35c702e4d2df63ecfffa6e5f92a78">parse_flags</a> (const int argc, const char *argv[], <a class="el" href="structprogram__modes__t.html">program_modes_t</a> *modes_stack)</td></tr>
+<tr class="memdesc:a0ad35c702e4d2df63ecfffa6e5f92a78"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>List of modes supported by program. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:ac119ac26da01ddea4ff6eac4030f070e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fd23998f92e73915ca6633c48e3b485" id="r_a1fd23998f92e73915ca6633c48e3b485"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fd23998f92e73915ca6633c48e3b485">modes_init</a> (unsigned int number)</td></tr>
-<tr class="memdesc:a1fd23998f92e73915ca6633c48e3b485"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
-<li>Initializes modes list structure. </li>
-</ul>
- <br /></td></tr>
-<tr class="separator:a1fd23998f92e73915ca6633c48e3b485"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a798cd43e18a004112d7dae2fe19914e5" id="r_a798cd43e18a004112d7dae2fe19914e5"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a798cd43e18a004112d7dae2fe19914e5">register_mode</a> (const char *long_name, const char *short_name, exit_code_t(*handler)(void))</td></tr>
-<tr class="memdesc:a798cd43e18a004112d7dae2fe19914e5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="separator:a0ad35c702e4d2df63ecfffa6e5f92a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17182b5d819c911399f1f34ecc11ca2a" id="r_a17182b5d819c911399f1f34ecc11ca2a"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17182b5d819c911399f1f34ecc11ca2a">register_mode</a> (<a class="el" href="structprogram__modes__t.html">program_modes_t</a> **modes_stack, const char *short_name, const char *long_name, exit_code_t(*handler)(const int argc, const char *argv[]))</td></tr>
+<tr class="memdesc:a17182b5d819c911399f1f34ecc11ca2a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Adds mode to modes list. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:a798cd43e18a004112d7dae2fe19914e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af44a22af5a9af12bbec7d62014a2eceb" id="r_af44a22af5a9af12bbec7d62014a2eceb"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af44a22af5a9af12bbec7d62014a2eceb">choose_default_mode</a> (const char *short_name)</td></tr>
-<tr class="memdesc:af44a22af5a9af12bbec7d62014a2eceb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="separator:a17182b5d819c911399f1f34ecc11ca2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb62b7328e471d95eda1db5a232e3ad7" id="r_adb62b7328e471d95eda1db5a232e3ad7"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb62b7328e471d95eda1db5a232e3ad7">choose_default_mode</a> (<a class="el" href="structprogram__modes__t.html">program_modes_t</a> **modes_stack, exit_code_t(*handler)(const int argc, const char *argv[]))</td></tr>
+<tr class="memdesc:adb62b7328e471d95eda1db5a232e3ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Choose the default run mode. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:af44a22af5a9af12bbec7d62014a2eceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0411e084f5ba88c0f608b1569dba18b" id="r_ab0411e084f5ba88c0f608b1569dba18b"><td class="memItemLeft" align="right" valign="top">exit_code_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0411e084f5ba88c0f608b1569dba18b">free_modes</a> (void)</td></tr>
-<tr class="memdesc:ab0411e084f5ba88c0f608b1569dba18b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="separator:adb62b7328e471d95eda1db5a232e3ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a025123b8c0b598284417b430cde57a" id="r_a7a025123b8c0b598284417b430cde57a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a025123b8c0b598284417b430cde57a">free_modes</a> (<a class="el" href="structprogram__modes__t.html">program_modes_t</a> *modes_stack)</td></tr>
+<tr class="memdesc:a7a025123b8c0b598284417b430cde57a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Frees modes array. </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:ab0411e084f5ba88c0f608b1569dba18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a7a025123b8c0b598284417b430cde57a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handling flags pushed from console. </p>
@@ -161,8 +158,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af44a22af5a9af12bbec7d62014a2eceb" name="af44a22af5a9af12bbec7d62014a2eceb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af44a22af5a9af12bbec7d62014a2eceb">&#9670;&#160;</a></span>choose_default_mode()</h2>
+<a id="adb62b7328e471d95eda1db5a232e3ad7" name="adb62b7328e471d95eda1db5a232e3ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb62b7328e471d95eda1db5a232e3ad7">&#9670;&#160;</a></span>choose_default_mode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,8 +167,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">exit_code_t choose_default_mode </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>short_name</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structprogram__modes__t.html">program_modes_t</a> **</td>          <td class="paramname"><span class="paramname"><em>modes_stack</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">exit_code_t(*</td>          <td class="paramname"><span class="paramname"><em>handler&#160;</em></span>)(const int argc, const char *argv[])&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -186,7 +187,8 @@ Functions</h2></td></tr>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">short_name</td><td>Short name of particullar mode (registered with register_mode(...) before).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">short_name</td><td>Short name of particullar mode (registered with register_mode(...) before). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">modes_stack</td><td>Pointer to pointer to stack with modes.</td></tr>
   </table>
   </dd>
 </dl>
@@ -195,16 +197,16 @@ Functions</h2></td></tr>
  
 </div>
 </div>
-<a id="ab0411e084f5ba88c0f608b1569dba18b" name="ab0411e084f5ba88c0f608b1569dba18b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0411e084f5ba88c0f608b1569dba18b">&#9670;&#160;</a></span>free_modes()</h2>
+<a id="a7a025123b8c0b598284417b430cde57a" name="a7a025123b8c0b598284417b430cde57a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a025123b8c0b598284417b430cde57a">&#9670;&#160;</a></span>free_modes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">exit_code_t free_modes </td>
+          <td class="memname">void free_modes </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structprogram__modes__t.html">program_modes_t</a> *</td>          <td class="paramname"><span class="paramname"><em>modes_stack</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -220,43 +222,8 @@ Functions</h2></td></tr>
  
 </div>
 </div>
-<a id="a1fd23998f92e73915ca6633c48e3b485" name="a1fd23998f92e73915ca6633c48e3b485"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fd23998f92e73915ca6633c48e3b485">&#9670;&#160;</a></span>modes_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">exit_code_t modes_init </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>number</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><ul>
-<li>Initializes modes list structure. </li>
-</ul>
-</p>
-<hr  />
- <ul>
-<li>This structure is global to <a class="el" href="handle__flags_8cpp.html" title="Handling flags pushed from console.">handle_flags.cpp</a> file.</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">number</td><td>Number of modes which are supported by program.</td></tr>
-  </table>
-  </dd>
-</dl>
-<h1><a class="anchor" id="autotoc_md15"></a>
-autotoc_md15</h1>
-<dl class="section return"><dt>Returns</dt><dd>Error (or success) code. </dd></dl>
-
-</div>
-</div>
-<a id="ac119ac26da01ddea4ff6eac4030f070e" name="ac119ac26da01ddea4ff6eac4030f070e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac119ac26da01ddea4ff6eac4030f070e">&#9670;&#160;</a></span>parse_flags()</h2>
+<a id="a0ad35c702e4d2df63ecfffa6e5f92a78" name="a0ad35c702e4d2df63ecfffa6e5f92a78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad35c702e4d2df63ecfffa6e5f92a78">&#9670;&#160;</a></span>parse_flags()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,12 +231,17 @@ autotoc_md15</h1>
         <tr>
           <td class="memname">exit_code_t parse_flags </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprogram__modes__t.html">program_modes_t</a> *</td>          <td class="paramname"><span class="paramname"><em>modes_stack</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -293,8 +265,8 @@ autotoc_md15</h1>
  
 </div>
 </div>
-<a id="a798cd43e18a004112d7dae2fe19914e5" name="a798cd43e18a004112d7dae2fe19914e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a798cd43e18a004112d7dae2fe19914e5">&#9670;&#160;</a></span>register_mode()</h2>
+<a id="a17182b5d819c911399f1f34ecc11ca2a" name="a17182b5d819c911399f1f34ecc11ca2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17182b5d819c911399f1f34ecc11ca2a">&#9670;&#160;</a></span>register_mode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +274,7 @@ autotoc_md15</h1>
         <tr>
           <td class="memname">exit_code_t register_mode </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+          <td class="paramtype"><a class="el" href="structprogram__modes__t.html">program_modes_t</a> **</td>          <td class="paramname"><span class="paramname"><em>modes_stack</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -312,7 +284,12 @@ autotoc_md15</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">exit_code_t(*</td>          <td class="paramname"><span class="paramname"><em>handler&#160;</em></span>)(void)&#160;)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">exit_code_t(*</td>          <td class="paramname"><span class="paramname"><em>handler&#160;</em></span>)(const int argc, const char *argv[])&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -322,19 +299,17 @@ autotoc_md15</h1>
 </ul>
 </p>
 <hr  />
- <ul>
-<li>Use modes_init(int) before.</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
+ <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">long_name</td><td>Long flag for mode. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">short_name</td><td>Short flag for mode. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">handler</td><td>Function, that handles user for particullar mode.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">handler</td><td>Function, that handles user for particullar mode. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stack</td><td>Pointer to pointer to stack with modes.</td></tr>
   </table>
   </dd>
 </dl>
-<h1><a class="anchor" id="autotoc_md17"></a>
-autotoc_md17</h1>
+<h1><a class="anchor" id="autotoc_md15"></a>
+autotoc_md15</h1>
 <dl class="section return"><dt>Returns</dt><dd>Error (or success) code. </dd></dl>
 
 </div>

@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['quadratic_20exe_0',['Quadratic.exe',['../index.html',1,'']]],
-  ['quadratic_2ecpp_1',['quadratic.cpp',['../quadratic_8cpp.html',1,'']]],
-  ['quadratic_2eh_2',['quadratic.h',['../quadratic_8h.html',1,'']]],
-  ['quadratic_5fequation_5ft_3',['quadratic_equation_t',['../structquadratic__equation__t.html',1,'']]],
-  ['quadratic_5ftests_2ecpp_4',['quadratic_tests.cpp',['../quadratic__tests_8cpp.html',1,'']]],
-  ['quadratic_5ftests_2eh_5',['quadratic_tests.h',['../quadratic__tests_8h.html',1,'']]]
+  ['read_5fexpected_5fline_0',['read_expected_line',['../utils_8h.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp'],['../utils_8cpp.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp']]],
+  ['register_5fmode_1',['register_mode',['../handle__flags_8h.html#a17182b5d819c911399f1f34ecc11ca2a',1,'register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t(*handler)(const int argc, const char *argv[])):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#a17182b5d819c911399f1f34ecc11ca2a',1,'register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t(*handler)(const int argc, const char *argv[])):&#160;handle_flags.cpp']]],
+  ['roots_5fnumber_5ft_2',['roots_number_t',['../quadratic_8h.html#aab90a28b547f90a752c3d962a5365f25',1,'quadratic.h']]]
 ];

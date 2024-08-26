@@ -16,6 +16,7 @@
 #include "custom_assert.h"
 #include "handle_flags.h"
 #include "quadratic.h"
+#include "stack.h"
 #include "quadratic_tests.h"
 
 /**
@@ -24,15 +25,15 @@
 
 ===============================================================================================================================
 */
+
 struct solving_mode_t {
     const char *long_name;
     const char *short_name;
     exit_code_t (*handle_function)(const int argc, const char *argv[]);
-    solving_mode_t *next;
 };
 
 struct program_modes_t {
-    solving_mode_t *list_head;
+    stack_elem_t *modes_list;
     exit_code_t (*default_handler)(const int argc, const char *argv[]);
 };
 
@@ -46,20 +47,22 @@ static exit_code_t handle_unknown_flag(const char *flag);
 
 ===============================================================================================================================
 */
-exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *modes_list){
-    C_ASSERT(modes_list != NULL, EXIT_CODE_FAILURE);
-    C_ASSERT(argv != NULL, EXIT_CODE_FAILURE);
-    C_ASSERT(modes_list->default_handler != NULL, EXIT_CODE_FAILURE);
+exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *modes_stack){
+    C_ASSERT(modes_stack                  != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(argv                         != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(modes_stack->default_handler != NULL, EXIT_CODE_FAILURE);
     if(argc == 1)
-        return modes_list->default_handler(argc, argv);
+        return modes_stack->default_handler(argc, argv);
 
-    solving_mode_t *current_mode = modes_list->list_head;
-    while(current_mode != NULL) {
-        if(strcmp(current_mode->long_name,  argv[1]) == 0 ||
-           strcmp(current_mode->short_name, argv[1]) == 0)
-            return current_mode->handle_function(argc, argv);
-        current_mode = current_mode->next;
+    for(solving_mode_t *current = (solving_mode_t *)stack_pop(&(modes_stack->modes_list));
+        current != NULL;
+        free(current),  current = (solving_mode_t *)stack_pop(&(modes_stack->modes_list))) {
+        if(strcmp(current->long_name,  argv[1]) == 0 ||
+           strcmp(current->short_name, argv[1]) == 0) {
+            return current->handle_function(argc, argv);
+        }
     }
+
     return handle_unknown_flag(argv[1]);
 }
 
@@ -79,49 +82,49 @@ exit_code_t handle_unknown_flag(const char *flag){
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t register_mode(program_modes_t *list, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[])) {
-    C_ASSERT(list != NULL, EXIT_CODE_FAILURE);
-    if(list->list_head == NULL) {
-        list->list_head = (solving_mode_t *)calloc(1, sizeof(solving_mode_t));
-        list->list_head->handle_function = handler;
-        list->list_head->long_name = long_name;
-        list->list_head->short_name = short_name;
-        list->list_head->next = NULL;
-        return EXIT_CODE_SUCCESS;
+exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[])) {
+    C_ASSERT(short_name != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(long_name  != NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(handler    != NULL, EXIT_CODE_FAILURE);
+
+    if(*modes_stack == NULL) {
+        *modes_stack = (program_modes_t *)calloc(1, sizeof(program_modes_t));
+        if(*modes_stack == NULL)
+            return EXIT_CODE_FAILURE;
     }
 
-    solving_mode_t *current_elem = list->list_head;
-    while(current_elem->next != NULL)
-        current_elem = current_elem->next;
+    solving_mode_t *mode = (solving_mode_t *)calloc(1, sizeof(solving_mode_t));
+    if(mode == NULL)
+        return EXIT_CODE_FAILURE;
 
-    current_elem->next = (solving_mode_t *)calloc(1, sizeof(solving_mode_t));
-    current_elem->next->next = NULL;
-    current_elem->next->long_name = long_name;
-    current_elem->next->short_name = short_name;
-    current_elem->next->handle_function = handler;
+    mode->handle_function = handler   ;
+    mode->long_name       = long_name ;
+    mode->short_name      = short_name;
+
+    if(stack_push(&((*modes_stack)->modes_list), (void *)mode) != STACK_SUCCESS) {
+        free(mode);
+        return EXIT_CODE_FAILURE;
+    }
+
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(const int argc, const char *argv[])) {
+exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*handler)(const int argc, const char *argv[])) {
     C_ASSERT(handler != NULL, EXIT_CODE_FAILURE);
-    C_ASSERT(modes   != NULL, EXIT_CODE_FAILURE);
 
-    modes->default_handler = handler;
-    return EXIT_CODE_SUCCESS;
-}
-
-exit_code_t free_modes(program_modes_t *modes) {
-    solving_mode_t *current = modes->list_head;
-    while(current != NULL) {
-        solving_mode_t *next = current->next;
-        free(current);
-        current = next;
+    if(*modes_stack == NULL) {
+        *modes_stack = (program_modes_t *)calloc(1, sizeof(program_modes_t));
+        if(*modes_stack == NULL)
+            return EXIT_CODE_FAILURE;
     }
-    free(modes);
+
+    (*modes_stack)->default_handler = handler;
     return EXIT_CODE_SUCCESS;
 }
 
-program_modes_t *modes_list_init(void) {
-    program_modes_t *list = (program_modes_t *)calloc(1, sizeof(program_modes_t));
-    return list;
+void free_modes(program_modes_t *modes_stack) {
+    if(modes_stack == NULL)
+        return ;
+
+    free_stack(modes_stack->modes_list);
 }

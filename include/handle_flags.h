@@ -12,6 +12,8 @@
 #ifndef HANDLE_FLAGS_H
 #define HANDLE_FLAGS_H
 
+#include "stack.h"
+
 enum exit_code_t {
     EXIT_CODE_SUCCESS = 0,
     EXIT_CODE_FAILURE = 1
@@ -42,12 +44,12 @@ exit_code_t parse_flags(int argc, const char *argv[], program_modes_t *list);
     @param   [in]  long_name          Long flag for mode.
     @param   [in]  short_name         Short flag for mode.
     @param   [in]  handler            Function, that handles user for particullar mode.
-    @param   [in]  list               Pointer to list with modes
+    @param   [in]  stack              Pointer to pointer to stack with modes.
 
     @return  Error (or success) code.
 ===============================================================================================================================
 */
-exit_code_t register_mode(program_modes_t *list, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[]));
+exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[]));
 
 /**
 ===============================================================================================================================
@@ -56,12 +58,13 @@ exit_code_t register_mode(program_modes_t *list, const char *short_name, const c
     @details - This function will run if user does not type in any flags.
 
     @param   [in]  short_name         Short name of particullar mode (registered with register_mode(...) before).
+    @param   [in]  modes_stack        Pointer to pointer to stack with modes.
 
     @return  Error (or success) code.
 
 ===============================================================================================================================
 */
-exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(const int argc, const char *argv[]));
+exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*handler)(const int argc, const char *argv[]));
 
 /**
 ===============================================================================================================================
@@ -71,12 +74,6 @@ exit_code_t choose_default_mode(program_modes_t *modes, exit_code_t (*handler)(c
 
 ===============================================================================================================================
 */
-exit_code_t free_modes(program_modes_t *modes);
+void free_modes(program_modes_t *modes_stack);
 
-/**
-===============================================================================================================================
-
-===============================================================================================================================
-*/
-program_modes_t *modes_list_init(void);
 #endif
