@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['less_0',['LESS',['../utils_8h.html#aaf2bf363c8c28c823c6967ee322c6094a95c736070f99b99eb80d1eac1f4ca60f',1,'utils.h']]],
-  ['long_5fname_1',['long_name',['../structsolving__mode__t.html#a4c33c7528c496ba2624340a9f3b561d3',1,'solving_mode_t']]]
+  ['solve_5fquadratic_0',['solve_quadratic',['../quadratic_8h.html#a78256d2aca444f759716cbfb4df6e778',1,'solve_quadratic(quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#a78256d2aca444f759716cbfb4df6e778',1,'solve_quadratic(quadratic_equation_t *equation):&#160;quadratic.cpp']]],
+  ['solving_5fmode_5ft_1',['solving_mode_t',['../structsolving__mode__t.html',1,'']]]
 ];

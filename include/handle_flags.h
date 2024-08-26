@@ -31,6 +31,13 @@ enum exit_code_t {
 
 ===============================================================================================================================
 */
-exit_code_t handle_user(int argc, const char *argv[]);
+exit_code_t parse_flags(int argc, const char *argv[]);
 
+exit_code_t modes_init(unsigned int number);
+
+exit_code_t register_mode(const char *long_name, const char *short_name, exit_code_t (*handler)(void));
+
+exit_code_t choose_default_mode(const char *short_name);
+
+exit_code_t free_modes(void);
 #endif

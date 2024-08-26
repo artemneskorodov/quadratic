@@ -8,15 +8,15 @@
 
 ===============================================================================================================================
 */
-#include "handle_flags.h"
 #include <stdbool.h>
-#include "quadratic.h"
-#include "quadratic_tests.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "colors.h"
 #include "custom_assert.h"
+#include "handle_flags.h"
+#include "quadratic.h"
+#include "quadratic_tests.h"
 
 /**
 ===============================================================================================================================
@@ -30,11 +30,12 @@ struct solving_mode_t {
     exit_code_t (*handle_function)(void);
 };
 
+static unsigned int modes_number = 0;
+static exit_code_t (*default_handler)(void) = NULL;
+static solving_mode_t *modes = NULL;
+
 static exit_code_t handle_unsupported_amount_of_flags(void);
 static exit_code_t handle_unknown_flag(const char *flag);
-static exit_code_t handle_help(void);
-static exit_code_t handle_solve(void);
-static exit_code_t handle_test(void);
 
 /**
 ===============================================================================================================================
@@ -44,19 +45,19 @@ static exit_code_t handle_test(void);
 
 ===============================================================================================================================
 */
-static const solving_mode_t modes[] = {
-    {.long_name = "--help",  .short_name = "-h", .handle_function = handle_help  },
-    {.long_name = "--solve", .short_name = "-s", .handle_function = handle_solve },
-    {.long_name = "--test",  .short_name = "-t", .handle_function = handle_test  }
-};
+exit_code_t parse_flags(int argc, const char *argv[]){
+    C_ASSERT(argv != NULL, EXIT_CODE_FAILURE);
+    if(modes == NULL || modes_number == 0)
+        return EXIT_CODE_FAILURE;
 
-exit_code_t handle_user(int argc, const char *argv[]){
-    C_ASSERT(argv != NULL);
     if(argc != 1 && argc != 2) return handle_unsupported_amount_of_flags();
-    if(argc == 1) return handle_solve();
-    for(size_t mode = 0; mode < sizeof(modes) / sizeof(solving_mode_t); mode++)
-        if(strcmp(modes[mode].long_name, argv[argc - 1]) == 0 || strcmp(modes[mode].short_name, argv[argc - 1]) == 0)
+    if(argc == 1) return default_handler();
+
+    for(size_t mode = 0; mode < modes_number; mode++)
+        if(strcmp(modes[mode].long_name,  argv[argc - 1]) == 0 ||
+           strcmp(modes[mode].short_name, argv[argc - 1]) == 0)
             return modes[mode].handle_function();
+
     return handle_unknown_flag(argv[argc - 1]);
 }
 
@@ -67,9 +68,9 @@ exit_code_t handle_user(int argc, const char *argv[]){
 ===============================================================================================================================
 */
 exit_code_t handle_unsupported_amount_of_flags(void){
-    color_printf(RED, "Unsupported amount of flags, you can use only 0 or 1\n");
-    color_printf(DEFAULT, "Use flag ");
-    color_printf(PURPLE, "'--help'\n");
+    color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Unsupported amount of flags, you can use only 0 or 1\n");
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Use flag ");
+    color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "'--help'\n");
     return EXIT_CODE_SUCCESS;
 }
 
@@ -82,111 +83,45 @@ exit_code_t handle_unsupported_amount_of_flags(void){
 ===============================================================================================================================
 */
 exit_code_t handle_unknown_flag(const char *flag){
-    C_ASSERT(flag != NULL);
-    color_printf(RED, "Unknown flag '%s'\n", flag);
-    color_printf(DEFAULT, "Use flag ");
-    color_printf(PURPLE, "'--help'\n");
+    C_ASSERT(flag != NULL, EXIT_CODE_FAILURE);
+    color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Unknown flag '%s'\n", flag);
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Use flag ");
+    color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "'--help'\n");
     return EXIT_CODE_SUCCESS;
 }
 
-/**
-===============================================================================================================================
-    @brief   - Handles help request.
-
-===============================================================================================================================
-*/
-exit_code_t handle_help(void){
-    color_printf(PURPLE, "\t'--help'");
-    color_printf(DEFAULT, " for help\n");
-    color_printf(PURPLE, "\t'--solve'");
-    color_printf(DEFAULT, " to type in and solve equation\n");
-    color_printf(PURPLE, "\t'--test'");
-    color_printf(DEFAULT, " to run tests\n");
-    color_printf(PURPLE, "\t''");
-    color_printf(DEFAULT, " is considered as ");
-    color_printf(PURPLE, "'--solve'\n");
+exit_code_t modes_init(unsigned int number) {
+    if(modes_number != 0)
+        return EXIT_CODE_FAILURE;
+    C_ASSERT(modes == NULL, EXIT_CODE_FAILURE);
+    C_ASSERT(number != 0, EXIT_CODE_FAILURE);
+    modes_number = number;
+    modes = (solving_mode_t *)calloc(number, sizeof(solving_mode_t));
     return EXIT_CODE_SUCCESS;
 }
 
-/**
-===============================================================================================================================
-    @brief   - Solve mode.
-
-    @details - Asks user to type in coefficients for quadratic equation.\n
-             - Solves equation.\n
-             - Prints resutlts in console.\n
-
-===============================================================================================================================
-*/
-exit_code_t handle_solve(void){
-    quadratic_equation_t equation = {.number = NOT_SOLVED};
-
-    //Getting coefficients from user
-    switch(get_coefficients(&equation)){
-        case GETTING_EXIT: {
-            color_printf(CYAN, "Stop using Vietta\n");
-            return EXIT_CODE_SUCCESS;
-        }
-        case GETTING_SUCCESS: {
-            break;
-        }
-        case GETTING_ERROR: {
-            return EXIT_CODE_FAILURE;
-        }
-        default: {
-            return EXIT_CODE_FAILURE;
-        }
-    }
-
-    //Solving quadratic
-    switch(solve_quadratic(&equation)) {
-        case INVALID_COEFFICIENTS: {
-            color_printf(RED, "Your input was invalid, unable to solve equation :(\n");
-            return EXIT_CODE_FAILURE;
-        }
-        case SOLVING_ERROR: {
-            color_printf(RED, "Caught unexpected error while solving\n");
-            return EXIT_CODE_FAILURE;
-        }
-        case SOLVING_SUCCESS: {
-            print_quadratic_result(&equation);
-            return EXIT_CODE_SUCCESS;
-        }
-        default: {
-            color_printf(RED, "solve_quadratic() returned unexpected result\n");
-            return EXIT_CODE_FAILURE;
-        }
-    }
+exit_code_t register_mode(const char *long_name, const char *short_name, exit_code_t (*handler)(void)) {
+    static size_t counter = 0;
+    modes[counter].long_name = long_name;
+    modes[counter].short_name = short_name;
+    modes[counter].handle_function = handler;
+    counter++;
+    if(counter > modes_number)
+        return EXIT_CODE_FAILURE;
+    return EXIT_CODE_SUCCESS;
 }
 
-/**
-===============================================================================================================================
-    @brief   - Test mode.
-
-    @details - Starts tests.\n
-             - Prints total number of tests from file "tests.txt" and errors.
-
-===============================================================================================================================
-*/
-exit_code_t handle_test(void) {
-    int total = 0, errors = 0;
-    switch(test_solving_quadratic(&total, &errors)) {
-        case NO_SUCH_FILE: {
-            color_printf(RED, "There is no file \"%s\"\n", TESTS_FILE_NAME);
-            return EXIT_CODE_FAILURE;
-        }
-        case INVALID_LINES:{
-            color_printf(RED, "Tests file is invalid\n");
-            return EXIT_CODE_FAILURE;
-        }
-        case SUCCESS_TEST: {
-            color_printf(YELLOW, "All test have been carried out\n");
-            color_printf(GREEN, "Total: %d, Errors: %d", total, errors);
+exit_code_t choose_default_mode(const char *short_name) {
+    for(size_t i = 0; i < modes_number; i++) {
+        if(strcmp(modes[i].short_name, short_name) == 0) {
+            default_handler = modes[i].handle_function;
             return EXIT_CODE_SUCCESS;
         }
-        default: {
-            color_printf(RED, "Unexpected return value from test function\n");
-            return EXIT_CODE_FAILURE;
-        }
     }
+    return EXIT_CODE_FAILURE;
+}
+
+exit_code_t free_modes(void) {
+    free(modes);
+    return EXIT_CODE_SUCCESS;
 }

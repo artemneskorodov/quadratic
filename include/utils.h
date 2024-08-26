@@ -107,4 +107,18 @@ reading_state_t read_expected_line(FILE *file, quadratic_equation_t *equation);
 */
 bool is_minus_zero(double number);
 
+/**
+================================================================================================================================
+    @brief   - Checks if numbers can be treated equal
+
+    @details - Double numbers are equal if |a - b| < EPSILON
+
+    @param   [in]  a                  First number to be compared
+    @param   [in]  b                  Second number to be compared
+
+    @return  True if numbers can be treated as equal and false if not
+
+================================================================================================================================
+*/
+bool is_equal(double a, double b);
 #endif

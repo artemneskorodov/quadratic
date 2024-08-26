@@ -31,7 +31,8 @@ enum test_result_t {
     OK,
     UNEXPECTED_SOLVING_ERROR,
     DIFFERENT_AMOUNT_OF_ROOTS,
-    DIFFERENT_ROOTS
+    DIFFERENT_ROOTS,
+    TEST_FAILURE
 };
 
 static test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual);
@@ -42,8 +43,8 @@ static void print_different_roots(const quadratic_equation_t *expected, const qu
 static void roots_number_to_string(char *out, roots_number_t number);
 
 test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
-    C_ASSERT(tests_number != NULL);
-    C_ASSERT(errors_number != NULL);
+    C_ASSERT(tests_number != NULL, TEST_ERROR);
+    C_ASSERT(errors_number != NULL, TEST_ERROR);
 
     *errors_number = 0;
     *tests_number = 0;
@@ -55,11 +56,14 @@ test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
 
     quadratic_equation_t expected = {};
     reading_state_t reading_state = read_expected_line(tests, &expected);
+
     while(reading_state == READING_SUCCESS) {
         quadratic_equation_t actual = {};
         test_result_t test_result = run_test(&expected, &actual);
+
         if(test_result != OK)
             *errors_number += 1;
+
         print_test_result(test_result, &expected, &actual);
         reading_state = read_expected_line(tests, &expected);
         *tests_number += 1;
@@ -97,8 +101,8 @@ test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
 ===============================================================================================================================
 */
 test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_t *actual) {
-    C_ASSERT(expected != NULL);
-    C_ASSERT(actual != NULL);
+    C_ASSERT(expected != NULL, TEST_FAILURE);
+    C_ASSERT(actual != NULL, TEST_FAILURE);
 
     actual->number = NOT_SOLVED;
     actual->a = expected->a;
@@ -128,24 +132,24 @@ test_result_t run_test(const quadratic_equation_t *expected, quadratic_equation_
 ===============================================================================================================================
 */
 void print_test_result(test_result_t test_result,
-                              const quadratic_equation_t *expected,
-                              const quadratic_equation_t *actual) {
+                       const quadratic_equation_t *expected,
+                       const quadratic_equation_t *actual) {
 
-    C_ASSERT(expected != NULL);
-    C_ASSERT(actual != NULL);
+    C_ASSERT(expected != NULL, );
+    C_ASSERT(actual != NULL, );
 
-    color_printf(DEFAULT, "For equation ");
-    color_printf(YELLOW, "%lgx^2 + %lgx + %lg",
-        expected->a, expected->b, expected->c);
-    color_printf(DEFAULT, ":\n");
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "For equation ");
+    color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "%lgx^2 + %lgx + %lg",
+                 expected->a, expected->b, expected->c);
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, ":\n");
 
     switch(test_result) {
         case OK: {
-            color_printf(GREEN, "Test went successfully\n");
+            color_printf(GREEN_TEXT, false, DEFAULT_BACKGROUND, "Test went successfully\n");
             break;
         }
         case UNEXPECTED_SOLVING_ERROR: {
-            color_printf(RED, "Caught unexpected solving error");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Caught unexpected solving error");
             break;
         }
         case DIFFERENT_AMOUNT_OF_ROOTS: {
@@ -156,11 +160,15 @@ void print_test_result(test_result_t test_result,
             print_different_roots(expected, actual);
             break;
         }
+        case TEST_FAILURE: {
+            break;
+        }
         default: {
-            color_printf(RED, "Test function returned unexpected exit status\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND,  "Test function returned unexpected exit status\n");
+            break;
         }
     }
-    color_printf(DEFAULT, "------------------------\n");
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "------------------------\n");
 }
 
 /**
@@ -180,20 +188,23 @@ void print_test_result(test_result_t test_result,
 ===============================================================================================================================
 */
 bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t *second) {
-    C_ASSERT(first != NULL);
-    C_ASSERT(second != NULL);
+    C_ASSERT(first != NULL, false);
+    C_ASSERT(second != NULL, false);
 
     if(first->number != second->number)
         return false;
 
     if(first->number == ONE_ROOT){
-        if(is_zero(first->x1 - second->x1)) return true;
+        if(is_equal(first->x1, second->x1)) return true;
         return false;
     }
 
     if(first->number == TWO_ROOTS){
-        if(is_zero(first->x1 - second->x1) && is_zero(first->x2 - second->x2)) return true;
-        if(is_zero(first->x1 - second->x2) && is_zero(first->x2 - second->x1)) return true;
+        if(is_equal(first->x1, second->x1) && is_equal(first->x2, second->x2))
+            return true;
+        if(is_equal(first->x1, second->x2) && is_equal(first->x2, second->x1))
+            return true;
+
         return false;
     }
     return true;
@@ -209,16 +220,16 @@ bool compare_roots(const quadratic_equation_t *first, const quadratic_equation_t
 ===============================================================================================================================
 */
 void print_different_amount(const quadratic_equation_t *expected, const quadratic_equation_t *actual){
-    C_ASSERT(expected != NULL);
-    C_ASSERT(actual != NULL);
+    C_ASSERT(expected != NULL, );
+    C_ASSERT(actual   != NULL, );
     char string_number_expected[MAX_ROOTS_NUMBER_LENGTH] = {};
-    char string_number_actual[MAX_ROOTS_NUMBER_LENGTH] = {};
+    char string_number_actual[MAX_ROOTS_NUMBER_LENGTH]   = {};
 
     roots_number_to_string(string_number_expected, expected->number);
     roots_number_to_string(string_number_actual, actual->number);
-    color_printf(RED, "Got different amount of roots\n");
-    color_printf(YELLOW, "Expected: %s, actual: %s\n",
-           string_number_expected, string_number_actual);
+    color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Got different amount of roots\n");
+    color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "Expected: %s, actual: %s\n",
+                 string_number_expected, string_number_actual);
 }
 
 /**
@@ -231,43 +242,45 @@ void print_different_amount(const quadratic_equation_t *expected, const quadrati
 ===============================================================================================================================
 */
 void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual) {
-    C_ASSERT(expected != NULL);
-    C_ASSERT(actual != NULL);
+    C_ASSERT(expected != NULL, );
+    C_ASSERT(actual != NULL, );
+
     switch(expected->number){
         case NOT_SOLVED: {
-            color_printf(RED, "expected is not solved\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "expected is not solved\n");
             return ;
         }
         case NO_ROOTS: {
-            color_printf(RED, "expected has no roots\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "expected has no roots\n");
             return ;
         }
         case ONE_ROOT: {
-            color_printf(RED, "Got different roots\n");
-            color_printf(YELLOW, "Expected: x = ");
-            color_printf(PURPLE, "%lg", expected->x1);
-            color_printf(YELLOW, ", actual: x = ");
-            color_printf(PURPLE, "%lg\n", actual->x1);
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Got different roots\n");
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "Expected: x = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg", expected->x1);
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, ", actual: x = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg\n", actual->x1);
             return ;
         }
         case TWO_ROOTS: {
-            color_printf(RED, "Got diggerent roots\n");
-            color_printf(YELLOW, "Expected: x1 = ");
-            color_printf(PURPLE, "%lg", expected->x1);
-            color_printf(YELLOW, ", x2 = ");
-            color_printf(PURPLE, "%lg,\n", expected->x2);
-            color_printf(YELLOW, "Actual: x1 = ");
-            color_printf(PURPLE, "%lg", actual->x1);
-            color_printf(YELLOW, ", x2 = ");
-            color_printf(PURPLE, "%lg\n", actual->x2);
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Got diggerent roots\n");
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "Expected: x1 = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg", expected->x1);
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, ", x2 = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg,\n", expected->x2);
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "Actual: x1 = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg", actual->x1);
+            color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, ", x2 = ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "%lg\n", actual->x2);
             return ;
         }
         case INF_ROOTS: {
-            color_printf(RED, "expected has inf roots\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "expected has inf roots\n");
             return ;
         }
         default: {
-            color_printf(RED, "Unexpected roots number\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Unexpected roots number\n");
+            return ;
         }
     }
 }
@@ -287,8 +300,9 @@ void print_different_roots(const quadratic_equation_t *expected, const quadratic
 ===============================================================================================================================
 */
 void roots_number_to_string(char *out, roots_number_t number) {
-    C_ASSERT(number != NOT_SOLVED);
-    C_ASSERT(out != NULL);
+    C_ASSERT(number != NOT_SOLVED, );
+    C_ASSERT(out != NULL, );
+
     switch(number){
         case NOT_SOLVED: {
             sprintf(out, "NOT SOLVED");
@@ -312,6 +326,7 @@ void roots_number_to_string(char *out, roots_number_t number) {
         }
         default: {
             sprintf(out, "ERROR");
+            return ;
         }
     }
 }

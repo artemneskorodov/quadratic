@@ -8,7 +8,6 @@
 ===============================================================================================================================
 */
 
-#include "quadratic.h"
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
@@ -16,6 +15,7 @@
 #include "utils.h"
 #include "colors.h"
 #include "custom_assert.h"
+#include "quadratic.h"
 
 enum scanning_result_t {
     SCANNING_WITH_POSTFIX,
@@ -38,15 +38,15 @@ static scanning_result_t try_get_double(double *out);
 static bool try_get_exit(void);
 
 getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
-    C_ASSERT(equation != NULL);
+    C_ASSERT(equation != NULL, GETTING_ERROR);
 
     equation->number = NOT_SOLVED;
 
     equation->x1 = equation->x2 = 0;
 
-    color_printf(CYAN, "(\"exit\" to leave)\n");
-    color_printf(DEFAULT, "Type in coefficients for equation ");
-    color_printf(YELLOW, "ax^2 + bx + c == 0:\n");
+    color_printf(CYAN_TEXT, false, DEFAULT_BACKGROUND, "(\"exit\" to leave)\n");
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Type in coefficients for equation ");
+    color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "ax^2 + bx + c == 0:\n");
 
     if(get_number('a', &equation->a) == GETTING_EXIT)
         return GETTING_EXIT;
@@ -61,11 +61,16 @@ getting_coeffs_state_t get_coefficients(quadratic_equation_t *equation) {
 }
 
 solving_state_t solve_quadratic(quadratic_equation_t *equation) {
-    C_ASSERT(equation != NULL);
+    C_ASSERT(equation != NULL, SOLVING_ERROR);
 
-    if(!isfinite(equation->a)) return INVALID_COEFFICIENTS;
-    if(!isfinite(equation->b)) return INVALID_COEFFICIENTS;
-    if(!isfinite(equation->c)) return INVALID_COEFFICIENTS;
+    if(!isfinite(equation->a))
+        return INVALID_COEFFICIENTS;
+
+    if(!isfinite(equation->b))
+        return INVALID_COEFFICIENTS;
+
+    if(!isfinite(equation->c))
+        return INVALID_COEFFICIENTS;
 
     //equation is linear if a == 0
     if(is_zero(equation->a))
@@ -104,35 +109,35 @@ solving_state_t solve_quadratic(quadratic_equation_t *equation) {
 }
 
 void print_quadratic_result(const quadratic_equation_t *equation) {
-    C_ASSERT(equation != NULL);
-    color_printf(DEFAULT, "Equation ");
-    color_printf(YELLOW, "%lgx^2 + %lgx + %lg == 0:\n",
+    C_ASSERT(equation != NULL, );
+    color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Equation ");
+    color_printf(YELLOW_TEXT, false, DEFAULT_BACKGROUND, "%lgx^2 + %lgx + %lg == 0:\n",
         equation->a, equation->b, equation->c);
     switch(equation->number) {
         case NOT_SOLVED: {
-            color_printf(RED, "Not solved yet, try to run solve_equation(...)\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Not solved yet, try to run solve_equation(...)\n");
             return ;
         }
         case NO_ROOTS: {
-            color_printf(PURPLE, "Does not have real roots\n");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "Does not have real roots\n");
             return ;
         }
         case ONE_ROOT: {
-            color_printf(DEFAULT, "Has one root: ");
-            color_printf(PURPLE, "x = %lg\n", equation->x1);
+            color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Has one root: ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "x = %lg\n", equation->x1);
             return ;
         }
         case TWO_ROOTS: {
-            color_printf(DEFAULT, "Has two roots: ");
-            color_printf(PURPLE, "x1 = %lg, x2 = %lg\n", equation->x1, equation->x2);
+            color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, "Has two roots: ");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "x1 = %lg, x2 = %lg\n", equation->x1, equation->x2);
             return ;
         }
         case INF_ROOTS: {
-            color_printf(PURPLE, "Has infinitely many roots\n");
+            color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "Has infinitely many roots\n");
             return ;
         }
         default: {
-            color_printf(RED, "Something went wrong while trying to print out result\n");
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Something went wrong while trying to print out result\n");
             return ;
         }
     }
@@ -159,9 +164,9 @@ void print_quadratic_result(const quadratic_equation_t *equation) {
 ===============================================================================================================================
 */
 getting_coeffs_state_t get_number(char symbol, double *out) {
-    C_ASSERT(out != NULL);
+    C_ASSERT(out != NULL, GETTING_ERROR);
     while(true) {
-        color_printf(CYAN, "%c = ", symbol);
+        color_printf(CYAN_TEXT, false, DEFAULT_BACKGROUND, "%c = ", symbol);
 
 
         switch(try_get_double(out)) {
@@ -176,12 +181,12 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
                 break ;
             }
             default: {
-                color_printf(RED, "Unexpected error\n");
+                color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "Unexpected error\n");
                 return GETTING_ERROR;
             }
         }
 
-        color_printf(PURPLE, "Invalid input\n");
+        color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "Invalid input\n");
     }
 }
 
@@ -209,7 +214,7 @@ getting_coeffs_state_t get_number(char symbol, double *out) {
 ===============================================================================================================================
 */
 solving_state_t solve_linear(quadratic_equation_t *equation) {
-    C_ASSERT(equation != NULL);
+    C_ASSERT(equation != NULL, SOLVING_ERROR);
     if(is_zero(equation->b)){
         if(is_zero(equation->c)){
             equation->number = INF_ROOTS;
@@ -259,8 +264,9 @@ void clear_buffer(void) {
 ===============================================================================================================================
 */
 scanning_result_t try_get_double(double *out) {
-    C_ASSERT(out != NULL);
-    if(scanf("%lg", out) != 1) return SCANNING_FAILURE;
+    C_ASSERT(out != NULL, SCANNING_FAILURE);
+    if(scanf("%lg", out) != 1)
+        return SCANNING_FAILURE;
 
     int c = getchar();
     if(c != '\n' && c != EOF){
@@ -284,10 +290,11 @@ scanning_result_t try_get_double(double *out) {
 bool try_get_exit(void) {
     char string[MAX_INPUT_LENGTH] = {};
     scanf("%s", string);
+
     clear_buffer();
+
     if(strcmp(string, "exit") == 0)
         return true;
-
     else
         return false;
 }

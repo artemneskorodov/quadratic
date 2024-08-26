@@ -15,7 +15,8 @@
 enum test_state_t {
     NO_SUCH_FILE,
     INVALID_LINES,
-    SUCCESS_TEST
+    SUCCESS_TEST,
+    TEST_ERROR
 };
 
 /**

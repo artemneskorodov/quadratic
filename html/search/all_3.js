@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['default_0',['DEFAULT',['../colors_8h.html#a0a8ef1b5e1941b7257e545cc33405ff1a88ec7d5086d2469ba843c7fcceade8a6',1,'colors.h']]],
-  ['different_5famount_5fof_5froots_1',['DIFFERENT_AMOUNT_OF_ROOTS',['../quadratic__tests_8cpp.html#a2682e047750c295771c3a6953c8393e1a680fc433e7e618a3f6aec2f3d548ce70',1,'quadratic_tests.cpp']]],
-  ['different_5froots_2',['DIFFERENT_ROOTS',['../quadratic__tests_8cpp.html#a2682e047750c295771c3a6953c8393e1a4eeff006af62f0f204642376b61be303',1,'quadratic_tests.cpp']]]
+  ['handle_5fflags_2ecpp_0',['handle_flags.cpp',['../handle__flags_8cpp.html',1,'']]],
+  ['handle_5fflags_2eh_1',['handle_flags.h',['../handle__flags_8h.html',1,'']]],
+  ['handle_5fuser_2',['handle_user',['../handle__flags_8h.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#a2fe13711640153cc3050c7227f2b9a19',1,'handle_user(int argc, const char *argv[]):&#160;handle_flags.cpp']]]
 ];

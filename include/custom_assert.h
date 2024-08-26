@@ -22,9 +22,10 @@
 ===============================================================================================================================
 */
 #ifndef NDEBUG
-#define C_ASSERT(expression) !(expression) ? print_assert_error(#expression, __LINE__, __FILE__) : ((void)0)
+// TODO be able to handle return value
+#define C_ASSERT(expression, return_value) if(expression) {(void)0;} else {print_assert_error(#expression, __LINE__, __FILE__);return return_value;}
 #else
-#define C_ASSERT(expression) ((void)0);
+#define C_ASSERT(expression, return_value) ((void)0);
 #endif
 
 /**

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ac0f2228420376f4db7e1274f2b41667c',1,'main.cpp']]]
+  ['print_5fassert_5ferror_0',['print_assert_error',['../custom__assert_8h.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp'],['../custom__assert_8cpp.html#ad5b3bf2b0746ceec58e1f20a5057cc83',1,'print_assert_error(const char *string, int line_number, const char *filename):&#160;custom_assert.cpp']]],
+  ['print_5fquadratic_5fresult_1',['print_quadratic_result',['../quadratic_8h.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#a91092d4d91e0114122a1d4549474c11c',1,'print_quadratic_result(const quadratic_equation_t *equation):&#160;quadratic.cpp']]]
 ];
