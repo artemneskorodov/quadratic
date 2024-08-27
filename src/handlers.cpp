@@ -17,7 +17,7 @@
 #include "quadratic_tests.h"
 #include "custom_assert.h"
 
-exit_code_t handle_help(const int /*argc*/, const char */*argv*/[]) {
+exit_code_t handle_help(const int, const char **) {
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--help'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " for help\n");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--solve'");
@@ -30,7 +30,7 @@ exit_code_t handle_help(const int /*argc*/, const char */*argv*/[]) {
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t handle_solve(const int /*argc*/, const char */*argv*/[]) {
+exit_code_t handle_solve(const int, const char **) {
     quadratic_equation_t equation = {.number = NOT_SOLVED};
 
     //Getting coefficients from user

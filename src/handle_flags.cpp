@@ -24,7 +24,6 @@
 
 ===============================================================================================================================
 */
-
 struct solving_mode_t {
     const char *long_name;
     const char *short_name;
@@ -50,6 +49,7 @@ exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *mod
     C_ASSERT(modes_stack                  != NULL, EXIT_CODE_FAILURE);
     C_ASSERT(argv                         != NULL, EXIT_CODE_FAILURE);
     C_ASSERT(modes_stack->default_handler != NULL, EXIT_CODE_FAILURE);
+
     if(argc == 1)
         return modes_stack->default_handler(argc, argv);
 
@@ -71,7 +71,7 @@ exit_code_t parse_flags(const int argc, const char *argv[], program_modes_t *mod
 ===============================================================================================================================
     @brief   - Handles the case when user typed in unknown flag.
 
-    @param   [in]  arg                String with flag, typed in by user.
+    @param   [in]  flag               String with flag, typed in by user.
 
 ===============================================================================================================================
 */
@@ -128,11 +128,13 @@ exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*han
 void free_modes(program_modes_t *modes_stack) {
     C_ASSERT(modes_stack != NULL, );
     solving_mode_t *current = modes_stack->modes_list;
+
     while(current != NULL) {
         solving_mode_t *next = current->next;
         free(current);
         current = next;
     }
+
     free(modes_stack);
 }
 
@@ -154,6 +156,7 @@ solving_mode_t *mode_pop(solving_mode_t **head) {
 
     if(*head == NULL)
         return NULL;
+
     solving_mode_t *result_mode = *head;
     *head = (*head)->next;
     return result_mode;
