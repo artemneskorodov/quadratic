@@ -99,8 +99,7 @@ $(function(){initNavTree('quadratic__tests_8cpp.html',''); initResizable(true); 
 <div class="header">
   <div class="summary">
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">quadratic_tests.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -131,18 +130,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7d126c81d57fa6d7250151a243923057" id="r_a7d126c81d57fa6d7250151a243923057"><td class="memItemLeft" align="right" valign="top">test_state_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d126c81d57fa6d7250151a243923057">test_solving_quadratic</a> (int *tests_number, int *errors_number)</td></tr>
-<tr class="memdesc:a7d126c81d57fa6d7250151a243923057"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
+<tr class="memitem:a7c3427dea676dc6b1b0e507d87485d65" id="r_a7c3427dea676dc6b1b0e507d87485d65"><td class="memItemLeft" align="right" valign="top">test_state_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c3427dea676dc6b1b0e507d87485d65">test_solving_quadratic</a> (int *tests_number, int *errors_number, const char *filename)</td></tr>
+<tr class="memdesc:a7c3427dea676dc6b1b0e507d87485d65"><td class="mdescLeft">&#160;</td><td class="mdescRight"><ul>
 <li>Run tests of solve_quadratic(...) </li>
 </ul>
  <br /></td></tr>
-<tr class="separator:a7d126c81d57fa6d7250151a243923057"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af761232d1e866fce2c059c9a5fa74f03" id="r_af761232d1e866fce2c059c9a5fa74f03"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af761232d1e866fce2c059c9a5fa74f03">TESTS_FILE_NAME</a> = &quot;tests.txt&quot;</td></tr>
-<tr class="memdesc:af761232d1e866fce2c059c9a5fa74f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of file where program will take expected cases to test solve_quadratic(...).  <br /></td></tr>
-<tr class="separator:af761232d1e866fce2c059c9a5fa74f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a7c3427dea676dc6b1b0e507d87485d65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Testing solve_quadratic(...). </p>
@@ -150,8 +143,8 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>23.08.2024 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Artem Neskorodov <a class="el" href="">https://vk.com/neskorodovartem</a> </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a7d126c81d57fa6d7250151a243923057" name="a7d126c81d57fa6d7250151a243923057"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d126c81d57fa6d7250151a243923057">&#9670;&#160;</a></span>test_solving_quadratic()</h2>
+<a id="a7c3427dea676dc6b1b0e507d87485d65" name="a7c3427dea676dc6b1b0e507d87485d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3427dea676dc6b1b0e507d87485d65">&#9670;&#160;</a></span>test_solving_quadratic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +157,12 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>errors_number</em></span>&#160;)</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>errors_number</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -219,25 +217,6 @@ Variables</h2></td></tr>
 </li>
 </ul>
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="af761232d1e866fce2c059c9a5fa74f03" name="af761232d1e866fce2c059c9a5fa74f03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af761232d1e866fce2c059c9a5fa74f03">&#9670;&#160;</a></span>TESTS_FILE_NAME</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* TESTS_FILE_NAME = &quot;tests.txt&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Name of file where program will take expected cases to test solve_quadratic(...). </p>
-<hr  />
- <hr  />
- 
 </div>
 </div>
 </div><!-- contents -->

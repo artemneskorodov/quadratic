@@ -35,53 +35,11 @@ exit_code_t parse_flags(int argc, const char *argv[]);
 
 /**
 ===============================================================================================================================
-    @brief   - Initializes modes list structure.
+    @brief   - Handles the case when user typed in unknown flag.
 
-    @details - This structure is global to handle_flags.cpp file.
-
-    @param   [in]  number             Number of modes which are supported by program.
-
-    @return  Error (or success) code.
-===============================================================================================================================
-*/
-exit_code_t modes_init(unsigned int number);
-
-/**
-===============================================================================================================================
-    @brief   - Adds mode to modes list.
-
-    @details - Use modes_init(int) before.
-
-    @param   [in]  long_name          Long flag for mode.
-    @param   [in]  short_name         Short flag for mode.
-    @param   [in]  handler            Function, that handles user for particullar mode.
-
-    @return  Error (or success) code.
-===============================================================================================================================
-*/
-exit_code_t register_mode(const char *long_name, const char *short_name, exit_code_t (*handler)(void));
-
-/**
-===============================================================================================================================
-    @brief   - Choose the default run mode.
-
-    @details - This function will run if user does not type in any flags.
-
-    @param   [in]  short_name         Short name of particullar mode (registered with register_mode(...) before).
-
-    @return  Error (or success) code.
+    @param   [in]  arg                String with flag, typed in by user.
 
 ===============================================================================================================================
 */
-exit_code_t choose_default_mode(const char *short_name);
-
-/**
-===============================================================================================================================
-    @brief   - Frees modes array.
-
-    @return  Error (or success) code.
-
-===============================================================================================================================
-*/
-exit_code_t free_modes(void);
+exit_code_t handle_unknown_flag(const char *flag);
 #endif

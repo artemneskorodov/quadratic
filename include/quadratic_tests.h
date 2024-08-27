@@ -25,7 +25,7 @@ enum test_state_t {
 
 ===============================================================================================================================
 */
-extern const char *TESTS_FILE_NAME;
+const char * const DEFAULT_TESTS_FILE_NAME = "tests.txt";
 
 /**
 ===============================================================================================================================
@@ -53,6 +53,6 @@ extern const char *TESTS_FILE_NAME;
 
 ===============================================================================================================================
 */
-test_state_t test_solving_quadratic(int *tests_number, int *errors_number);
+test_state_t test_solving_quadratic(int *tests_number, int *errors_number, const char *filename);
 
 #endif

@@ -20,31 +20,6 @@
 ===============================================================================================================================
 */
 
-int main(int argc, const char *argv[]) {
-
-    if(modes_init(3) != EXIT_CODE_SUCCESS)
-        return EXIT_FAILURE;
-
-    if(register_mode("--solve", "-s", handle_solve) != EXIT_CODE_SUCCESS) {
-        free_modes();
-        return EXIT_FAILURE;
-    }
-
-    if(register_mode("--help",  "-h", handle_help ) != EXIT_CODE_SUCCESS) {
-        free_modes();
-        return EXIT_FAILURE;
-    }
-
-    if(register_mode("--test",  "-t", handle_test ) != EXIT_CODE_SUCCESS) {
-        free_modes();
-        return EXIT_FAILURE;
-    }
-
-    if(choose_default_mode("-s") != EXIT_CODE_SUCCESS) {
-        free_modes();
-        return EXIT_FAILURE;
-    }
-    exit_code_t result = parse_flags(argc, argv);
-    free_modes();
-    return (int)result;
+int main(const int argc, const char *argv[]) {
+    return (int)parse_flags(argc, argv);
 }

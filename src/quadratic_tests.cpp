@@ -25,8 +25,6 @@
 */
 static const int MAX_ROOTS_NUMBER_LENGTH = 32;
 
-const char *TESTS_FILE_NAME = "tests.txt";
-
 enum test_result_t {
     OK,
     UNEXPECTED_SOLVING_ERROR,
@@ -42,14 +40,14 @@ static void print_different_amount(const quadratic_equation_t *expected, const q
 static void print_different_roots(const quadratic_equation_t *expected, const quadratic_equation_t *actual);
 static void roots_number_to_string(char *out, roots_number_t number);
 
-test_state_t test_solving_quadratic(int *tests_number, int *errors_number) {
+test_state_t test_solving_quadratic(int *tests_number, int *errors_number, const char *filename) {
     C_ASSERT(tests_number != NULL, TEST_ERROR);
     C_ASSERT(errors_number != NULL, TEST_ERROR);
 
     *errors_number = 0;
     *tests_number = 0;
 
-    FILE *tests = fopen(TESTS_FILE_NAME, "r");
+    FILE *tests = fopen(filename, "r");
 
     if(tests == NULL)
         return NO_SUCH_FILE;

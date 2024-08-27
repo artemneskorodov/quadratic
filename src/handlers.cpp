@@ -15,7 +15,12 @@
 #include "quadratic.h"
 #include "quadratic_tests.h"
 
-exit_code_t handle_help(void) {
+exit_code_t handle_help(const int argc, const char *argv[]) {
+    if(argc != 2) {
+        handle_unknown_flag(argv[2]);
+        return EXIT_CODE_FAILURE;
+    }
+
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--help'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " for help\n");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--solve'");
@@ -25,11 +30,17 @@ exit_code_t handle_help(void) {
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t''");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " is considered as ");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "'--solve'\n");
+
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t handle_solve(void) {
+exit_code_t handle_solve(const int argc, const char *argv[]) {
     quadratic_equation_t equation = {.number = NOT_SOLVED};
+
+    if(argc != 1 && argc != 2) {
+        handle_unknown_flag(argv[2]);
+        return EXIT_CODE_FAILURE;
+    }
 
     //Getting coefficients from user
     switch(get_coefficients(&equation)){
@@ -69,11 +80,21 @@ exit_code_t handle_solve(void) {
     }
 }
 
-exit_code_t handle_test(void) {
+exit_code_t handle_test(const int argc, const char *argv[]) {
+
+    const char *filename = DEFAULT_TESTS_FILE_NAME;
+
+    if(argc == 3)
+        filename = argv[2];
+    else if(argc != 2) {
+        handle_unknown_flag(argv[3]);
+        return EXIT_CODE_FAILURE;
+    }
+
     int total = 0, errors = 0;
-    switch(test_solving_quadratic(&total, &errors)) {
+    switch(test_solving_quadratic(&total, &errors, filename)) {
         case NO_SUCH_FILE: {
-            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "There is no file \"%s\"\n", TESTS_FILE_NAME);
+            color_printf(RED_TEXT, false, DEFAULT_BACKGROUND, "There is no file \"%s\"\n", filename);
             return EXIT_CODE_FAILURE;
         }
         case INVALID_LINES:{

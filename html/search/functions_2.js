@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['get_5fcoefficients_0',['get_coefficients',['../quadratic_8h.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp'],['../quadratic_8cpp.html#ada8dab06f29a84234f2f01188727bd6e',1,'get_coefficients(quadratic_equation_t *equation):&#160;quadratic.cpp']]]
+  ['handle_5fhelp_0',['handle_help',['../handlers_8h.html#a1291c887101c59c6039b4830a88e2e80',1,'handlers.cpp']]],
+  ['handle_5fsolve_1',['handle_solve',['../handlers_8h.html#a3a2fb194338222a16a23bc4d94f9c727',1,'handlers.cpp']]],
+  ['handle_5ftest_2',['handle_test',['../handlers_8h.html#ab33dccaf3d0a4c7a8f6a4bf77b281616',1,'handlers.cpp']]],
+  ['handle_5funknown_5fflag_3',['handle_unknown_flag',['../handle__flags_8h.html#afdd6388c20be0c831a2227ebedb2fbf0',1,'handle_unknown_flag(const char *flag):&#160;handle_flags.cpp'],['../handle__flags_8cpp.html#afdd6388c20be0c831a2227ebedb2fbf0',1,'handle_unknown_flag(const char *flag):&#160;handle_flags.cpp']]]
 ];

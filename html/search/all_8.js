@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['quadratic_20exe_0',['Quadratic.exe',['../index.html',1,'']]],
-  ['quadratic_2ecpp_1',['quadratic.cpp',['../quadratic_8cpp.html',1,'']]],
-  ['quadratic_2eh_2',['quadratic.h',['../quadratic_8h.html',1,'']]],
-  ['quadratic_5fequation_5ft_3',['quadratic_equation_t',['../structquadratic__equation__t.html',1,'']]],
-  ['quadratic_5ftests_2ecpp_4',['quadratic_tests.cpp',['../quadratic__tests_8cpp.html',1,'']]],
-  ['quadratic_5ftests_2eh_5',['quadratic_tests.h',['../quadratic__tests_8h.html',1,'']]]
+  ['read_5fexpected_5fline_0',['read_expected_line',['../utils_8h.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp'],['../utils_8cpp.html#a0bee40d3992bb16a435f9243374c62db',1,'read_expected_line(FILE *file, quadratic_equation_t *equation):&#160;utils.cpp']]],
+  ['roots_5fnumber_5ft_1',['roots_number_t',['../quadratic_8h.html#aab90a28b547f90a752c3d962a5365f25',1,'quadratic.h']]]
 ];
