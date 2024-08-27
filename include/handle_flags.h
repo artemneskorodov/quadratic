@@ -17,8 +17,6 @@ enum exit_code_t {
     EXIT_CODE_FAILURE = 1
 };
 
-struct program_modes_t;
-
 /**
 ================================================================================================================================
     @brief   - Defines the mode in which program will run.
@@ -33,45 +31,16 @@ struct program_modes_t;
 
 ===============================================================================================================================
 */
-exit_code_t parse_flags(int argc, const char *argv[], program_modes_t *list);
+exit_code_t parse_flags(const int argc, const char *argv[]);
 
 /**
 ===============================================================================================================================
-    @brief   - Adds mode to modes list.
+    @brief   - Handles the case when user typed in unknown flag.
 
-    @param   [in]  long_name          Long flag for mode.
-    @param   [in]  short_name         Short flag for mode.
-    @param   [in]  handler            Function, that handles user for particullar mode.
-    @param   [in]  stack              Pointer to pointer to stack with modes.
-
-    @return  Error (or success) code.
-===============================================================================================================================
-*/
-exit_code_t register_mode(program_modes_t **modes_stack, const char *short_name, const char *long_name, exit_code_t (*handler)(const int argc, const char *argv[]));
-
-/**
-===============================================================================================================================
-    @brief   - Choose the default run mode.
-
-    @details - This function will run if user does not type in any flags.
-
-    @param   [in]  short_name         Short name of particullar mode (registered with register_mode(...) before).
-    @param   [in]  modes_stack        Pointer to pointer to stack with modes.
-
-    @return  Error (or success) code.
+    @param   [in]  flag               String with flag, typed in by user.
 
 ===============================================================================================================================
 */
-exit_code_t choose_default_mode(program_modes_t **modes_stack, exit_code_t (*handler)(const int argc, const char *argv[]));
-
-/**
-===============================================================================================================================
-    @brief   - Frees modes array.
-
-    @return  Error (or success) code.
-
-===============================================================================================================================
-*/
-void free_modes(program_modes_t *modes_stack);
+exit_code_t handle_unknown_flag(const char *flag);
 
 #endif

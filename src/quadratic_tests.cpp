@@ -25,8 +25,6 @@
 */
 static const int MAX_ROOTS_NUMBER_LENGTH = 32;
 
-const char *DEFAULT_TEST_FILE_NAME = "tests.txt";
-
 enum test_result_t {
     OK,
     UNEXPECTED_SOLVING_ERROR,

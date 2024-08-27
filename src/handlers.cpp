@@ -17,7 +17,12 @@
 #include "quadratic_tests.h"
 #include "custom_assert.h"
 
-exit_code_t handle_help(const int, const char **) {
+exit_code_t handle_help(const int argc, const char *argv[]) {
+    if(argc != 2) {
+        handle_unknown_flag(argv[2]);
+        return EXIT_CODE_FAILURE;
+    }
+
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--help'");
     color_printf(DEFAULT_TEXT, false, DEFAULT_BACKGROUND, " for help\n");
     color_printf(PURPLE_TEXT, false, DEFAULT_BACKGROUND, "\t'--solve'");
@@ -30,7 +35,12 @@ exit_code_t handle_help(const int, const char **) {
     return EXIT_CODE_SUCCESS;
 }
 
-exit_code_t handle_solve(const int, const char **) {
+exit_code_t handle_solve(const int argc, const char *argv[]) {
+    if(argc != 1 && argc != 2) {
+        handle_unknown_flag(argv[2]);
+        return EXIT_CODE_FAILURE;
+    }
+
     quadratic_equation_t equation = {.number = NOT_SOLVED};
 
     //Getting coefficients from user
@@ -74,10 +84,15 @@ exit_code_t handle_solve(const int, const char **) {
 exit_code_t handle_test(const int argc, const char *argv[]) {
     C_ASSERT(argv != NULL, EXIT_CODE_FAILURE);
     C_ASSERT(argc >= 0,    EXIT_CODE_FAILURE);
+
     int total = 0, errors = 0;
     const char *filename = DEFAULT_TEST_FILE_NAME;
-    if(argc >= 3) {
+    if(argc == 3) {
         filename = argv[2];
+    }
+    if(argc > 3) {
+        handle_unknown_flag(argv[3]);
+        return EXIT_CODE_FAILURE;
     }
     switch(test_solving_quadratic(&total, &errors, filename)) {
         case NO_SUCH_FILE: {

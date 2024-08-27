@@ -19,7 +19,7 @@ enum test_state_t {
     TEST_ERROR
 };
 
-extern const char *DEFAULT_TEST_FILE_NAME;
+const char *const DEFAULT_TEST_FILE_NAME = "tests.txt";
 
 /**
 ===============================================================================================================================
